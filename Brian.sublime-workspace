@@ -1,0 +1,756 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tab",
+				"table-cell"
+			],
+			[
+				"il",
+				"inline-block"
+			],
+			[
+				"style2",
+				"style2_prod"
+			],
+			[
+				"text-a",
+				"text-align"
+			],
+			[
+				"faci",
+				"facility_loop"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"table",
+				"table"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"news",
+				"newsletter_wrapper"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"temp",
+				"tempSoundCloudKind"
+			],
+			[
+				"init",
+				"initMp3Player"
+			],
+			[
+				"upload",
+				"uploaded_file"
+			],
+			[
+				"play",
+				"playlist"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "request.php",
+			"settings":
+			{
+				"buffer_size": 1274,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "<?php"
+			}
+		},
+		{
+			"contents": "<?php\n\nrequire_once \"request.php\";\nrequire_once \"vendor/autoload.php\";\n\n$db = require_once \"db.php\";\n\nuse MessageMedia\\RESTAPI\\Configuration;\nuse MessageMedia\\RESTAPI\\Api\\MessagingApi;\nuse MessageMedia\\RESTAPI\\Model\\NewMessage;\nuse MessageMedia\\RESTAPI\\Model\\Messages;\n\n\nConfiguration::getDefaultConfiguration()->setUsername('deV7DoyXTsvEFfQqOhW0');\nConfiguration::getDefaultConfiguration()->setPassword('Mew8LexZreHGyfzhtL2n5ozFrNLGrX');\n\n// if (isset($_POST['MessageContents']) && isset($_POST['from_phone']) && isset($_POST['to_phone']) & trim($_POST['MessageContents']) != \"\" && trim($_POST['from_phone']) != \"\" && trim($_POST['to_phone']) != \"\") {\n//     // Input OK, save customer\n//     // try {\n//     //     $addResult = $db->exec(\"INSERT INTO customers (name, phone, phone_status) VALUES ('\"\n//     //         .$_POST['name'].\"', '\".$_POST['phone'].\"', '');\");\n        \n//     //     if ($addResult)\n//     //         echo \"<p>Customer saved!\";\n//     //     else\n//     //         echo \"<p>Customer could not be saved!\";\n//     // } catch (Exception $e) {\n//     //     echo \"<p>Database Error!</p>\";\n//     // }\n//     try {\n//         $messagingApi = new MessagingApi;\n        \n//         $messagingApi->sendMessages(new Messages([\n//             'messages' => [\n//                 new NewMessage([\n//                     'content' => $_POST['MessageContents'],\n//                     'destination_number' => $_POST['to_phone'],\n//                     'source_number' => $_POST['from_phone'],\n//                     'delivery_report' => true\n//                 ])\n//             ]\n//         ]));\n//         echo $hey;\n//     } catch (Exception $e) {\n//         echo $e;\n//         echo \"<p>Failed texting the customer.</p>\";\n//     }\n// } else {\n//     echo \"<p>Invalid input.</p>\";\n// }\n\n\nfunction sendMsg ($id, $to, $from, $content) {\n\n    $generated_id = 'something';\n    \n    try {\n        $messagingApi = new MessagingApi;\n        \n        $messagingApi->sendMessages(new Messages([\n            'messages' => [\n                new NewMessage([\n                    'content' => $content,\n                    'destination_number' => $to,\n                    'source_number' => $from,\n                    'delivery_report' => true\n                ])\n            ]\n        ]));\n\n         // Input OK, save customer\n        try {\n            $addResult = $db->exec(\"UPDATE testdb.Message SET MMID=\" . $generated_id . \" WHERE MessageID=\" . $id . \";\");\n            \n        } catch (Exception $e) {\n            echo \"<p>Database Error!</p>\";\n        }      \n\n    } catch (Exception $e) {\n        echo $e;\n        echo \"<p>Failed texting the customer.</p>\";\n    }\n\n}",
+			"file": "add.php",
+			"file_size": 2684,
+			"file_write_time": 131498432666607088,
+			"settings":
+			{
+				"buffer_size": 2677,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 220.0,
+		"last_filter": "Package Control: In",
+		"selected_items":
+		[
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 440.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/wamp64/www/Brian",
+		"/C/wamp64/www/Brian/vendor"
+	],
+	"file_history":
+	[
+		"/C/wamp64/www/Brian/db.php",
+		"/C/wamp64/www/Brian/add.php",
+		"/C/wamp64/www/Brian/add.html",
+		"/C/Users/Sam/AppData/Local/Temp/scp00869/var/www/samaradionne.com/public_html/brian/init.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp15421/var/www/samaradionne.com/public_html/brian/add.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp41829/var/www/samaradionne.com/public_html/brian/db.php",
+		"/C/wamp64/www/Brian/vendor/messagemedia/messagemedia-rest-api-php-sdk/lib/Model/Messages.php",
+		"/C/wamp64/www/Brian/init.php",
+		"/C/wamp64/www/Brian/customers.sqlite",
+		"/C/Users/Sam/Desktop/Brian/init.php",
+		"/C/Users/Sam/Desktop/Brian/add.html",
+		"/C/Users/Sam/Desktop/Brian/db.php",
+		"/C/Users/Sam/Desktop/Brian/add.php",
+		"/C/Users/Sam/Desktop/Brian/composer.json",
+		"/C/Users/Sam/Desktop/Learnnode.com/Learn-Node-master/ohm/variables.env",
+		"/C/Users/Sam/Desktop/Learnnode.com/Learn-Node-master/ohm/app.js",
+		"/C/Users/Sam/AppData/Local/Temp/scp29714/public_html/fnl/wp-content/themes/Functional-lab-theme/footer.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp43875/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp14650/public_html/fnl/wp-content/themes/Functional-lab-theme/lib/cssmenu/cssmenu.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp21930/public_html/fnl/wp-content/themes/Functional-lab-theme/js/script.js",
+		"/C/Users/Sam/AppData/Local/Temp/scp12154/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/products-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp43090/public_html/fnl/wp-content/themes/Functional-lab-theme/header.php",
+		"/C/Users/Sam/Desktop/menu.svg",
+		"/C/Users/Sam/AppData/Local/Temp/scp29466/public_html/fnl/wp-content/themes/Functional-lab-theme/template-search.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp19434/public_html/fnl/wp-content/themes/Functional-lab-theme/single-protocol.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp29562/public_html/fnl/wp-content/themes/Functional-lab-theme/functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp48275/public_html/fnl/wp-content/themes/Functional-lab-theme/single.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp45378/public_html/fnl/wp-content/themes/Functional-lab-theme/functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp58017/public_html/fnl/wp-content/themes/Functional-lab-theme/template-protocol.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp44251/public_html/fnl/wp-content/themes/Functional-lab-theme/header.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp48875/public_html/fnl/wp-content/themes/Functional-lab-theme/single-protocol.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp33420/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp22452/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/products-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp49598/public_html/fnl/wp-content/themes/Functional-lab-theme/header.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp49286/public_html/fnl/wp-content/themes/Functional-lab-theme/functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp17093/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp11099/public_html/fnl/wp-content/themes/Functional-lab-theme/search.php",
+		"/C/wamp64/www/function-orig/intro.html",
+		"/C/Users/Sam/AppData/Local/Temp/scp40343/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/products-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp43760/public_html/fnl/wp-content/themes/Functional-lab-theme/footer.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp40574/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/categories-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp44969/public_html/fnl/wp-content/themes/Functional-lab-theme/header.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp43360/public_html/fnl/wp-content/themes/Functional-lab-theme/template-home.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp46122/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp37812/public_html/fnl/wp-content/themes/Functional-lab-theme/functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp59459/public_html/fnl/wp-content/themes/Functional-lab-theme/template-search.php",
+		"/C/wamp64/www/function-orig/css/style.css",
+		"/C/wamp64/www/function-orig/js/script.js",
+		"/C/Users/Sam/AppData/Local/Temp/scp59994/public_html/fnl/wp-content/themes/Functional-lab-theme/single-protocol.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp55738/public_html/unidisc.com/wp-content/themes/unidisc/header.php",
+		"/C/Users/Sam/Downloads/FNL_circle/functionalab_home_complete-09.svg",
+		"/C/Users/Sam/Downloads/FNL_circle/functionalab_home_complete no text-09.svg",
+		"/C/Users/Sam/Downloads/FNL_circle/functionalab_home_complete bold text-09.svg",
+		"/C/Users/Sam/AppData/Local/Temp/scp40471/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/differences-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp41549/public_html/fnl/wp-content/themes/Functional-lab-theme/languages/functionalab.pot",
+		"/C/Users/Sam/Downloads/test/test/header.php",
+		"/C/Users/Sam/Downloads/test/test/functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp40528/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/contact-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp40314/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/protocol-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/template-protocol.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/search.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp40422/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/preoccupation-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/protocol-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp41377/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/Users/Sam/AppData/Local/Temp/scp43825/public_html/fnl/wp-content/themes/Functional-lab-theme/single-protocol.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/single-protocol.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme2/single-protocol.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp27793/public_html/fnl/wp-content/themes/Functional-lab-theme/template-home.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/products-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/footer.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/contact-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/categories-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/single-product.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/functions.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/header.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/template-search.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/differences-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc-elements/preoccupation-element.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/template-home.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/js/script.js",
+		"/C/Users/Sam/AppData/Local/Temp/scp31559/public_html/fnl/wp-content/themes/Functional-lab-theme/style.css",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/archive.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp03727/public_html/unidisc.com/wp-content/themes/unidisc/header.php",
+		"/C/wamp64/www/functionalab/about.html",
+		"/C/Users/Sam/Desktop/style.css",
+		"/C/wamp64/www/functionalab/buy.html",
+		"/C/Users/Sam/AppData/Local/Temp/scp46698/public_html/fnl/wp-content/themes/Functional-lab-theme/vc-elements/preoccupation-element.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp56179/public_html/unidisc.com/wp-content/themes/unidisc/footer.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp59124/public_html/unidisc.com/.htaccess",
+		"/C/wamp64/www/wp_functional/.htaccess",
+		"/C/Users/Sam/AppData/Local/Temp/scp23849/public_html/unidisc.com/wp-content/themes/unidisc/albums.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp21041/public_html/unidisc.com/wp-content/themes/unidisc/placements.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp55932/public_html/unidisc.com/wp-content/themes/unidisc/header.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp55370/public_html/unidisc.com/wp-content/themes/unidisc/js/script.js",
+		"/C/Users/Sam/AppData/Local/Temp/scp15449/public_html/unidisc.com/wp-content/themes/unidisc/search.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/navigation.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp21030/public_html/unidisc.com/wp-content/themes/unidisc/search-page.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp31651/public_html/unidisc.com/wp-content/themes/unidisc/navigation.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/temp.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp30978/public_html/unidisc.com/wp-content/themes/unidisc/functions.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/single.php",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/page.php",
+		"/C/wamp64/www/function-orig/single-product.html",
+		"/C/wamp64/www/function-orig/single-protocol.html",
+		"/C/wamp64/www/function-orig/buy.html",
+		"/C/wamp64/www/function-orig/index.html",
+		"/C/wamp64/www/function-orig/products.html",
+		"/C/wamp64/www/function-orig/protocols.html",
+		"/C/wamp64/www/function-orig/about.html",
+		"/C/wamp64/www/wp_functional/wp-content/themes/Functional-lab-theme/vc_templates/include/templates/shortcodes/layerslider_vc.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp08890/var/www/vhosts/ilovetylermadison.com/dev.ilovetylermadison.com/wp-content/plugins/wc-momentis-17-pluginterritory/plugin.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp26868/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/uploads/wc-logs/Description-def6535932b719683e9dd0145517f761.log",
+		"/C/Users/Sam/AppData/Local/Temp/scp27813/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/plugins/wc-momentis-17-pluginterritory/includes/api-functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp27932/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/plugins/wc-momentis-17-pluginterritory/includes/cron-functions.php",
+		"/C/Users/Sam/AppData/Local/Temp/scp26852/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/uploads/wc-logs/momentis-product-stock.0-1ae3799df28967cbb07178a26aab2d8d.log",
+		"/C/Users/Sam/AppData/Local/Temp/scp04006/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/uploads/wc-logs/Fabric_Care-a392fcb93b0320cecf9a3447c9af7d25.log",
+		"/C/Users/Sam/AppData/Local/Temp/scp04905/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/uploads/wc-logs/Description-def6535932b719683e9dd0145517f761.log",
+		"/C/Users/Sam/AppData/Local/Temp/scp07709/var/www/vhosts/ilovetylermadison.com/httpdocs/wp-content/plugins/wc-momentis-17-pluginterritory/plugin.php",
+		"/C/wamp/www/functionalab/single-protocol.html",
+		"/C/wamp/www/functionalab/products.html",
+		"/C/wamp/www/functionalab/buy.html",
+		"/C/wamp/www/functionalab/about.html",
+		"/C/wamp/www/functionalab/protocols.html",
+		"/C/wamp/www/functionalab/single-product.html",
+		"/C/wamp/www/functionalab/index.html",
+		"/C/wamp/www/functionalab/product-single.html",
+		"/C/Users/Sam/AppData/Local/Temp/scp57656/var/www/vhosts/ilovetylermadison.com/dev.ilovetylermadison.com/wp-content/plugins/wc-momentis-17-pluginterritory/plugin.php"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"add.php",
+			"",
+			"style.css",
+			"contact-element.php",
+			"",
+			"protocols.html",
+			"",
+			"index.html",
+			"",
+			"type.css",
+			"",
+			"<current file>",
+			"",
+			"geo-my-wp",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"selection",
+			"selected",
+			"",
+			"style.css",
+			"",
+			"index.html, style.css",
+			"",
+			"agency.html",
+			"",
+			"style.css",
+			"",
+			"index.html",
+			"",
+			"fonts.css",
+			"",
+			"<open folders>",
+			"outline",
+			"script.js, style.css, index.html",
+			"",
+			"upload4.svg",
+			"upload3.svg",
+			"upload.svg",
+			"",
+			"<open folders>",
+			"",
+			"<current file>",
+			"",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Invalid in",
+			"_GET",
+			"_POST",
+			"header",
+			"search-form",
+			"click",
+			"submit",
+			"more_info",
+			"home",
+			"img",
+			"page-template-template-home",
+			"home",
+			"hide",
+			"template",
+			"translate3d(0,0,0)",
+			"scale(1.1)",
+			"img",
+			"underline",
+			"thumbnail",
+			"featured",
+			"VOIR LE PROTOCOLE",
+			"search_image",
+			"middle",
+			"product-details",
+			"produc",
+			"product",
+			"title",
+			"product-details",
+			"Product",
+			"col-60",
+			"products-single",
+			".page-template-template-home .products-store",
+			"products-store",
+			".page-template-template-home ",
+			"products-store",
+			"table-cell",
+			"more_info",
+			"warning",
+			"_e",
+			"__",
+			"_e",
+			"__",
+			"_e",
+			"'map",
+			"'",
+			"\"map",
+			" map",
+			"map",
+			"ACTIVE",
+			"search-header",
+			"page-template-buy",
+			"HOME",
+			"details",
+			"title",
+			"about",
+			"size",
+			"img {",
+			" wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp",
+			"animate",
+			"section {",
+			"\n",
+			"location.href",
+			"location.href.replace",
+			"location.href",
+			" register_post_type",
+			".map .col",
+			"border",
+			"differences_",
+			".split",
+			"reset",
+			".toggle",
+			"custom-logo",
+			"img {",
+			"filters",
+			"view more",
+			"Filters",
+			"logo",
+			"\" data-aos=\"fade-up\"",
+			"data-aos=\"fade-left\"",
+			"data",
+			".archi",
+			".search",
+			"$terms = get_terms",
+			"section {",
+			"section {}",
+			"img {",
+			"product",
+			"title",
+			"inline-table",
+			"vertical-align: bott",
+			"included",
+			"INCLU",
+			"included",
+			"col-6",
+			"bullet",
+			"font-size: 18px",
+			"inline-block",
+			"italic",
+			"col-100",
+			"width",
+			"full",
+			"full'",
+			"acheter",
+			"font-size: 0",
+			"section",
+			"col-33",
+			"font-size: 0",
+			"section",
+			"home",
+			"logger",
+			"716020",
+			"<a href=\"products.html\">Produits</a>",
+			"border {",
+			"url(",
+			"border {",
+			"Elle",
+			"products-single",
+			"avert",
+			"<a href=\"#\">Ou Acheter</a>",
+			"details",
+			".products-single",
+			"bold",
+			"on",
+			"<h5 class=\"load-map\"><img src=\"img/location-marker.svg\" /> Voir sur mappe</h5>",
+			":after",
+			"header a",
+			"<h5 class=\"load-map\">Voir sur mappe</h5>",
+			"<span class=\"close\">x</span>"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"_POST",
+			"_GET",
+			"translateZ(0)",
+			"translate3d(0,0,0) scale(1.1)",
+			".products-store",
+			"",
+			"contact_",
+			"Afficher plus",
+			" wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp\"",
+			"data-aos=\"fade-up\"",
+			"<a href=\"#\">Produits</a>",
+			"<a href=\"buy.html\">Ou Acheter</a>",
+			"<h5 class=\"load-map underline\"><img src=\"img/location-marker.svg\" /><span>Voir sur mappe</span></h5>",
+			"<h5 class=\"load-map\"><img src=\"img/location-marker.svg\" /> Voir sur mappe</h5>",
+			"<img src=\"img/location-marker.svg\" /> ",
+			"<span class=\"load-map\">x</span>",
+			"<a href=\"buy.html\">Acheter</a>",
+			".page-template-protocols",
+			"<a href=\"protocols.html\">Protocols</a>",
+			"<img src=\"http://via.placeholder.com/500x400\" alt=\"\">",
+			"<a href=\"index.html\"><img src=\"http://via.placeholder.com/300x40\" alt=\"\" class=\"logo\"></a>",
+			"<a href=\"products.html\">Produits</a>",
+			"<a href=\"about.html\">A Propos</a>",
+			" data-aos=\"fade-left\"",
+			" data-aos=\"fade-right\"",
+			"products-single",
+			"col-33 border",
+			"col-33",
+			"col-25",
+			"url('../type/",
+			"col-md-3",
+			"*",
+			"            <?php \n            $br_1 = CFS()->get('sale_bed_1_price');\n            $br_2 = CFS()->get('sale_bed_2_price');\n            $br_3 = CFS()->get('sale_bed_3_price');\n            $br_4 = CFS()->get('sale_bed_4_price');\n            $br_5 = CFS()->get('sale_bed_5_price');\n\n            if (($br_1 != '' && $br_1 != 0) || ($br_2 != '' && $br_2 != 0) || ($br_3 != '' && $br_3 != 0) || ($br_4 != '' && $br_4 != 0) || ($br_5 != '' && $br_5 != 0)) {\n            ?>\n            \n            <div class=\"f_beds\">\n              <img src=\"<?php bloginfo('template_directory'); ?>/img/door.png\" alt=\"\" class=\"f_bed_left\">\n\n              <?php \n              if($br_1 != '' && $br_1 != 0){\n              ?>\n                <div class=\"f_bed\">\n                  <span class=\"f_bed_number\">1 Bed</span>\n                  <span class=\"f_bed_price\">$<?php echo substr($br_1, 0, -3); ?>k</span>\n                </div>\n              <?php \n              }\n              if($br_2 != '' && $br_2 != 0){\n              ?>\n                <div class=\"f_bed\">\n                  <span class=\"f_bed_number\">2 Bed</span>\n                  <span class=\"f_bed_price\">$<?php echo substr($br_2, 0, -3); ?>k</span>\n                </div>\n              <?php \n              }\n              if($br_3 != '' && $br_3 != 0){\n              ?>\n                <div class=\"f_bed\">\n                  <span class=\"f_bed_number\">3 Bed</span>\n                  <span class=\"f_bed_price\">$<?php echo substr($br_3, 0, -3); ?>k</span>\n                </div>\n              <?php \n              }\n              if($br_4 != '' && $br_4 != 0){\n              ?>\n                <div class=\"f_bed\">\n                  <span class=\"f_bed_number\">4 Bed</span>\n                  <span class=\"f_bed_price\">$<?php echo substr($br_4, 0, -3); ?>k</span>\n                </div>\n              <?php \n              }\n              if($br_5 != '' && $br_5 != 0){\n              ?>\n                <div class=\"f_bed\">\n                  <span class=\"f_bed_number\">5 Bed</span>\n                  <span class=\"f_bed_price\">$<?php echo substr($br_5, 0, -3); ?>k</span>\n                </div>\n              <?php \n              }\n              ?>\n            </div>\n            <?php } ?>\n          </div>",
+			"if (($br_1 != '' && $br_1 != 0) || ($br_2 != '' && $br_2 != 0) || ($br_3 != '' && $br_3 != 0) || ($br_4 != '' && $br_4 != 0) || ($br_5 != '' && $br_5 != 0)) {",
+			"$br_5 != '' && $br_5 != 0",
+			"$br_4 != '' && $br_4 != 0",
+			"$br_3 != '' && $br_3 != 0",
+			"$br_2 != '' && $br_2 != 0",
+			"$br_1 != '' && $br_1 != 0",
+			"Km",
+			"Search",
+			"moment-with-locales.min.js",
+			"hidden-tax",
+			"$fav_1 == $post_id || $fav_2 == $post_id || $fav_3 == $post_i || $fav_4 == $post_i",
+			"update_user_meta",
+			".simplefavorite-button",
+			"bash",
+			"<meta property=\"og:image\" content=\"http://fiveknightsproductions.com/img/og_thumb.jpg\">",
+			"    <meta property=\"og:image\" content=\"img/og_thumb.jpg\">",
+			"\n<meta property=\"og:image\" content=\"img/og_thumb.jpg\">",
+			"room_price",
+			".search_form ",
+			".search_input",
+			".page-template-search-page",
+			"region",
+			"<p>Tel <a href=\"tel:+1-514-603-0050\">514 603 0050</a></p>",
+			"#A57847",
+			"url('fonts/",
+			"<li><a href=\"index.html\">Home</a></li>",
+			"#999",
+			"#817f80",
+			"#00cef6",
+			".p_desc",
+			".p_des",
+			"f_size",
+			"f_location",
+			"f_sub",
+			"f_features",
+			"f_date",
+			"f_title",
+			"f_desc",
+			"f_bed",
+			"f_beds",
+			"f_slider",
+			"f_img",
+			"about",
+			"http://loiseau-noir.com/homeshoppr/",
+			"\n            <a href=\"https://www.instagram.com/houseofyouth.studios/\" target=\"_blank\">Instagram</a>\n            <a href=\"https://www.facebook.com/houseofyouthstudios/\" target=\"_blank\">Facebook</a>\n            <a href=\"https://vimeo.com/user51875758\" target=\"_blank\">Vimeo</a>\n            <a href=\"https://soundcloud.com/house-of-youth\" target=\"_blank\">SoundCloud</a>\n            <a href=\"https://www.behance.net/houseofyouth\" target=\"_blank\">Behance</a>",
+			"\n            <li><a href=\"https://www.facebook.com/houseofyouthstudios/\" target=\"_blank\">Facebook</a></li>\n            <li><a href=\"https://www.instagram.com/houseofyouth.studios/\" target=\"_blank\">Instagram</a></li>\n            <li><a href=\"https://soundcloud.com/house-of-youth\" target=\"_blank\">Soundcloud</a></li>\n            <li><a href=\"https://www.behance.net/houseofyouth\" target=\"_blank\">Behance</a></li>",
+			"    <div class=\"nav-icon\">\n        <span></span>\n    </div>",
+			"<div class=\"menu_top\">",
+			".menu_top",
+			".max_width",
+			"<li><a href=\"brands.html\">Brands</a></li>",
+			"update",
+			"<li><a href=\"updates.html\">Updates</a></li>",
+			"<li><a href=\"brands.html\">Projects</a></li>",
+			"<li><a href=\"projects.html\">Projects</a></li>",
+			"<div class=\"logo f_left visible\"><a href=\"index.html\"><img src=\"img/h_logo.svg\" alt=\"\"></a></div>",
+			"<li><a href=\"agency.html\">Agency</a></li>",
+			"#circle_",
+			"slide_size",
+			"curr_index",
+			"slide_number",
+			"intro_slider",
+			"blog_slider",
+			"project",
+			"href=\"#\"",
+			"'Aaux Pro'",
+			"../fonts/aauxpro",
+			"Aaux Pro",
+			"f_left",
+			"f_right",
+			"SC_Upload",
+			"SC",
+			"submit",
+			"if(debugMode) console.log('",
+			"if(debugMode) console.log(\"",
+			"NULL",
+			"playlistPos",
+			"playing.svg",
+			"debugMsg",
+			"#ffffff",
+			"#fffff",
+			"",
+			"#D7E7F7",
+			"black",
+			"red",
+			"black"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\wamp64\\www\\Brian"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "request.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								501,
+								501
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<?php",
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "add.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2677,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								101,
+								101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"css\\fonts.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\Sam\\Desktop\\candc\\Site\\CandC.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
