@@ -10,8 +10,8 @@ use MessageMedia\RESTAPI\Model\NewMessage;
 use MessageMedia\RESTAPI\Model\Messages;
 
 
-Configuration::getDefaultConfiguration()->setUsername('deV7DoyXTsvEFfQqOhW0');
-Configuration::getDefaultConfiguration()->setPassword('Mew8LexZreHGyfzhtL2n5ozFrNLGrX');
+Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
+Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
 
 function sendMsg ($id, $to, $from, $content) {
 
@@ -31,7 +31,7 @@ function sendMsg ($id, $to, $from, $content) {
                     'metadata' => array(
                         'MessageID' => $id,
                     ),
-                    'callback_url' => 'https://188e0839.ngrok.io/brian/callback.php'
+                    'callback_url' => 'http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com/brian/callback.php'
 
                 ])
             ]

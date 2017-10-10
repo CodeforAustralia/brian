@@ -1,5 +1,9 @@
 <?php
 
+// header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://ec2-52-63-1-205.ap-southeast-2.compute.amazonaws.com:3000");
+header("Content-Type:application/json");
+
 require_once "db.php";
 require_once "pretty_json.php";
 
@@ -31,7 +35,7 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 			$LastName = $row['LastName'];
 		}
 	} catch (Exception $e) {
-	    echo "<p>Database Error!</p>";
+	    echo "Database Error";
 	}
 
 	try {
@@ -47,7 +51,7 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 		}
 
 	} catch (Exception $e) {
-	    echo "<p>Database Error!</p>";
+	    echo "Database Error!";
 	}
 
 	try {
@@ -97,7 +101,7 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 		}
 
 	} catch (Exception $e) {
-	    echo "<p>Database Error!</p>";
+	    echo "Database Error!";
 	}
 
 
@@ -122,5 +126,26 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 		$json_client_obj = json_encode($client_obj);
 		echo $json_client_obj;
 	}
+	
+	// if(empty($price))	{
+	// 	response(200,"Product Not Found",NULL);
+	// }
+	// else {
+	// 	response(200,"Product Found",$json_client_obj);
+	// }
 
 }
+else {
+	// response(400,"Invalid Request",NULL);
+}
+
+// function response($status,$status_message,$data) {
+// 	header("HTTP/1.1 ".$status_message);
+	
+// 	$response['status']=$status;
+// 	$response['status_message']=$status_message;
+// 	$response['data']=$data;
+	
+// 	$json_response = json_encode($response);
+// 	echo $json_response;
+// }

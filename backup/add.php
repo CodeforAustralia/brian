@@ -10,8 +10,8 @@ use MessageMedia\RESTAPI\Model\NewMessage;
 use MessageMedia\RESTAPI\Model\Messages;
 
 
-Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
-Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
+Configuration::getDefaultConfiguration()->setUsername('deV7DoyXTsvEFfQqOhW0');
+Configuration::getDefaultConfiguration()->setPassword('Mew8LexZreHGyfzhtL2n5ozFrNLGrX');
 
 function sendMsg ($id, $to, $from, $content) {
 
@@ -26,12 +26,12 @@ function sendMsg ($id, $to, $from, $content) {
                 new NewMessage([
                     'content' => $content,
                     'destination_number' => $to,
-                    // 'source_number' => $from,
+                    'source_number' => $from,
                     'delivery_report' => true,
                     'metadata' => array(
                         'MessageID' => $id,
                     ),
-                    'callback_url' => 'https://188e0839.ngrok.io/brian/callback.php'
+                    'callback_url' => 'https://samaradionne.com/brian/callback.php'
 
                 ])
             ]
