@@ -1,7 +1,7 @@
 <?php
 
 require_once "db.php";
-require_once "status_check.php";
+require_once "check_status.php";
 
 date_default_timezone_set('Australia/Melbourne');
 

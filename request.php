@@ -1,9 +1,8 @@
 <?php 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
 
 require_once "add.php";
 require_once "db.php";
+require_once "check_reply.php";
 
 // $get_msgs = $db->exec("SELECT * FROM testdb.Message; ");
 
@@ -24,6 +23,7 @@ foreach (returnDB()->query($offender_sql) as $row) {
 
 
 		    echo "<strong>Date: </strong>" . date("F j, Y, g:i a", strtotime($row['DateDelivered'])) . "<br />";
+		    echo "<strong>Outbound: </strong>" . $row['Outbound'] . "<br />";
 		    echo "<strong>To: </strong>" . $row['To'] . "<br />";
 		    echo "<strong>From: </strong>" . $row['From'] . "<br />";
 		    echo "<strong>Message: </strong>" . $row['MessageContents'] . "<br />";
@@ -46,3 +46,5 @@ foreach (returnDB()->query($waiting_msgs_sql) as $row) {
     sendMsg($MessageID, $JAID, $To, $From, $MessageContents);
 
 }
+
+checkReply();

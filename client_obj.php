@@ -86,12 +86,13 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 
 
 	try {
-		$message_sql = "SELECT * FROM testdb.Message WHERE JAID = " . $JAID . ";";
+		$message_sql = "SELECT * FROM testdb.Message WHERE JAID = " . $JAID . " ORDER BY DateDelivered ASC;";
 
 		foreach(returnDB()->query($message_sql) as $row) {
 
 			$message_Arr[] = array(
 				'MessageType' => $row['MessageType'],
+				'Outbound' => $row['Outbound'],
 				'To' => $row['To'],
 				'From' => $row['From'],
 				'MessageContents' => $row['MessageContents'],
