@@ -13,10 +13,7 @@ use MessageMedia\RESTAPI\Model\Messages;
 Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
 Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
 
-function sendMsg ($id, $to, $from, $content) {
-
-    $generated_id = 'something';
-    echo $id;
+function sendMsg ($id, $JAID, $to, $from, $content) {
     
     try {
         $messagingApi = new MessagingApi;
@@ -30,6 +27,7 @@ function sendMsg ($id, $to, $from, $content) {
                     'delivery_report' => true,
                     'metadata' => array(
                         'MessageID' => $id,
+                        'JAID' => $JAID,
                     ),
                     'callback_url' => 'http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com/brian/callback.php'
 

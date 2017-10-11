@@ -2,8 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once 'add.php';
+require_once "add.php";
 require_once "db.php";
+
 // $get_msgs = $db->exec("SELECT * FROM testdb.Message; ");
 
 $offender_sql = "SELECT * FROM testdb.Offender;";
@@ -37,10 +38,11 @@ $waiting_msgs_sql = "SELECT * FROM testdb.Message WHERE MMID IS NULL;";
 foreach (returnDB()->query($waiting_msgs_sql) as $row) {
 
     $MessageID = $row['MessageID'];
+    $JAID = $row['JAID'];
     $To = $row['To'];
     $From = $row['From'];
     $MessageContents = $row['MessageContents'];
 
-    sendMsg($MessageID, $To, $From, $MessageContents);
+    sendMsg($MessageID, $JAID, $To, $From, $MessageContents);
 
 }

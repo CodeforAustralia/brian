@@ -1,6 +1,7 @@
 <?php
 
 require_once "db.php";
+require_once "status_check.php";
 
 date_default_timezone_set('Australia/Melbourne');
 
@@ -32,7 +33,13 @@ if (isset($jsonData['status'])) {
 
     try {
 
-			$updateStatus = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $jsonData['message_id'] . "', DeliveryStatus='" . $jsonData['status'] . "' WHERE MessageID='" . $jsonData['metadata']['MessageID'] . "';");   
+        if (strcmp($jsonData['status'],"Delivered")) {
+            $updateStatus = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $jsonData['message_id'] . "', DeliveryStatus='" . $jsonData['status'] . "', DateDelivered='" . date('Y-m-d h:i:s a', time()) . "' WHERE MessageID='" . $jsonData['metadata']['MessageID'] . "';");
+            checkStatus();
+        }
+        else {
+            $updateStatus = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $jsonData['message_id'] . "', DeliveryStatus='" . $jsonData['status'] . "', DateAttempted='" . date('Y-m-d h:i:s a', time()) . "' WHERE MessageID='" . $jsonData['metadata']['MessageID'] . "';");  
+        }
 
 	    if ($updateStatus)
 	        echo "SUCCESS: Added Status & Message ID";
