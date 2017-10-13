@@ -1,6 +1,6 @@
 <?php 
 
-require_once "add.php";
+require_once "send_message.php";
 require_once "db.php";
 require_once "check_reply.php";
 

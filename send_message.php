@@ -33,21 +33,7 @@ function sendMsg ($id, $JAID, $to, $from, $content) {
 
                 ])
             ]
-        ]));
-
-        // Set MMID in callback
-         // Input OK, save customer
-        // try {
-        //     $addResult = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $generated_id . "' WHERE MessageID='" . $id . "';");        
-
-        //     if ($addResult)
-        //         echo "<p>MMID Updated!";
-        //     else
-        //         echo "<p>MMID could not be saved!";
-            
-        // } catch (Exception $e) {
-        //     echo "<p>Database Error!</p>";
-        // }      
+        ])); 
 
     } catch (Exception $e) {
         echo $e;

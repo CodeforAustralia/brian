@@ -1,7 +1,7 @@
 <?php
 
-// header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Origin: http://ec2-52-63-1-205.ap-southeast-2.compute.amazonaws.com:3000");
+header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Origin: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:3000");
 header("Content-Type:application/json");
 
 require_once "db.php";
@@ -95,6 +95,7 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 				'Outbound' => $row['Outbound'],
 				'To' => $row['To'],
 				'From' => $row['From'],
+				'ResponseRequired' => $row['ResponseRequired'],
 				'MessageContents' => $row['MessageContents'],
 				'DeliveryStatus' => $row['DeliveryStatus'],
 				'DateDelivered' => $row['DateDelivered'],
