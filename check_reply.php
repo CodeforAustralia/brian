@@ -12,6 +12,7 @@ use MessageMedia\RESTAPI\Api\RepliesApi;
 use MessageMedia\RESTAPI\Model\NewMessage;
 use MessageMedia\RESTAPI\Model\Messages;
 
+date_default_timezone_set('Australia/Melbourne');
 
 Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
 Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
@@ -27,7 +28,9 @@ function checkReply() {
 
 	    	foreach($jsonData['replies'] as $report) {
 
-			    $addReply = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MMID`, `DeliveryStatus`, `MessageContents`, `Outbound`, `To`, `From`, `DateDelivered`) VALUES ('333', '" . $report['message_id'] . "', 'Delivered', '" . $report['content'] . "', '0', '" . $report['destination_number'] . "', '" . $report['source_number'] . "', '" . $report['date_received'] . "');");
+        	$received = date('Y-m-d h:i:s a', strtotime($report['date_received']));
+
+			    $addReply = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MMID`, `DeliveryStatus`, `MessageContents`, `Outbound`, `To`, `From`, `DateDelivered`) VALUES ('333', '" . $report['message_id'] . "', 'Delivered', '" . $report['content'] . "', '0', '" . $report['destination_number'] . "', '" . $report['source_number'] . "', '" . $received . "');");
 
 			    if ($addReply) {
 						try {
