@@ -1,6 +1,6 @@
 <?php
 
-require_once "request.php";
+// require_once "request.php";
 require_once "vendor/autoload.php";
 require_once "db.php";
 
@@ -12,6 +12,24 @@ use MessageMedia\RESTAPI\Model\Messages;
 
 Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
 Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
+
+if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !empty($_GET["to"])) && (isset($_GET["content"]) && !empty($_GET["content"])) && (isset($_GET["response"]))) {
+
+	try {
+    $addResult = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `Outbound`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $_GET["content"] . "', '+" . $_GET["to"] . "', '+" . $_GET["from"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '1', '" . $_GET["response"] . "');");        
+
+
+    if ($addResult)
+        echo "SUCCESS: Test message";
+    else
+        echo "FAILED: Test message";
+	    
+	} catch (Exception $e) {
+	    echo "<p>Database Error!</p>";
+	}  
+
+}
+
 
 function sendMsg ($id, $JAID, $to, $from, $content) {
     
