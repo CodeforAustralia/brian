@@ -26,8 +26,10 @@ if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !em
         echo "SUCCESS: Test message";
 	if (strcmp($_GET["content"], "Reschedule") == 0) {
 		$responseMsg = "Thanks for letting us know. We will call you on 0" . substr($_GET["from"], 2) . " to reschedule.";
-	} else {
+	} else if (strcmp($_GET["content"], "OK") == 0) {
 		$responseMsg = "Thank you. See you soon.";
+	} else {
+		$responseMsg = "Your case manager will call you on 0" . substr($_GET["from"], 2) . ". If you need help straight away, please call 000.";
 	}
 
 	$response = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $responseMsg . "', '+" . $_GET["from"] . "', '+" . $_GET["to"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '" . date('Y-m-d h:i:s a', time()) . "', '1', 'App', '0');");
