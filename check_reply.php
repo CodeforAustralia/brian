@@ -4,6 +4,7 @@
 require_once "vendor/autoload.php";
 require_once "db.php";
 require_once "pretty_json.php";
+require_once "send_message.php";
 
 use MessageMedia\RESTAPI\Configuration;
 use MessageMedia\RESTAPI\Api\MessagingApi;
@@ -61,6 +62,9 @@ function checkReply() {
 						} catch (Exception $e) {
 					    echo 'Exception when calling RepliesApi->confirmReplies: ', $e->getMessage(), PHP_EOL;
 						}
+				if (strcmp($report['content'], "N") == 0) {
+					sendMsg($report['message_id'], '333', $report['source_number'], $report['destination_number'], "Thanks for letting us know. We will call you on 0" . substr($report['source_number'], 3) . " to reschedule.");
+				}
 		      }
 			    else 
 			        echo "FAILED: Test message";
