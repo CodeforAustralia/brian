@@ -22,9 +22,21 @@ if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !em
     $addResult = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $_GET["content"] . "', '+" . $_GET["to"] . "', '+" . $_GET["from"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '" . date('Y-m-d h:i:s a', time()) . "', '0', 'App', '" . $_GET["response"] . "');");        
 
 
-    if ($addResult)
+    if ($addResult) {
         echo "SUCCESS: Test message";
-    else
+	if (strcmp($_GET["content"], "Reschedule") == 0) {
+		$responseMsg = "Thanks for letting us know. We will call you on 0" . substr($_GET["from"], 2) . " to reschedule.";
+	} else {
+		$responseMsg = "Thank you. See you soon.";
+	}
+
+	$response = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $responseMsg . "', '+" . $_GET["from"] . "', '+" . $_GET["to"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '" . date('Y-m-d h:i:s a', time()) . "', '1', 'App', '0');");
+
+	if ($response)
+		echo "SUCCESS: Auto Response";
+	else
+		echo "FAILURE: Auto Response";
+    } else
         echo "FAILED: Test message";
 	    
 	} catch (Exception $e) {
