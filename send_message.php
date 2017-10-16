@@ -12,6 +12,7 @@ use MessageMedia\RESTAPI\Api\MessagingApi;
 use MessageMedia\RESTAPI\Model\NewMessage;
 use MessageMedia\RESTAPI\Model\Messages;
 
+date_default_timezone_set('Australia/Melbourne');
 
 Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
 Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
@@ -19,7 +20,7 @@ Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEG
 if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !empty($_GET["to"])) && (isset($_GET["content"]) && !empty($_GET["content"])) && (isset($_GET["response"]))) {
 
 	try {
-    $addResult = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $_GET["content"] . "', '+" . $_GET["to"] . "', '+" . $_GET["from"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '" . date('Y-m-d h:i:s a', time()) . "', '0', 'App', '" . $_GET["response"] . "');");        
+    $addResult = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $_GET["content"] . "', '+" . $_GET["to"] . "', '+" . $_GET["from"] . "', '" . date('Y-m-d H:i:s', time()) . "', '" . date('Y-m-d H:i:s', time()) . "', '0', 'App', '" . $_GET["response"] . "');");        
 
 
     if ($addResult) {
@@ -32,7 +33,7 @@ if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !em
 		$responseMsg = "Your case manager will call you on 0" . substr($_GET["from"], 2) . ". If you need help straight away, please call 000.";
 	}
 
-	$response = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $responseMsg . "', '+" . $_GET["from"] . "', '+" . $_GET["to"] . "', '" . date('Y-m-d h:i:s a', time()) . "', '" . date('Y-m-d h:i:s a', time()) . "', '1', 'App', '0');");
+	$response = returnDB()->exec("INSERT INTO `testdb`.`Message` (`JAID`, `MessageContents`, `To`, `From`, `DateTriggered`, `DateDelivered`, `Outbound`, `MessageType`, `ResponseRequired`) VALUES ('" . $_GET["JAID"] . "', '" . $responseMsg . "', '+" . $_GET["from"] . "', '+" . $_GET["to"] . "', '" . date('Y-m-d H:i:s', time()) . "', '" . date('Y-m-d H:i:s', time()) . "', '1', 'App', '0');");
 
 	if ($response)
 		echo "SUCCESS: Auto Response";
