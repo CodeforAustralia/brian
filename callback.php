@@ -13,6 +13,7 @@ $file = 'debug.log';
 $dump = date('Y-m-d h:i:s a', time()) . ' - ' . print_r($jsonData);
 
 
+
 $dump .= 'format: ' . $jsonData['format'];
 $dump .= 'content: ' . $jsonData['content'];
 $dump .= 'MessageID: ' . $jsonData['metadata']['MessageID'];
