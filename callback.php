@@ -35,10 +35,10 @@ if (isset($jsonData['status'])) {
 
         if (strcmp($jsonData['status'],"Delivered")) {
             $updateStatus = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $jsonData['message_id'] . "', DeliveryStatus='" . $jsonData['status'] . "', DateDelivered='" . date('Y-m-d h:i:s a', time()) . "' WHERE MessageID='" . $jsonData['metadata']['MessageID'] . "';");
-            checkStatus();
         }
         else {
             $updateStatus = returnDB()->exec("UPDATE testdb.Message SET MMID='" . $jsonData['message_id'] . "', DeliveryStatus='" . $jsonData['status'] . "', DateAttempted='" . date('Y-m-d h:i:s a', time()) . "' WHERE MessageID='" . $jsonData['metadata']['MessageID'] . "';");  
+            checkStatus();
         }
 
 	    if ($updateStatus)
