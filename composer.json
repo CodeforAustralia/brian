@@ -7,6 +7,6 @@
   ],
   "require": {
     "messagemedia/messagemedia-rest-api-php-sdk": "*@dev",
-    "slim/slim": "^3.0"
+    "slim/slim": "^3.8"
   }
 }

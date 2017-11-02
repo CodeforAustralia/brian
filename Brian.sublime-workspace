@@ -1,0 +1,297 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tab",
+				"table-cell"
+			],
+			[
+				"il",
+				"inline-block"
+			],
+			[
+				"style2",
+				"style2_prod"
+			],
+			[
+				"text-a",
+				"text-align"
+			],
+			[
+				"faci",
+				"facility_loop"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"table",
+				"table"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"news",
+				"newsletter_wrapper"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"temp",
+				"tempSoundCloudKind"
+			],
+			[
+				"init",
+				"initMp3Player"
+			],
+			[
+				"upload",
+				"uploaded_file"
+			],
+			[
+				"play",
+				"playlist"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 220.0,
+		"last_filter": "Package Control: In",
+		"selected_items":
+		[
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 440.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/wamp64/www/Brian"
+	],
+	"file_history":
+	[	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"add.php",
+			"",
+			"style.css",
+			"contact-element.php",
+			"",
+			"protocols.html",
+			"",
+			"index.html",
+			"",
+			"type.css",
+			"",
+			"<current file>",
+			"",
+			"geo-my-wp",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"",
+			"<current file>",
+			"selection",
+			"selected",
+			"",
+			"style.css",
+			"",
+			"index.html, style.css",
+			"",
+			"agency.html",
+			"",
+			"style.css",
+			"",
+			"index.html",
+			"",
+			"fonts.css",
+			"",
+			"<open folders>",
+			"outline",
+			"script.js, style.css, index.html",
+			"",
+			"upload4.svg",
+			"upload3.svg",
+			"upload.svg",
+			"",
+			"<open folders>",
+			"",
+			"<current file>",
+			"",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\wamp64\\www\\Brian"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"css\\fonts.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\Sam\\Desktop\\candc\\Site\\CandC.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
