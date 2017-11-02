@@ -241,7 +241,6 @@ function client_output($arr) {
 	$client_obj = array(
 		'Clients' => $arr
 	);
-
-	$json_client_obj = json_encode($client_obj);
-	return $json_client_obj;
+	
+	return $client_obj;
 }
