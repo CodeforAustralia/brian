@@ -52,7 +52,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 
 
 // Location API
-$app->get('/location/', function (Request $request, Response $response) {
+$app->get('/location', function (Request $request, Response $response) {
 
 		// Leave this here if I need to debug headers
 		// 	$headers = $request->getHeaders();
@@ -90,23 +90,50 @@ $app->get('/location/', function (Request $request, Response $response) {
 
 
 // Client API
-$app->get('/client/', function (Request $request, Response $response) {
+$app->get('/client', function (Request $request, Response $response) {
+
+    $response->getBody()->write(var_export(get_client_list(), true));
+    return $response;
+
+});
+
+// Client API
+$app->get('/client/{id}', function (Request $request, Response $response, $args) {
+		$JAID = (int)$args['id'];
 
     $data = $request->getQueryParams();
 
-    $client = $data['JAID'];
-    $client_clean = filter_var($data['JAID'], FILTER_SANITIZE_STRING);
+    $messages = $data['messages'];
+    $cw = $data['community_work'];
+    $ccs = $data['ccs_location'];
+    $staff = $data['staff'];
+    $phone = $data['phone'];
 
-    if(isset($client)) {
-	    $response->getBody()->write(var_export(get_client_detail($client_clean), true));
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    if(isset($messages)) {
+	    $response->getBody()->write(var_export(json_encode(get_client_messages($JAID_clean)), true));
+    }
+    else if(isset($cw)) {
+	    $response->getBody()->write(var_export(json_encode(get_client_community_work($JAID_clean)), true));
+    }
+    else if(isset($ccs)) {
+	    $response->getBody()->write(var_export(json_encode(get_client_ccs_locations($JAID_clean)), true));
+    }
+    else if(isset($staff)) {
+	    $response->getBody()->write(var_export(json_encode(get_client_manager($JAID_clean)), true));
+    }
+    else if(isset($phone)) {
+	    $response->getBody()->write(var_export(json_encode(get_client_phone($JAID_clean)), true));
     }
     else {
-	    $response->getBody()->write(var_export(get_client_list(), true));
+	    $response->getBody()->write(var_export(json_encode(get_client_detail($JAID_clean)), true));
     }
 
     return $response;
 
 });
+
 
 
 
