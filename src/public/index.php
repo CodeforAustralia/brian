@@ -4,6 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require_once "../location_obj.php";
+require_once "../client_obj.php";
 
 $app = new \Slim\App;
 
@@ -12,15 +13,18 @@ $app = new \Slim\App;
 //     return $response;
 // });
 
-// $app->add(function ($req, $res, $next) {
-//     $response = $next($req, $res);
-//     return $response
-//             ->withHeader('Access-Control-Allow-Origin', '*')
-//             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-//             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-// });
+
+// Cross-Origins
+$app->add(function ($request, $response, $next) {
+		$response = $next($request, $response);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST');
+});
 
 
+// Authorization
 $app->add(function ($request, $response, $next) {
 
 	// Can't use keyword 'Authorization' without htaccess changes
@@ -30,12 +34,11 @@ $app->add(function ($request, $response, $next) {
 
 	if($user[0] == 'root' && $pass[0] == 'pass')
 		$response = $next($request, $response);
-	else {
+	else
     return $response
-        ->withStatus(401)
+        ->withStatus(403)
         ->withHeader('Content-Type', 'text/html')
         ->write('Invalid Credentials');
-	}
 
 	return $response;
 });
@@ -47,6 +50,8 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     return $response;
 });
 
+
+// Location API
 $app->get('/location/', function (Request $request, Response $response) {
 
 		// Leave this here if I need to debug headers
@@ -77,10 +82,32 @@ $app->get('/location/', function (Request $request, Response $response) {
 	    $response->getBody()->write(var_export(get_all_locations_detail(), true));
     }
     else {
-    	// echo 'else';
 	    $response->getBody()->write(var_export(get_all_locations(), true));
     }
-    return $auth[0];
+    return $response;
 
 });
+
+
+// Client API
+$app->get('/client/', function (Request $request, Response $response) {
+
+    $data = $request->getQueryParams();
+
+    $client = $data['JAID'];
+    $client_clean = filter_var($data['JAID'], FILTER_SANITIZE_STRING);
+
+    if(isset($client)) {
+	    $response->getBody()->write(var_export(get_client_detail($client_clean), true));
+    }
+    else {
+	    $response->getBody()->write(var_export(get_client_list(), true));
+    }
+
+    return $response;
+
+});
+
+
+
 $app->run();

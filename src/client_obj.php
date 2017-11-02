@@ -1,50 +1,11 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type:application/json");
-
 require_once "db.php";
 require_once "pretty_json.php";
 
-$client_obj = '';
-$debug = '';
 
-$JAID = '';
-$FirstName = '';
-$LastName = '';
-$message_arr = array();
-$phone_arr = array();
-$ccs_location_arr = array();
-$cw_location_arr = array();
-$program_location_arr = array();
+// Get phone numbers in ascending order of EndDate
+function get_client_phone($JAID) {
 
-
-// Check if Debugging mode is needed
-if(isset($_GET["debug"]) && !empty($_GET["debug"])) {
-	$debug = $_GET['debug'];
-}
-
-// 
-if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
-	$JAID = $_GET['JAID'];
-
-
-
-	// Get JAID, first name, last name
-	try {
-		$offender_sql = "SELECT * FROM testdb.Offender WHERE JAID = " . $JAID . ";";
-
-		foreach (returnDB()->query($offender_sql) as $row) {
-
-			$JAID = $row['JAID'];
-			$FirstName = $row['FirstName'];
-			$LastName = $row['LastName'];
-		}
-	} catch (Exception $e) {
-	    echo "Database Error";
-	}
-
-
-	// Get phone numbers in ascending order of EndDate
 	try {
 		$phone_sql = "SELECT * FROM testdb.Phone WHERE JAID = " . $JAID . " ORDER BY EndDate ASC;";
 
@@ -61,8 +22,54 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 	    echo "Database Error!";
 	}
 
+	return $phone_arr;
+}
 
-	// Get CCS locations in ascending order of EndDate
+
+// Get list of CMs for offender
+function get_client_manager($JAID) {
+
+	try {
+		$manager_sql = "
+			SELECT 
+				* 
+					FROM 
+						testdb.OffenderAssignedToStaff s
+							JOIN testdb.Staff o
+								ON o.email=s.email
+					WHERE 
+						s.JAID = '". $JAID . "' ORDER BY EndDate ASC;";
+
+		foreach(returnDB()->query($manager_sql) as $row) {
+			// // Use this for CM object
+			// $manager_arr[] = array(
+			// 	'JAID' => $row['JAID'],
+			// 	'email' => $row['email'],
+			// 	'FirstName' => $row['FirstName'],
+			// 	'LastName' => $row['LastName'],
+			// 	'StartDate' => $row['StartDate'],
+			// 	'EndDate' => $row['EndDate']
+			// );
+			$manager_arr[] = array(
+				'JAID' => $row['JAID'],
+				'email' => $row['email'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'StartDate' => $row['StartDate'],
+				'EndDate' => $row['EndDate']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $manager_arr;
+}
+
+// Get CCS locations in ascending order of EndDate
+function get_client_ccs_locations($JAID) {
+
 	try {
 			$ccs_location_sql = "
 			SELECT 
@@ -94,6 +101,10 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 	    echo "<p>Database Error!</p>";
 	}
 
+	return $ccs_location_arr;
+}
+
+function get_client_community_work($JAID) {
 
 	// Get Community Work in ascending order of EndDate
 	// TODO: Select distinct values (ProgramID & Location ID duplicated)
@@ -136,8 +147,13 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 	    echo "<p>Database Error!</p>";
 	}
 
+	return $cw_location_arr;
+}
 
-	// Get messages in ascending order of DateDelivered
+
+// Get messages in ascending order of DateDelivered
+function get_client_messages($JAID) {
+
 	try {
 		$message_sql = "SELECT * FROM testdb.Message WHERE JAID = " . $JAID . " ORDER BY DateDelivered ASC;";
 
@@ -159,6 +175,29 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 	    echo "Database Error!";
 	}
 
+	return $message_arr;
+}
+
+
+function get_client_detail($JAID) {
+	$client_obj = '';
+
+	$FirstName = '';
+	$LastName = '';
+
+	// Get JAID, first name, last name
+	try {
+		$offender_sql = "SELECT * FROM testdb.Offender WHERE JAID = " . $JAID . ";";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$FirstName = $row['FirstName'];
+			$LastName = $row['LastName'];
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
 
 	// Create JSON encoded object to be served with previous array data
 	// (phones, ccs locations, programs, messages)
@@ -166,23 +205,44 @@ if(isset($_GET["JAID"]) && !empty($_GET["JAID"])) {
 		'JAID' => $JAID,
 		'FirstName' => $FirstName,
 		'LastName' => $LastName,
-		'Phones' => $phone_arr,
-		'CCSLocations' => $ccs_location_arr,
-		'CommunityWork' => $cw_location_arr,
-		'Messages' => $message_arr
+		'Phones' => get_client_phone($JAID),
+		'Staff' => get_client_manager($JAID),
+		'CCSLocations' => get_client_ccs_locations($JAID),
+		'CommunityWork' => get_client_community_work($JAID),
+		'Messages' => get_client_messages($JAID)
 	);
 	$json_client_obj = json_encode($client_obj);
 
-
-	// Debugging modes
-	if($debug) {
-		print_r(indent($json_client_obj));
-	}
-	else {
-		$json_client_obj = json_encode($client_obj);
-		echo $json_client_obj;
-	}
+	return $json_client_obj;
 }
-else {
-	// response(400,"Invalid Request",NULL);
+
+function get_client_list() {
+
+	try {
+		$offender_sql = "SELECT * FROM testdb.Offender;";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'JAID' => $row['JAID'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName']
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+	return client_output($offender_arr);
+}
+
+// Create JSON encoded object to be served with previous array data
+// TODO: Condense all of these outputs
+function client_output($arr) {
+	$client_obj = array(
+		'Clients' => $arr
+	);
+
+	$json_client_obj = json_encode($client_obj);
+	return $json_client_obj;
 }
