@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type:application/json");
 
 require_once "db.php";
 require_once "pretty_json.php";
@@ -120,12 +118,12 @@ function get_all_locations() {
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-	return output($location_arr);
+	return location_output($location_arr);
 }
 
 // Create JSON encoded object to be served with previous array data
-// (phones, ccs locations, programs, messages)
-function output($arr) {
+// TODO: Condense all of these outputs
+function location_output($arr) {
 	$location_obj = array(
 		'Locations' => $arr
 	);
