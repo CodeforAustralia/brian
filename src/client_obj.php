@@ -210,9 +210,8 @@ function get_client_detail($JAID) {
 		'CommunityWork' => get_client_community_work($JAID),
 		'Messages' => get_client_messages($JAID)
 	);
-	$json_client_obj = json_encode($client_obj);
 
-	return $json_client_obj;
+	return $client_obj;
 }
 
 function get_client_list() {

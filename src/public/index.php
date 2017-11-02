@@ -92,7 +92,7 @@ $app->get('/location', function (Request $request, Response $response) {
 // Client API
 $app->get('/client', function (Request $request, Response $response) {
 
-    $response->getBody()->write(var_export(get_client_list(), true));
+    $response->getBody()->write(var_export(json_encode(get_client_list()), true));
     return $response;
 
 });
