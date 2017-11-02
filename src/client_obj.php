@@ -51,10 +51,9 @@ function get_client_manager($JAID) {
 			// 	'EndDate' => $row['EndDate']
 			// );
 			$manager_arr[] = array(
-				'JAID' => $row['JAID'],
-				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
+				'email' => $row['email'],
 				'StartDate' => $row['StartDate'],
 				'EndDate' => $row['EndDate']
 			);
