@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 require_once "../location_obj.php";
 require_once "../client_obj.php";
+require_once "../region_obj.php";
 
 $app = new \Slim\App;
 
@@ -37,6 +38,27 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     $response->getBody()->write("Hello, $name");
 
     return $response;
+});
+
+// Region API
+$app->get('/region', function (Request $request, Response $response) {
+
+    $data = get_all_regions();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+// Region API
+$app->get('/region/{id}', function (Request $request, Response $response, $args) {
+    $region_id = (int)$args['id'];
+
+    $data = get_all_locations_in_regions($region_id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
 });
 
 
@@ -95,7 +117,7 @@ $app->get('/client', function (Request $request, Response $response) {
 
 // Client API
 $app->get('/client/{id}', function (Request $request, Response $response, $args) {
-		$JAID = (int)$args['id'];
+	$JAID = (int)$args['id'];
 
     $data = $request->getQueryParams();
 
