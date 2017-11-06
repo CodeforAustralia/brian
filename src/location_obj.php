@@ -34,14 +34,14 @@ function get_locations_in_region_detail($region_id) {
 	    echo "Database Error";
 	}
 
-	return output($location_arr);
+	return location_output($location_arr);
 }
 
 // Limit locations by region, NO details
 function get_locations_in_region($region_id) {
 
 	try {
-		$location_sql = "SELECT * FROM testdb.Location WHERE regionID = " . $region_id . ";";
+		$location_sql = "SELECT * FROM testdb.Location WHERE RegionID = " . $region_id . ";";
 
 		foreach (returnDB()->query($location_sql) as $row) {
 
@@ -54,7 +54,7 @@ function get_locations_in_region($region_id) {
 	    echo "Database Error";
 	}
 
-	return output($location_arr);
+	return location_output($location_arr);
 }
 
 // Get details about a specific location
@@ -77,7 +77,7 @@ function get_location_detail($location_id) {
 	    echo "Database Error";
 	}
 
-	return output($location_arr);
+	return location_output($location_arr);
 }
 
 
@@ -102,7 +102,7 @@ function get_all_locations_detail() {
 	    echo "Database Error";
 	}
 
-	return output($location_arr);
+	return location_output($location_arr);
 }
 
 
