@@ -8,20 +8,6 @@ require_once "../client_obj.php";
 
 $app = new \Slim\App;
 
-// $app->add(new \Tuupola\Middleware\Cors([
-//     "origin" => ["http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080/"],
-//     "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//     "headers.allow" => ["Authorization", "If-Match", "If-Unmodified-Since"],
-//     "headers.expose" => ["Etag"],
-//     "credentials" => true,
-//     "cache" => 86400
-// ]));
-
-// //TODO: Allow cross origins
-// $app->options('/{routes:.+}', function ($request, $response, $args) {
-//     return $response;
-// });
-
 
 // Cross-Origins
 $app->add(function ($request, $response, $next) {
@@ -33,39 +19,10 @@ $app->add(function ($request, $response, $next) {
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-
-// // Authorization
-// $app->add(function ($request, $response, $next) {
-
-// 	// Can't use keyword 'Authorization' without htaccess changes
-// 	// https://github.com/slimphp/Slim/issues/1616#issuecomment-159621954
-// 	$user = $request->getHeader('PHP_AUTH_USER');
-// 	$pass = $request->getHeader('PHP_AUTH_PW');
-
-// 	if($user[0] == 'root' && $pass[0] == 'pass')
-// 		$response = $next($request, $response);
-// 	else {
-//         $headers = $response->getHeaders();
-//         $string = "";
-//         foreach ($headers as $name => $values) {
-//             $string .= $name . ": " . implode(", ", $values);
-//         }
-
-//         $response->write("Username: " . $user[0] . " Password: " . $pass[0]);
-//     // return $response
-//     //     ->withStatus(403)
-//     //     ->withHeader('Content-Type', 'text/html')
-//     //     ->write("Username: " . $user[0] . " Password: " . $pass[0]);
-//     }
-
-// 	return $response;
-// });
-
 $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     "secure" => false,
     "users" => [
-        "root" => "pass",
-        "somebody" => "passw0rd"
+        "root" => "pass"
     ],
     "error" => function ($request, $response, $arguments) {
         $data = [];
@@ -82,10 +39,6 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     return $response;
 });
 
-
-// Host: ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.comHTTP_CONNECTION: keep-aliveHTTP_ACCEPT: */*HTTP_ORIGIN: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080HTTP_USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36HTTP_DNT: 1HTTP_REFERER: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080/HTTP_ACCEPT_ENCODING: gzip, deflateHTTP_ACCEPT_LANGUAGE: en-US,en;q=0.9,fr;q=0.8,it;q=0.7
-
-// Host: ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.comHTTP_CONNECTION: keep-aliveHTTP_ACCEPT: */*, application/jsonHTTP_ORIGIN: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080HTTP_USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36CONTENT_TYPE: application/jsonHTTP_DNT: 1HTTP_REFERER: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080/HTTP_ACCEPT_ENCODING: gzip, deflateHTTP_ACCEPT_LANGUAGE: en-US,en;q=0.9,fr;q=0.8,it;q=0.7PHP_AUTH_USER: rootPHP_AUTH_PW: passHTTP_AUTHORIZATION: Basic cm9vdDpwYXNz
 
 // Location API
 $app->get('/location', function (Request $request, Response $response) {
