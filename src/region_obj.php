@@ -16,6 +16,23 @@ $region_arr = array();
 
 
 // Show all results
+function get_all_areas() {
+	try {
+		$region_sql = "SELECT DISTINCT Area FROM testdb.Region;";
+
+		foreach (returnDB()->query($region_sql) as $row) {
+
+			$region_arr[] = array(
+				'Area' => $row['Area']
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+	return region_output($region_arr);
+}
+
+// Show all results
 function get_all_locations_in_regions($id) {
 	try {
 		$region_sql = "SELECT * FROM testdb.Region WHERE RegionID = " . $id . ";";

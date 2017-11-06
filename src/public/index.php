@@ -61,6 +61,17 @@ $app->get('/region/{id}', function (Request $request, Response $response, $args)
 
 });
 
+// Region API
+$app->get('/area', function (Request $request, Response $response) {
+
+    $data = get_all_areas();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+
 
 // Location API
 $app->get('/location', function (Request $request, Response $response) {
