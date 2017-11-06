@@ -1,5 +1,8 @@
 <?php
 
+// header("Access-Control-Allow-Origin: http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080");
+// header("Content-Type:application/json");
+
 require_once "db.php";
 require_once "pretty_json.php";
 
@@ -128,6 +131,6 @@ function location_output($arr) {
 		'Locations' => $arr
 	);
 
-	$json_client_obj = json_encode($location_obj);
-	return $json_client_obj;
+	// $json_client_obj = json_encode($location_obj);
+	return $location_obj;
 }
