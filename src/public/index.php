@@ -12,7 +12,19 @@ $app = new \Slim\App;
 
 // Cross-Origins
 $app->add(function ($request, $response, $next) {
-		$response = $next($request, $response);
+
+    // // Leave this here if I need to debug headers
+    // $headers = $request->getHeaders();
+    // foreach ($headers as $name => $values) {
+    //     echo $name . ": " . implode(", ", $values);
+    // }
+
+    // // Sam use this if we need to handle multiple domains
+    // $domain = parse_url($_SERVER['HTTP_HOST']);
+    // var_dump($domain);
+
+
+    $response = $next($request, $response);
     return $response
             ->withHeader('Access-Control-Allow-Origin', 'http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com:8080')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
