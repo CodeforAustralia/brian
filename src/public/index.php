@@ -135,41 +135,70 @@ $app->get('/client', function (Request $request, Response $response) {
 // Client API
 $app->get('/client/{id}', function (Request $request, Response $response, $args) {
 	$JAID = (int)$args['id'];
-
-    $data = $request->getQueryParams();
-
-    $messages = $data['messages'];
-    $cw = $data['community_work'];
-    $ccs = $data['ccs_location'];
-    $staff = $data['staff'];
-    $phone = $data['phone'];
-
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
 
-    if(isset($messages)) {
-        $data = get_client_messages($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($cw)) {
-        $data = get_client_community_work($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($ccs)) {
-        $data = get_client_ccs_locations($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($staff)) {
-        $data = get_client_manager($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($phone)) {
-        $data = get_client_phone($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else {
-        $data = get_client_detail($JAID_clean);
-        $newResponse = $response->withJson($data);
-    }
+    $data = get_client_detail($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+
+// Client API
+$app->get('/client/{id}/messages', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    $data = get_client_messages($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+
+// Client API
+$app->get('/client/{id}/communitywork', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    $data = get_client_community_work($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+
+    return $newResponse;
+
+});
+// Client API
+$app->get('/client/{id}/location', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    $data = get_client_ccs_locations($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+// Client API
+$app->get('/client/{id}/staff', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    $data = get_client_manager($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+// Client API
+$app->get('/client/{id}/phone', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    
+    $data = get_client_phone($JAID_clean);
+    $newResponse = $response->withJson($data);
 
     return $newResponse;
 

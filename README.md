@@ -13,11 +13,11 @@ To access the respective API, assume the host is always the same:
 | --- | --- |
 | `/client` | List of **all** offenders |
 | `/client/{id}` | Detailed information about offender |
-| `/client/{id}?messages=1` | List all correspondence |
-| `/client/{id}?community_work=1` | List of *all* assigned community work |
-| `/client/{id}?ccs_location=1` | List of *all* assigned locations |
-| `/client/{id}?staff=1` | List of *all* assigned staff |
-| `/client/{id}?phone=1` | List of *all* offender's phone numbers |
+| `/client/{id}/messages` | List all correspondence |
+| `/client/{id}/communitywork` | List of *all* assigned community work |
+| `/client/{id}/location` | List of *all* assigned locations |
+| `/client/{id}/staff` | List of *all* assigned staff |
+| `/client/{id}/phone` | List of *all* offender's phone numbers |
 
 
 #### Users
