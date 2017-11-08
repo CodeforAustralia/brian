@@ -29,29 +29,29 @@ function get_all_areas() {
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-	return region_output($region_arr);
+	return $region_arr;
+	// return region_output($region_arr);
 }
 
 // Show all results
-function get_all_locations_in_regions($id) {
+function get_all_locations_in_region($id) {
+
 	try {
 		$region_sql = "SELECT * FROM testdb.Region WHERE RegionID = " . $id . ";";
-
 		foreach (returnDB()->query($region_sql) as $row) {
 
 			$region_arr[] = array(
 				'RegionID' => $row['RegionID'],
 				'RegionName' => $row['RegionName'],
-				'Area' => $row['Area']
+				'Area' => $row['Area'],
+				'Locations' => get_locations_in_region($id)
 			);
 		}
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-	// $region_arr[0] = get_locations_in_region($id);
-	$result = array_merge($region_arr[0], get_locations_in_region($id));
 	
-	return region_output($result);
+	return $region_arr;
 }
 
 // Show all results
@@ -69,7 +69,7 @@ function get_all_regions() {
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-	return region_output($region_arr);
+	return $region_arr;
 }
 
 // Create JSON encoded object to be served with previous array data

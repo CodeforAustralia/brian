@@ -60,7 +60,7 @@ $app->get('/region', function (Request $request, Response $response) {
 $app->get('/region/{id}', function (Request $request, Response $response, $args) {
     $region_id = (int)$args['id'];
 
-    $data = get_all_locations_in_regions($region_id);
+    $data = get_all_locations_in_region($region_id);
     $newResponse = $response->withJson($data);
 
     return $newResponse;

@@ -11,7 +11,7 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/client` | List of **all** offenders |
+| GET | `/client` | List of *all* offenders |
 | GET | `/client/{id}` | Detailed information about offender |
 | GET | `/client/{id}/messages` | List all correspondence |
 | GET | `/client/{id}/communitywork` | List of *all* assigned community work |
@@ -34,18 +34,18 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/user` | List of **all** users |
+| GET | `/user` | List of *all* users |
 | GET | `/user/{id}` | Detailed information about user (role only?) |
 | POST | `/user/{id}/assign/{role}` | Assigns a user a specific role (//TODO) |
-| GET | `/user/type` | List of **all** user types |
-| GET | `/user/type/{role}` | List **all** users with a specific role |
-| GET | `/user/location/{id}` | List **all** users from a location |
-| GET | `/user/location/{id}/type/{role}` | List **specific** users from a location |
+| GET | `/user/type` | List of *all* user types |
+| GET | `/user/type/{role}` | List *all* users with a specific role |
+| GET | `/user/location/{id}` | List *all* users from a location |
+| GET | `/user/location/{id}/type/{role}` | List *specific* users from a location |
 | GET | `/user/location/{id}/authenticate` | List users that need to be authenticated in a location (//TODO) |
-| GET | `/user/authenticate` | List **all** users that require authentication (//TODO) |
+| GET | `/user/authenticate` | List *all* users that require authentication (//TODO) |
 | POST | `/user/authenticate/{username}` | Authenticates a specific user (//TODO) |
-| GET | `/user/region/{id}` | List **all** users from a region (//TODO) |
-| GET | `/user/region/{id}/type/{role}` | List **specific** users from a region (//TODO) |
+| GET | `/user/region/{id}` | List *all* users from a region (//TODO) |
+| GET | `/user/region/{id}/type/{role}` | List *specific* users from a region (//TODO) |
 
 
 #### Location
@@ -53,9 +53,9 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/location` | List of **all** locations |
-| GET | `/location/detail` | List of **all** locations, with detail |
-| GET | `/location/{id}` | **One** location, with detail |
+| GET | `/location` | List of *all* locations |
+| GET | `/location/detail` | List of *all* locations, with detail |
+| GET | `/location/{id}` | *One* location, with detail |
 | GET | `/location/region/{id}` | List of *all* locations within a region |
 | GET | `/location/region/{id}/detail` | List of *all* locations within a region, with detail |
 
@@ -65,8 +65,8 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/region` | List of **all** regions |
-| GET | `/region/{id}` | List of **all** locations, within a region (same as `/location?region={id| GET }`) |
+| GET | `/region` | List of *all* regions |
+| GET | `/region/{id}` | List of *all* locations, within a region (same as `/location/region/{id}`) |
 
 
 #### Area
@@ -74,4 +74,4 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/area` | List of **all** areas |
+| GET | `/area` | List of *all* areas |
