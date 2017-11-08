@@ -6,6 +6,7 @@ require '../vendor/autoload.php';
 require_once "../location_obj.php";
 require_once "../client_obj.php";
 require_once "../region_obj.php";
+require_once "../user_obj.php";
 
 $app = new \Slim\App;
 
