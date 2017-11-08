@@ -54,7 +54,6 @@ function get_locations_in_region($region_id) {
 	}
 
 	return $location_arr;
-	// return location_output($location_arr);
 }
 
 // Get details about a specific location
@@ -78,7 +77,6 @@ function get_location_detail($location_id) {
 	}
 
 	return $location_arr;
-	// return location_output($location_arr);
 }
 
 
@@ -104,7 +102,6 @@ function get_all_locations_detail() {
 	}
 
 	return $location_arr;
-	// return location_output($location_arr);
 }
 
 
@@ -124,7 +121,6 @@ function get_all_locations() {
 	    echo "Database Error";
 	}
 	return $location_arr;
-	// return location_output($location_arr);
 }
 
 // Create JSON encoded object to be served with previous array data
@@ -134,6 +130,5 @@ function location_output($arr) {
 		'Locations' => $arr
 	);
 
-	// $json_client_obj = json_encode($location_obj);
 	return $location_obj;
 }
