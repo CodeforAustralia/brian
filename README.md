@@ -39,7 +39,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/user/location/{id}` | List *all* users from a location |
 | GET | `/user/location/{id}/type/{role}` | List *specific* users from a location |
 | GET | `/user/location/{id}/authenticate` | List users that need to be authenticated in a location (//TODO) |
-| GET | `/user/authenticate` | List *all* users that require authentication (//TODO) |
+| GET | `/user/authenticate` | List *all* users that require authentication |
 | POST | `/user/authenticate/{username}` | Authenticates a specific user (//TODO) |
 | GET | `/user/region/{id}` | List *all* users from a region (//TODO) |
 | GET | `/user/region/{id}/type/{role}` | List *specific* users from a region (//TODO) |
