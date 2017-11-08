@@ -186,6 +186,17 @@ $app->get('/user', function (Request $request, Response $response) {
 });
 
 // User API
+// Make sure this stays in the correct order
+$app->get('/user/type', function (Request $request, Response $response) {
+
+    $data = get_all_types();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+// User API
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
     $username = (string)$args['username'];
 
@@ -195,6 +206,7 @@ $app->get('/user/{username}', function (Request $request, Response $response, $a
     return $newResponse;
 
 });
+
 
 
 $app->run();

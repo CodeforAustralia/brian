@@ -45,6 +45,28 @@ function get_user($user) {
 	// return user_output($user_arr);
 }
 
+
+
+function get_all_types() {
+	try {
+		$user_sql = "SELECT DISTINCT UserRole FROM testdb.User;";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+
+			$user_arr[] = array(
+				'UserRole' => $row['UserRole']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $user_arr;
+	// return user_output($user_arr);
+}
+
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function user_output($arr) {
