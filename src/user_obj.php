@@ -84,7 +84,8 @@ function get_users_of_type($role) {
 
 function get_users_from_location($id) {
 	try {
-		$user_sql = "SELECT * FROM testdb.Staff WHERE LocationID = '" . $id . "';";
+
+		$user_sql = "SELECT * FROM testdb.Staff s JOIN testdb.StaffLocation l WHERE s.email = l.email AND LocationID = '" . $id . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
