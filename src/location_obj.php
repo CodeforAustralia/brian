@@ -33,8 +33,7 @@ function get_locations_in_region_detail($region_id) {
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-
-	return location_output($location_arr);
+	return $location_arr;
 }
 
 // Limit locations by region, NO details
@@ -54,7 +53,8 @@ function get_locations_in_region($region_id) {
 	    echo "Database Error";
 	}
 
-	return location_output($location_arr);
+	return $location_arr;
+	// return location_output($location_arr);
 }
 
 // Get details about a specific location
@@ -77,7 +77,8 @@ function get_location_detail($location_id) {
 	    echo "Database Error";
 	}
 
-	return location_output($location_arr);
+	return $location_arr;
+	// return location_output($location_arr);
 }
 
 
@@ -102,7 +103,8 @@ function get_all_locations_detail() {
 	    echo "Database Error";
 	}
 
-	return location_output($location_arr);
+	return $location_arr;
+	// return location_output($location_arr);
 }
 
 
@@ -121,7 +123,8 @@ function get_all_locations() {
 	} catch (Exception $e) {
 	    echo "Database Error";
 	}
-	return location_output($location_arr);
+	return $location_arr;
+	// return location_output($location_arr);
 }
 
 // Create JSON encoded object to be served with previous array data

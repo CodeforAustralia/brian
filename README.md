@@ -57,7 +57,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/location/detail` | List of **all** locations, with detail |
 | GET | `/location/{id}` | **One** location, with detail |
 | GET | `/location/region/{id}` | List of *all* locations within a region |
-| GET | `/location/region/id}/detail` | List of *all* locations within a region, with detail |
+| GET | `/location/region/{id}/detail` | List of *all* locations within a region, with detail |
 
 
 #### Region
