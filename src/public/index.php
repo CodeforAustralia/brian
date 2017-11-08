@@ -81,42 +81,55 @@ $app->get('/area', function (Request $request, Response $response) {
 
 // Location API
 $app->get('/location', function (Request $request, Response $response) {
-
-		// // Leave this here if I need to debug headers
+        // // Leave this here if I need to debug headers
   //   $headers = $request->getHeaders();
   //   foreach ($headers as $name => $values) {
   //       echo $name . ": " . implode(", ", $values);
   //   }
 
-    $data = $request->getQueryParams();
 
-    $location = $data['location'];
-    $region = $data['region'];
-    $detail = $data['detail'];
+    $data = get_all_locations();
+    $newResponse = $response->withJson($data);
 
-    $location_clean = filter_var($data['location'], FILTER_SANITIZE_STRING);
-    $region_clean = filter_var($data['region'], FILTER_SANITIZE_STRING);
+    return $newResponse;
 
-    if(isset($region) && isset($detail)) {
-        $data = get_locations_in_region_detail($region_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($region)) {
-        $data = get_locations_in_region($region_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($location)) {
-        $data = get_location_detail($location_clean);
-        $newResponse = $response->withJson($data);
-    }
-    else if(isset($detail)) {
-        $data = get_all_locations_detail();
-        $newResponse = $response->withJson($data);
-    }
-    else {
-        $data = get_all_locations();
-        $newResponse = $response->withJson($data);
-    }
+});
+
+// Location API
+$app->get('/location/detail', function (Request $request, Response $response) {
+
+    $data = get_all_locations_detail();
+    $newResponse = $response->withJson($data);
+    
+    return $newResponse;
+
+});
+// Location API
+$app->get('/location/region/{id}/detail', function (Request $request, Response $response, $args) {
+    $region_id = (int)$args['id'];
+
+    $data = get_locations_in_region_detail($region_id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+// Location API
+$app->get('/location/region/{id}', function (Request $request, Response $response, $args) {
+    $region_id = (int)$args['id'];
+    $data = get_locations_in_region($region_id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+// Location API
+$app->get('/location/{id}', function (Request $request, Response $response, $args) {
+    $location_id = (int)$args['id'];
+
+    $data = get_location_detail($location_id);
+    $newResponse = $response->withJson($data);
+
     return $newResponse;
 
 });

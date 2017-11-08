@@ -54,10 +54,10 @@ To access the respective API, assume the host is always the same:
 | METHOD | API | Description |
 | --- | --- | --- |
 | GET | `/location` | List of **all** locations |
-| GET | `/location?detail=1` | List of **all** locations, with detail |
-| GET | `/location?location={id}` | **One** location, with detail |
-| GET | `/location?region={id}` | List of *all* locations within a region| GET  |
-| GET | `/location?region={id}&detail=1` | List of *all* locations within a region, with detail |
+| GET | `/location/detail` | List of **all** locations, with detail |
+| GET | `/location/{id}` | **One** location, with detail |
+| GET | `/location/region/{id}` | List of *all* locations within a region |
+| GET | `/location/region/id}/detail` | List of *all* locations within a region, with detail |
 
 
 #### Region
