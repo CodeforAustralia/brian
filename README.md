@@ -31,8 +31,8 @@ To access the respective API, assume the host is always the same:
 | `/user/type/{role}` | List **all** users with a specific role |
 | `/user/location/{id}` | List **all** users from a location |
 | `/user/location/{id}/type/{role}` | List **specific** users from a location |
-| `/user/region/{id}` | List **all** users from a region |
-| `/user/region/{id}/type/{role}` | List **specific** users from a region |
+| `/user/region/{id}` | List **all** users from a region (//TODO) |
+| `/user/region/{id}/type/{role}` | List **specific** users from a region (//TODO) |
 
 
 #### Location
