@@ -46,6 +46,7 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     }
 ]));
 
+
 // Region API
 $app->get('/region', function (Request $request, Response $response) {
 
@@ -55,8 +56,6 @@ $app->get('/region', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-
-// Region API
 $app->get('/region/{id}', function (Request $request, Response $response, $args) {
     $region_id = (int)$args['id'];
 
@@ -67,7 +66,8 @@ $app->get('/region/{id}', function (Request $request, Response $response, $args)
 
 });
 
-// Region API
+
+// Area API
 $app->get('/area', function (Request $request, Response $response) {
 
     $data = get_all_areas();
@@ -76,6 +76,7 @@ $app->get('/area', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+
 
 
 
@@ -94,8 +95,6 @@ $app->get('/location', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-
-// Location API
 $app->get('/location/detail', function (Request $request, Response $response) {
 
     $data = get_all_locations_detail();
@@ -104,7 +103,6 @@ $app->get('/location/detail', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-// Location API
 $app->get('/location/region/{id}/detail', function (Request $request, Response $response, $args) {
     $region_id = (int)$args['id'];
 
@@ -114,7 +112,6 @@ $app->get('/location/region/{id}/detail', function (Request $request, Response $
     return $newResponse;
 
 });
-// Location API
 $app->get('/location/region/{id}', function (Request $request, Response $response, $args) {
     $region_id = (int)$args['id'];
     $data = get_locations_in_region($region_id);
@@ -123,7 +120,6 @@ $app->get('/location/region/{id}', function (Request $request, Response $respons
     return $newResponse;
 
 });
-// Location API
 $app->get('/location/{id}', function (Request $request, Response $response, $args) {
     $location_id = (int)$args['id'];
 
@@ -135,6 +131,8 @@ $app->get('/location/{id}', function (Request $request, Response $response, $arg
 });
 
 
+
+
 // Client API
 $app->get('/client', function (Request $request, Response $response) {
 
@@ -144,8 +142,6 @@ $app->get('/client', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-
-// Client API
 $app->get('/client/{id}', function (Request $request, Response $response, $args) {
 	$JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -156,9 +152,6 @@ $app->get('/client/{id}', function (Request $request, Response $response, $args)
     return $newResponse;
 
 });
-
-
-// Client API
 $app->get('/client/{id}/messages', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -169,9 +162,6 @@ $app->get('/client/{id}/messages', function (Request $request, Response $respons
     return $newResponse;
 
 });
-
-
-// Client API
 $app->get('/client/{id}/communitywork', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -183,7 +173,6 @@ $app->get('/client/{id}/communitywork', function (Request $request, Response $re
     return $newResponse;
 
 });
-// Client API
 $app->get('/client/{id}/location', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -194,7 +183,6 @@ $app->get('/client/{id}/location', function (Request $request, Response $respons
     return $newResponse;
 
 });
-// Client API
 $app->get('/client/{id}/staff', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -205,7 +193,6 @@ $app->get('/client/{id}/staff', function (Request $request, Response $response, 
     return $newResponse;
 
 });
-// Client API
 $app->get('/client/{id}/phone', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -217,7 +204,10 @@ $app->get('/client/{id}/phone', function (Request $request, Response $response, 
 
 });
 
+
+
 // User API
+// Make sure this stays in the correct order
 $app->get('/user', function (Request $request, Response $response) {
 
     $data = get_all_users();
@@ -226,9 +216,14 @@ $app->get('/user', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->get('/user/authenticate', function (Request $request, Response $response) {
 
-// User API
-// Make sure this stays in the correct order
+    $data = get_waiting_authentication();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/user/type', function (Request $request, Response $response) {
 
     $data = get_all_types();
@@ -237,8 +232,6 @@ $app->get('/user/type', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-
-// User API
 $app->get('/user/type/{role}', function (Request $request, Response $response, $args) {
     $role = (string)$args['role'];
 
@@ -248,9 +241,6 @@ $app->get('/user/type/{role}', function (Request $request, Response $response, $
     return $newResponse;
 
 });
-
-
-// User API
 $app->get('/user/location/{id}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
 
@@ -260,9 +250,6 @@ $app->get('/user/location/{id}', function (Request $request, Response $response,
     return $newResponse;
 
 });
-
-
-// User API
 $app->get('/user/location/{id}/type/{role}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
     $role = (string)$args['role'];
@@ -274,8 +261,6 @@ $app->get('/user/location/{id}/type/{role}', function (Request $request, Respons
     return $newResponse;
 
 });
-
-// User API
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
     $username = (string)$args['username'];
 
@@ -285,7 +270,6 @@ $app->get('/user/{username}', function (Request $request, Response $response, $a
     return $newResponse;
 
 });
-
 
 
 $app->run();

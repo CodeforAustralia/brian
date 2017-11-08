@@ -151,6 +151,26 @@ function get_typed_users_from_location($id, $role) {
 	return $user_arr;
 }
 
+
+function get_waiting_authentication() {
+	try {
+		$user_sql = "SELECT * FROM testdb.User WHERE Authenticated = 0;";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+
+			$user_arr[] = array(
+				'Username' => $row['Username'],
+				'UserRole' => $row['UserRole']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $user_arr;
+}
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function user_output($arr) {
