@@ -67,6 +67,27 @@ function get_all_types() {
 }
 
 
+function get_users_of_type($role) {
+	try {
+		$user_sql = "SELECT * FROM testdb.User WHERE UserRole = '" . $role . "';";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+
+			$user_arr[] = array(
+				'Username' => $row['Username']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $user_arr;
+	// return user_output($user_arr);
+}
+
+
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function user_output($arr) {

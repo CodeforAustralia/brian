@@ -197,6 +197,17 @@ $app->get('/user/type', function (Request $request, Response $response) {
 });
 
 // User API
+$app->get('/user/type/{role}', function (Request $request, Response $response, $args) {
+    $role = (string)$args['role'];
+
+    $data = get_users_of_type($role);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+// User API
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
     $username = (string)$args['username'];
 
