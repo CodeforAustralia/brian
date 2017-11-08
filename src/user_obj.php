@@ -129,25 +129,12 @@ function get_typed_users_from_location($id, $role) {
 				    testdb.User u
 				        LEFT JOIN
 				    testdb.Staff s ON u.Username = s.email
+						LEFT JOIN
+					testdb.StaffLocation l ON s.email = l.email
 				WHERE u.UserRole = '" . $role . "' AND 
-				    s.LocationID = '". $id ."'";
+				    l.LocationID = '". $id ."'";
 		}
     
-    
-
-	// Works, but don't use it for now
-	// 		$user_sql = "
-	// 			SELECT 
-	//     *
-	// FROM
-	//     testdb.User u
-	//         LEFT JOIN
-	//     testdb.Staff s ON u.Username = s.email
-	//         LEFT JOIN
-	//     testdb.OffenderCCSLocation o ON u.Username = o.JAID
-	// WHERE
-	//     (u.UserRole = '" . $role . "') AND (s.LocationID = '". $id . "' OR o.LocationID = '". $id . "');";
-
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
@@ -162,8 +149,6 @@ function get_typed_users_from_location($id, $role) {
 	}
 
 	return $user_arr;
-	// return user_output($user_arr);
-
 }
 
 // Create JSON encoded object to be served with previous array data
