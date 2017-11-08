@@ -207,6 +207,32 @@ $app->get('/user/type/{role}', function (Request $request, Response $response, $
 
 });
 
+
+// User API
+$app->get('/user/location/{id}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+
+    $data = get_users_from_location($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+
+// User API
+$app->get('/user/location/{id}/type/{role}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+    $role = (string)$args['role'];
+
+
+    $data = get_typed_users_from_location($id, $role);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
 // User API
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
     $username = (string)$args['username'];
