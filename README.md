@@ -9,56 +9,69 @@ To access the respective API, assume the host is always the same:
 #### Client
 ------
 
-| API | Description |
-| --- | --- |
-| `/client` | List of **all** offenders |
-| `/client/{id}` | Detailed information about offender |
-| `/client/{id}/messages` | List all correspondence |
-| `/client/{id}/communitywork` | List of *all* assigned community work |
-| `/client/{id}/location` | List of *all* assigned locations |
-| `/client/{id}/staff` | List of *all* assigned staff |
-| `/client/{id}/phone` | List of *all* offender's phone numbers |
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/client` | List of **all** offenders |
+| GET | `/client/{id}` | Detailed information about offender |
+| GET | `/client/{id}/messages` | List all correspondence |
+| GET | `/client/{id}/communitywork` | List of *all* assigned community work |
+| GET | `/client/{id}/location` | List of *all* assigned locations |
+| GET | `/client/{id}/staff` | List of *all* assigned staff |
+| GET | `/client/{id}/phone` | List of *all* offender's phone numbers |
 
+#### Staff
+------
+
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/staff` | Same as "/user/type/{role}" (//TODO) |
+| GET | `/staff/location/{id}` | Same as "/user/location/{id}/type/{role}" (//TODO) |
+| GET | `/staff/{username}/client` | List all offenders assigned to CM (//TODO) |
+| GET | `/staff/{username}/client/location/{id}` | List offenders assigned to CM in a location (//TODO) |
 
 #### Users
 ------
 
-| API | Description |
-| --- | --- |
-| `/user` | List of **all** users |
-| `/user/{id}` | Detailed information about user (role only?) |
-| `/user/type` | List of **all** user types |
-| `/user/type/{role}` | List **all** users with a specific role |
-| `/user/location/{id}` | List **all** users from a location |
-| `/user/location/{id}/type/{role}` | List **specific** users from a location |
-| `/user/region/{id}` | List **all** users from a region (//TODO) |
-| `/user/region/{id}/type/{role}` | List **specific** users from a region (//TODO) |
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/user` | List of **all** users |
+| GET | `/user/{id}` | Detailed information about user (role only?) |
+| POST | `/user/{id}/assign/{role}` | Assigns a user a specific role (//TODO) |
+| GET | `/user/type` | List of **all** user types |
+| GET | `/user/type/{role}` | List **all** users with a specific role |
+| GET | `/user/location/{id}` | List **all** users from a location |
+| GET | `/user/location/{id}/type/{role}` | List **specific** users from a location |
+| GET | `/user/location/{id}/authenticate` | List users that need to be authenticated in a location (//TODO) |
+| GET | `/user/authenticate` | List **all** users that require authentication (//TODO) |
+| POST | `/user/authenticate/{username}` | Authenticates a specific user (//TODO) |
+| GET | `/user/region/{id}` | List **all** users from a region (//TODO) |
+| GET | `/user/region/{id}/type/{role}` | List **specific** users from a region (//TODO) |
 
 
 #### Location
 ------
 
-| API | Description |
-| --- | --- |
-| `/location` | List of **all** locations |
-| `/location?detail=1` | List of **all** locations, with detail |
-| `/location?location={id}` | **One** location, with detail |
-| `/location?region={id}` | List of *all* locations within a region |
-| `/location?region={id}&detail=1` | List of *all* locations within a region, with detail |
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/location` | List of **all** locations |
+| GET | `/location?detail=1` | List of **all** locations, with detail |
+| GET | `/location?location={id}` | **One** location, with detail |
+| GET | `/location?region={id}` | List of *all* locations within a region| GET  |
+| GET | `/location?region={id}&detail=1` | List of *all* locations within a region, with detail |
 
 
 #### Region
 ------
 
-| API | Description |
-| --- | --- |
-| `/region` | List of **all** regions |
-| `/region/{id}` | List of **all** locations, within a region (same as `/location?region={id}`) |
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/region` | List of **all** regions |
+| GET | `/region/{id}` | List of **all** locations, within a region (same as `/location?region={id| GET }`) |
 
 
 #### Area
 ------
 
-| API | Description |
-| --- | --- |
-| `/area` | List of **all** areas |
+| METHOD | API | Description |
+| --- | --- | --- |
+| GET | `/area` | List of **all** areas |
