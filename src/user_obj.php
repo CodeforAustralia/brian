@@ -3,7 +3,7 @@ require_once "db.php";
 require_once "pretty_json.php";
 
 
-function get_users() {
+function get_all_users() {
 
 	try {
 		$user_sql = "SELECT * FROM testdb.User ORDER BY UserRole ASC;";
@@ -11,7 +11,7 @@ function get_users() {
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
-				'UserName' => $row['UserName'],
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole']
 			);
 		}
@@ -20,7 +20,8 @@ function get_users() {
 	    echo "Database Error!";
 	}
 
-	return client_output($user_arr);
+	return $user_arr;
+	// return user_output($user_arr);
 }
 
 
@@ -31,6 +32,7 @@ function get_user($user) {
 
 		foreach(returnDB()->query($user_sql) as $row) {
 			$user_arr[] = array(
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole']
 			);
 		}
@@ -39,22 +41,13 @@ function get_user($user) {
 	    echo "Database Error!";
 	}
 
-	return client_output($user_arr);
-}
-
-// Get CCS locations in ascending order of EndDate
-function get_user_types() {
-
-	} catch (Exception $e) {
-	    echo "<p>Database Error!</p>";
-	}
-
-	return $ccs_location_arr;
+	return $user_arr;
+	// return user_output($user_arr);
 }
 
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
-function client_output($arr) {
+function user_output($arr) {
 	$user_obj = array(
 		'Users' => $arr
 	);

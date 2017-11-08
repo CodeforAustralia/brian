@@ -46,13 +46,6 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     }
 ]));
 
-$app->get('/hello/{name}', function (Request $request, Response $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
-
 // Region API
 $app->get('/region', function (Request $request, Response $response) {
 
@@ -182,7 +175,26 @@ $app->get('/client/{id}', function (Request $request, Response $response, $args)
 
 });
 
+// User API
+$app->get('/user', function (Request $request, Response $response) {
 
+    $data = get_all_users();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+// User API
+$app->get('/user/{username}', function (Request $request, Response $response, $args) {
+    $username = (string)$args['username'];
+
+    $data = get_user($username);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 
 
 $app->run();
