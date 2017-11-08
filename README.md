@@ -6,8 +6,7 @@ To access the respective API, assume the host is always the same:
 `http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com/brian/src/public/`
 
 
-#### Client
-------
+## Client
 
 | METHOD | API | Description |
 | --- | --- | --- |
@@ -19,8 +18,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/client/{id}/staff` | List of *all* assigned staff |
 | GET | `/client/{id}/phone` | List of *all* offender's phone numbers |
 
-#### Staff
-------
+## Staff
 
 | METHOD | API | Description |
 | --- | --- | --- |
@@ -29,8 +27,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/staff/{username}/client` | List all offenders assigned to CM (//TODO) |
 | GET | `/staff/{username}/client/location/{id}` | List offenders assigned to CM in a location (//TODO) |
 
-#### Users
-------
+## Users
 
 | METHOD | API | Description |
 | --- | --- | --- |
@@ -48,8 +45,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/user/region/{id}/type/{role}` | List *specific* users from a region (//TODO) |
 
 
-#### Location
-------
+## Location
 
 | METHOD | API | Description |
 | --- | --- | --- |
@@ -60,8 +56,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/location/region/{id}/detail` | List of *all* locations within a region, with detail |
 
 
-#### Region
-------
+## Region
 
 | METHOD | API | Description |
 | --- | --- | --- |
@@ -69,8 +64,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/region/{id}` | List of *all* locations, within a region (same as `/location/region/{id}`) |
 
 
-#### Area
-------
+## Area
 
 | METHOD | API | Description |
 | --- | --- | --- |
