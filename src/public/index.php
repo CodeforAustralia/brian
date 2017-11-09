@@ -261,6 +261,15 @@ $app->get('/user/location/{id}/type/{role}', function (Request $request, Respons
     return $newResponse;
 
 });
+$app->get('/user/location/{id}/authenticate', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+
+    $data = get_waiting_authentication_from_location($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
     $username = (string)$args['username'];
 
