@@ -34,7 +34,7 @@ To access the respective API, assume the host is always the same:
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
 | GET | `/user` | List of *all* users | |
-| POST | `/user/new` | Create a new user | UserName:{UserName} <br/> Password:{Password} <br/> Role:{Role} <br/> Location:{id} <br/> FirstName:{FirstName} <br/> LastName:{LastName} <br/> Authentication:{Authentication} |
+| POST | `/user/new` | Create a new user | `UserName:{UserName}` <br/> `Password:{Password}` <br/> `Role:{Role}` <br/> `Location:{id}` <br/> `FirstName:{FirstName}` <br/> `LastName:{LastName}` <br/> `Authentication:{Authentication}` |
 | POST | `/user/password` | Update password (//TODO, not sure what this means yet) | |
 | GET | `/user/{username}` | Detailed information about *one* user (role only?) | |
 | POST | `/user/{username}` | Assigns a user a *specific role* | `Role:{Role}` |
@@ -44,7 +44,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/user/location/{id}/type/{role}` | List of *specific* users from a location | |
 | GET | `/user/location/{id}/authenticate` | List of users that need to be authenticated in a location | |
 | GET | `/user/authenticate` | List of *all* users that require authentication | |
-| POST | `/user/authenticate` | Authenticates a *specific* user  | `UserName:{UserName} LocationID:{id}` |
+| POST | `/user/authenticate` | Authenticates a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` |
 | GET | `/user/revoked` | List of *all* that have rejected/revoked access | |
 | GET | `/user/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
 | GET | `/user/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
