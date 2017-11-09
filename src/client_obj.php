@@ -244,11 +244,11 @@ function get_client_list_in_location($id) {
 FROM
     testdb.Offender o
         JOIN
-    testdb.OffenderCCSLocation c
+    testdb.OffenderCCSLocation c ON o.JAID = c.JAID
     JOIN
-    testdb.Location l
+    testdb.Location l ON c.LocationID = l.LocationID
 WHERE
-    o.JAID = c.JAID AND EndDate IS NULL AND c.LocationID = l.LocationID
+     EndDate IS NULL
         AND c.LocationID = '" . $id ."';";
 
 		foreach (returnDB()->query($offender_sql) as $row) {
@@ -276,14 +276,13 @@ function get_client_list_in_region($id) {
 FROM
     testdb.Offender o
         JOIN
-    testdb.OffenderCCSLocation c
-    JOIN
-    testdb.Location l
-    JOIN
-    testdb.Region r
+    testdb.OffenderCCSLocation c ON o.JAID = c.JAID
+        JOIN
+    testdb.Location l ON c.LocationID = l.LocationID
+        JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
-    o.JAID = c.JAID AND EndDate IS NULL AND c.LocationID = l.LocationID AND l.RegionID = r.RegionID
-        AND l.RegionID = '" . $id ."';";
+    EndDate IS NULL AND l.RegionID = '" . $id ."';";
 
 		foreach (returnDB()->query($offender_sql) as $row) {
 
