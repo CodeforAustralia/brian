@@ -310,6 +310,16 @@ $app->get('/staff/{username}/client', function (Request $request, Response $resp
     return $newResponse;
 
 });
+$app->get('/staff/{username}/client/location/{id}', function (Request $request, Response $response, $args) {
+    $username = (string)$args['username'];
+    $id = (string)$args['id'];
+
+    $data = get_staff_clients_from_location($username, $id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 
 
 

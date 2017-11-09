@@ -25,7 +25,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/staff` | List of *all* authenticated staff |
 | GET | `/staff/location/{id}` | List of *all* authenticated staff from a location |
 | GET | `/staff/{username}/client` | List all offenders assigned to CM |
-| GET | `/staff/{username}/client/location/{id}` | List offenders assigned to CM in a location (//TODO) |
+| GET | `/staff/{username}/client/location/{id}` | List offenders assigned to CM in a location |
 
 ## Users
 
