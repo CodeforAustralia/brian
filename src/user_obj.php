@@ -243,7 +243,6 @@ WHERE
 
 
 function set_authenticate_user($username, $id) {
-	echo $username . $id;
 	try {
 		$user_sql = "UPDATE testdb.StaffAuthentication 
 		SET 
@@ -251,6 +250,19 @@ function set_authenticate_user($username, $id) {
 		WHERE
 		    email = '" . $username . "'
 		        AND LocationID = '" . $id . "';";
+
+		returnDB()->query($user_sql);
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
+}
+
+function set_user_role($username, $role) {
+
+	try {
+		$user_sql = "UPDATE testdb.User SET UserRole = '" . $role . "' WHERE Username = '" . $username . "';";
 
 		returnDB()->query($user_sql);
 

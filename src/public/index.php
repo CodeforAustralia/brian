@@ -254,9 +254,8 @@ $app->post('/user/authenticate', function (Request $request, Response $response,
     // echo $user_data['LocationID'];
 
     $data = set_authenticate_user($user_data['UserName'], $user_data['LocationID']);
-    // $newResponse = $response->withJson($data);
-
     $response->getBody()->write($data);
+
     return $response;
 
 });
@@ -313,6 +312,19 @@ $app->get('/user/{username}', function (Request $request, Response $response, $a
     $newResponse = $response->withJson($data);
 
     return $newResponse;
+
+});
+$app->post('/user/{username}', function (Request $request, Response $response, $args) {
+    $username = (string)$args['username'];
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Role'] = filter_var($body['Role'], FILTER_SANITIZE_STRING);
+
+    $data = set_user_role($username, $user_data['Role']);
+    $response->getBody()->write($data);
+    
+    return $response;
 
 });
 
