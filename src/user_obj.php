@@ -2,6 +2,7 @@
 require_once "db.php";
 require_once "pretty_json.php";
 
+date_default_timezone_set('Australia/Melbourne');
 
 function get_all_users() {
 
@@ -278,6 +279,32 @@ function set_user_role($username, $role) {
 	}
 	return 1;
 }
+
+function set_new_user($username, $password, $role, $location, $firstname, $lastname, $auth) {
+
+	try {
+		$user_sql = "INSERT INTO testdb.User (Username, Password, UserRole) VALUES ('" . $username . "', '" . $password . "', '" . $role . "');";
+		returnDB()->query($user_sql);
+
+
+		// Look into this for Offenders later
+		if ($role == 'Staff') {
+			$staff_sql = "INSERT INTO testdb.Staff (email, FirstName, LastName) VALUES ('" . $username . "', '" . $firstname . "', '" . $lastname . "');";
+		returnDB()->query($staff_sql);
+
+			$location_sql = "INSERT INTO testdb.StaffLocation (email, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
+			returnDB()->query($location_sql);
+
+			$auth_sql = "INSERT INTO testdb.StaffAuthentication (email, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";
+			returnDB()->query($auth_sql);
+		}
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
+}
+
 
 
 // Create JSON encoded object to be served with previous array data
