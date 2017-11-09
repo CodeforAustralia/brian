@@ -7,6 +7,7 @@ require_once "../location_obj.php";
 require_once "../client_obj.php";
 require_once "../region_obj.php";
 require_once "../user_obj.php";
+require_once "../staff_obj.php";
 
 $app = new \Slim\App;
 
@@ -274,6 +275,18 @@ $app->get('/user/{username}', function (Request $request, Response $response, $a
     $username = (string)$args['username'];
 
     $data = get_user($username);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+
+
+// Staff API
+$app->get('/staff', function (Request $request, Response $response) {
+
+    $data = get_all_staff();
     $newResponse = $response->withJson($data);
 
     return $newResponse;
