@@ -253,7 +253,7 @@ $app->post('/user/authenticate', function (Request $request, Response $response,
     // echo $user_data['UserName'];
     // echo $user_data['LocationID'];
 
-    $data = set_authenticate_user($user_data['UserName'], $user_data['LocationID']);
+    $data = set_user_authentication($user_data['UserName'], $user_data['LocationID']);
     $response->getBody()->write($data);
 
     return $response;

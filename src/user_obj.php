@@ -249,7 +249,7 @@ WHERE
 
 
 
-function set_authenticate_user($username, $id) {
+function set_user_authentication($username, $id) {
 	try {
 		$user_sql = "UPDATE testdb.StaffAuthentication 
 		SET 
