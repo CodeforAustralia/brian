@@ -22,8 +22,8 @@ To access the respective API, assume the host is always the same:
 
 | METHOD | API | Description |
 | --- | --- | --- |
-| GET | `/staff` | Different to "/user/type/{role}", more location details |
-| GET | `/staff/location/{id}` | Same as "/user/location/{id}/type/{role}" (//TODO) |
+| GET | `/staff` | List of *all* authenticated staff |
+| GET | `/staff/location/{id}` | List of *all* authenticated staff from a location |
 | GET | `/staff/{username}/client` | List all offenders assigned to CM (//TODO) |
 | GET | `/staff/{username}/client/location/{id}` | List offenders assigned to CM in a location (//TODO) |
 

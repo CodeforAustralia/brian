@@ -292,6 +292,16 @@ $app->get('/staff', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->get('/staff/location/{id}', function (Request $request, Response $response, $args) {
+    $id = (string)$args['id'];
+
+    $data = get_staff_from_location($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
 
 
 $app->run();

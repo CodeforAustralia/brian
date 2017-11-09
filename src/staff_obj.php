@@ -11,12 +11,17 @@ function get_all_staff() {
 FROM
     testdb.Staff s
         JOIN
+    testdb.StaffAuthentication a
+        JOIN
     testdb.StaffLocation sl
         JOIN
     testdb.Location l
 WHERE
     s.email = sl.email
-        AND sl.LocationID = l.LocationID;";
+		    AND
+		    s.email = a.email
+        AND sl.LocationID = l.LocationID
+        AND a.Authenticated = 1;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
@@ -38,18 +43,24 @@ WHERE
 
 function get_staff_from_location($id) {
 	try {
+
 		$user_sql = "SELECT 
     *
 FROM
     testdb.Staff s
+        JOIN
+    testdb.StaffAuthentication a
         JOIN
     testdb.StaffLocation sl
         JOIN
     testdb.Location l
 WHERE
     s.email = sl.email
+		    AND
+		    s.email = a.email
         AND sl.LocationID = l.LocationID
-        AND sl.LocationID = '" . $id "';";
+        AND a.Authenticated = 1
+        AND sl.LocationID = '" . $id . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
