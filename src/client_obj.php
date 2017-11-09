@@ -232,7 +232,37 @@ function get_client_list() {
 	    echo "Database Error";
 	}
 
-	return client_output($offender_arr);
+	return $offender_arr;
+}
+
+
+function get_client_list_in_location($id) {
+
+	try {
+		$offender_sql = "SELECT 
+    *
+FROM
+    testdb.Offender o
+        JOIN
+    testdb.OffenderCCSLocation l
+WHERE
+    o.JAID = l.JAID AND EndDate IS NULL
+        AND LocationID = '" . $id ."';";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'JAID' => $row['JAID'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'OptedIn' => $row['OptedIn'],
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+	return $offender_arr;
 }
 
 // Create JSON encoded object to be served with previous array data
