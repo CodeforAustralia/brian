@@ -87,16 +87,13 @@ function get_staff_clients($username) {
 FROM
     testdb.Offender o
         JOIN
-    testdb.OffenderAssignedToStaff s
+    testdb.OffenderAssignedToStaff s ON o.JAID = s.JAID
         JOIN
-    testdb.OffenderCCSLocation cl
+    testdb.OffenderCCSLocation cl ON s.JAID = cl.JAID
         JOIN
-    testdb.Location l
+    testdb.Location l ON cl.LocationID = l.LocationID
 WHERE
-    o.JAID = s.JAID AND s.JAID = cl.JAID
-        AND cl.LocationID = l.LocationID
-        AND cl.EndDate IS NULL
-        AND o.OptedIn = 1
+    cl.EndDate IS NULL AND o.OptedIn = 1
         AND s.email = '" . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
@@ -124,18 +121,15 @@ function get_staff_clients_from_location($username, $id) {
 FROM
     testdb.Offender o
         JOIN
-    testdb.OffenderAssignedToStaff s
+    testdb.OffenderAssignedToStaff s ON o.JAID = s.JAID
         JOIN
-    testdb.OffenderCCSLocation cl
+    testdb.OffenderCCSLocation cl ON s.JAID = cl.JAID
         JOIN
-    testdb.Location l
+    testdb.Location l ON cl.LocationID = l.LocationID
 WHERE
-    o.JAID = s.JAID AND s.JAID = cl.JAID
-        AND cl.LocationID = l.LocationID
-        AND cl.EndDate IS NULL
-        AND o.OptedIn = 1
+    cl.EndDate IS NULL AND o.OptedIn = 1
         AND cl.LocationID = '" . $id . "'
-        AND s.email = '" . $username . "';";
+        AND s.email = " . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
