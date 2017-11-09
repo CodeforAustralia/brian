@@ -224,7 +224,8 @@ function get_client_list() {
 			$offender_arr[] = array(
 				'JAID' => $row['JAID'],
 				'FirstName' => $row['FirstName'],
-				'LastName' => $row['LastName']
+				'LastName' => $row['LastName'],
+				'OptedIn' => $row['OptedIn'],
 			);
 		}
 	} catch (Exception $e) {
