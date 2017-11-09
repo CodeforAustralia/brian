@@ -123,7 +123,14 @@ function get_users_of_type($role) {
 function get_users_from_location($id) {
 	try {
 
-		$user_sql = "SELECT * FROM testdb.Staff s JOIN testdb.StaffLocation l WHERE s.email = l.email AND LocationID = '" . $id . "';";
+		$user_sql = "SELECT 
+			    *
+			FROM
+			    testdb.Staff s
+			        JOIN
+			    testdb.StaffLocation l ON s.email = l.email
+			WHERE
+			     LocationID = '" . $id . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
@@ -151,9 +158,9 @@ function get_typed_users_from_location($id, $role) {
 				    *
 				FROM
 				    testdb.User u
-				        LEFT JOIN
+				        JOIN
 				    testdb.OffenderCCSLocation c ON u.Username = c.JAID
-				        LEFT JOIN
+				        JOIN
 				    testdb.Offender o ON u.Username = o.JAID
 				WHERE u.UserRole = 'Offender' AND c.LocationID = '". $id ."'";
 		}
@@ -165,9 +172,9 @@ function get_typed_users_from_location($id, $role) {
 				    *
 				FROM
 				    testdb.User u
-				        LEFT JOIN
+				        JOIN
 				    testdb.Staff s ON u.Username = s.email
-						LEFT JOIN
+								JOIN
 					testdb.StaffLocation l ON s.email = l.email
 				WHERE u.UserRole = '" . $role . "' AND 
 				    l.LocationID = '". $id ."'";
@@ -218,11 +225,11 @@ function get_waiting_authentication_from_location($id) {
 FROM
     testdb.User u
         JOIN
-    testdb.StaffLocation l
+    testdb.StaffLocation l ON u.Username = l.email
         JOIN
-    testdb.StaffAuthentication a
+    testdb.StaffAuthentication a ON u.Username = a.email
 WHERE
-    u.Username = l.email AND u.Username = a.email AND a.LocationID = '" . $id . "'
+    a.LocationID = '" . $id . "'
         AND Authenticated = 0;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
