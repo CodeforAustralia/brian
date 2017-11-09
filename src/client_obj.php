@@ -244,10 +244,12 @@ function get_client_list_in_location($id) {
 FROM
     testdb.Offender o
         JOIN
-    testdb.OffenderCCSLocation l
+    testdb.OffenderCCSLocation c
+    JOIN
+    testdb.Location l
 WHERE
-    o.JAID = l.JAID AND EndDate IS NULL
-        AND LocationID = '" . $id ."';";
+    o.JAID = c.JAID AND EndDate IS NULL AND c.LocationID = l.LocationID
+        AND c.LocationID = '" . $id ."';";
 
 		foreach (returnDB()->query($offender_sql) as $row) {
 
@@ -256,6 +258,44 @@ WHERE
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
 				'OptedIn' => $row['OptedIn'],
+				'SiteName' => $row['SiteName'],
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+	return $offender_arr;
+}
+
+function get_client_list_in_region($id) {
+
+	try {
+		$offender_sql = "SELECT 
+    *
+FROM
+    testdb.Offender o
+        JOIN
+    testdb.OffenderCCSLocation c
+    JOIN
+    testdb.Location l
+    JOIN
+    testdb.Region r
+WHERE
+    o.JAID = c.JAID AND EndDate IS NULL AND c.LocationID = l.LocationID AND l.RegionID = r.RegionID
+        AND l.RegionID = '" . $id ."';";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'JAID' => $row['JAID'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'OptedIn' => $row['OptedIn'],
+				'SiteName' => $row['SiteName'],
+				'RegionName' => $row['RegionName'],
+
+
 			);
 		}
 	} catch (Exception $e) {

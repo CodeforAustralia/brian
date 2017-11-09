@@ -152,7 +152,15 @@ $app->get('/client/location/{id}', function (Request $request, Response $respons
     return $newResponse;
 
 });
+$app->get('/client/region/{id}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
 
+    $data = get_client_list_in_region($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/client/{id}', function (Request $request, Response $response, $args) {
 	$JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
