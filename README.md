@@ -31,22 +31,23 @@ To access the respective API, assume the host is always the same:
 
 ## Users
 
-| Method | API | Description |
-| --- | --- | --- |
-| GET | `/user` | List of *all* users |
+| Method | API | Description | Body |
+| --- | --- | --- | --- |
+| GET | `/user` | List of *all* users | |
 | POST | `/user/new` | Create a new user (//TODO) |
-| POST | `/user/password` | Updated password (//TODO, not sure what this means yet) |
-| GET | `/user/{username}` | Detailed information about *one* user (role only?) |
-| POST | `/user/{username}/assign/{role}` | Assigns a user a *specific role* (//TODO) |
-| GET | `/user/type` | List of *all* user types |
-| GET | `/user/type/{role}` | List of *all* users with a specific role |
-| GET | `/user/location/{id}` | List of *all* users from a location |
-| GET | `/user/location/{id}/type/{role}` | List of *specific* users from a location |
-| GET | `/user/location/{id}/authenticate` | List of users that need to be authenticated in a location |
-| GET | `/user/authenticate` | List of *all* users that require authentication |
-| POST | `/user/authenticate/{username}` | Authenticates a *specific* user (//TODO) |
-| GET | `/user/region/{id}` | List of *all* users from a region (//TODO) |
-| GET | `/user/region/{id}/type/{role}` | List of *specific* users from a region (//TODO) |
+| POST | `/user/password` | Update password (//TODO, not sure what this means yet) | |
+| GET | `/user/{username}` | Detailed information about *one* user (role only?) | |
+| POST | `/user/{username}` | Assigns a user a *specific role* (//TODO) | |
+| GET | `/user/type` | List of *all* user types | |
+| GET | `/user/type/{role}` | List of *all* users with a specific role | |
+| GET | `/user/location/{id}` | List of *all* users from a location | |
+| GET | `/user/location/{id}/type/{role}` | List of *specific* users from a location | |
+| GET | `/user/location/{id}/authenticate` | List of users that need to be authenticated in a location | |
+| GET | `/user/authenticate` | List of *all* users that require authentication | |
+| POST | `/user/authenticate` | Authenticates a *specific* user  | `UserName:{UserName} LocationID:{id}` |
+| GET | `/user/revoked` | List of *all* that have rejected/revoked access | |
+| GET | `/user/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
+| GET | `/user/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
 
 
 ## Location

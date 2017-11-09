@@ -243,6 +243,23 @@ $app->get('/user/authenticate', function (Request $request, Response $response) 
     return $newResponse;
 
 });
+$app->post('/user/authenticate', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['UserName'] = filter_var($body['UserName'], FILTER_SANITIZE_STRING);
+    $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+    // // var_dump($user_data);
+    // echo $user_data['UserName'];
+    // echo $user_data['LocationID'];
+
+    $data = set_authenticate_user($user_data['UserName'], $user_data['LocationID']);
+    // $newResponse = $response->withJson($data);
+
+    $response->getBody()->write($data);
+    return $response;
+
+});
 $app->get('/user/type', function (Request $request, Response $response) {
 
     $data = get_all_types();
