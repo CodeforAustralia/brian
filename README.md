@@ -13,12 +13,12 @@ To access the respective API, assume the host is always the same:
 | GET | `/client` | List of *all* offenders |
 | GET | `/client/location/{id}` | List of *all* offender's from a location |
 | GET | `/client/region/{id}` | List of *all* offender's from a region |
-| GET | `/client/{id}` | *All* information about offender |
-| GET | `/client/{id}/messages` | List of *all* correspondence |
-| GET | `/client/{id}/communitywork` | List of *all* assigned community work |
-| GET | `/client/{id}/location` | List of *all* assigned locations |
-| GET | `/client/{id}/staff` | List of *all* assigned staff |
-| GET | `/client/{id}/phone` | List of *all* offender's phone numbers |
+| GET | `/client/{id}` | *All* information about *one* offender |
+| GET | `/client/{id}/messages` | List of *all* correspondence for *one* offender |
+| GET | `/client/{id}/communitywork` | List of *all* assigned community work for *one* offender |
+| GET | `/client/{id}/location` | List of *all* assigned locations for *one* offender |
+| GET | `/client/{id}/staff` | List of *all* assigned staff for *one* offender |
+| GET | `/client/{id}/phone` | List of *all* offender's phone numbers for *one* offender |
 
 ## Staff
 
