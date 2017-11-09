@@ -34,8 +34,10 @@ To access the respective API, assume the host is always the same:
 | Method | API | Description |
 | --- | --- | --- |
 | GET | `/user` | List of *all* users |
-| GET | `/user/{id}` | Detailed information about *one* user (role only?) |
-| POST | `/user/{id}/assign/{role}` | Assigns a user a *specific role* (//TODO) |
+| POST | `/user/new` | Create a new user (//TODO) |
+| POST | `/user/password` | Updated password (//TODO, not sure what this means yet) |
+| GET | `/user/{username}` | Detailed information about *one* user (role only?) |
+| POST | `/user/{username}/assign/{role}` | Assigns a user a *specific role* (//TODO) |
 | GET | `/user/type` | List of *all* user types |
 | GET | `/user/type/{role}` | List of *all* users with a specific role |
 | GET | `/user/location/{id}` | List of *all* users from a location |
