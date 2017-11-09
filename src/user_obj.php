@@ -66,12 +66,50 @@ function get_all_types() {
 
 function get_users_of_type($role) {
 	try {
-		$user_sql = "SELECT * FROM testdb.User WHERE UserRole = '" . $role . "';";
+
+
+		if($role == 'Offender') {
+			$user_sql = "
+				SELECT 
+				    *
+				FROM
+				    testdb.User u
+				        JOIN
+				    testdb.OffenderCCSLocation c ON u.Username = c.JAID
+				        JOIN
+				    testdb.Offender o ON u.Username = o.JAID
+				        JOIN
+				    testdb.Location l ON c.LocationID = l.LocationID
+				        JOIN
+				    testdb.Region r ON l.RegionID = r.RegionID
+				WHERE u.UserRole = 'Offender'";
+		}
+		else {
+			$user_sql = "SELECT 
+				    *
+				FROM
+				    testdb.User u
+				        JOIN
+				    testdb.Staff s ON u.Username = s.email
+				        JOIN
+				    testdb.StaffLocation sl ON s.email = sl.email
+				        JOIN
+				    testdb.Location l ON sl.LocationID = l.LocationID
+				        JOIN
+				    testdb.Region r ON l.RegionID = r.RegionID
+				WHERE
+				    u.UserRole = '" . $role . "'";
+		}
+
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
-				'Username' => $row['Username']
+				'Username' => $row['Username'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'SiteName' => $row['SiteName'],
+				'RegionName' => $row['RegionName'],
 			);
 		}
 
@@ -200,6 +238,26 @@ WHERE
 	}
 
 	return $user_arr;
+}
+
+
+
+function set_authenticate_user($username, $id) {
+	echo $username . $id;
+	try {
+		$user_sql = "UPDATE testdb.StaffAuthentication 
+		SET 
+		    Authenticated = '1'
+		WHERE
+		    email = '" . $username . "'
+		        AND LocationID = '" . $id . "';";
+
+		returnDB()->query($user_sql);
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
 }
 
 
