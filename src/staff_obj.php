@@ -45,21 +45,17 @@ function get_staff_from_location($id) {
 	try {
 
 		$user_sql = "SELECT 
-    *
+*
 FROM
     testdb.Staff s
         JOIN
-    testdb.StaffAuthentication a
+    testdb.StaffLocation sl ON s.email = sl.email
         JOIN
-    testdb.StaffLocation sl
+    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
         JOIN
-    testdb.Location l
+    testdb.Location l ON a.LocationID = l.LocationID
 WHERE
-    s.email = sl.email
-		    AND
-		    s.email = a.email
-        AND sl.LocationID = l.LocationID
-        AND a.Authenticated = 1
+        a.Authenticated = 1
         AND sl.LocationID = '" . $id . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {

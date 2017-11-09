@@ -200,13 +200,13 @@ function get_typed_users_from_location($id, $role) {
 
 function get_waiting_authentication() {
 	try {
-		$user_sql = "SELECT * FROM testdb.User WHERE Authenticated = 0;";
+		$user_sql = "SELECT * FROM testdb.StaffAuthentication WHERE Authenticated = 0;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
-				'Username' => $row['Username'],
-				'UserRole' => $row['UserRole']
+				'email' => $row['email'],
+				'LocationID' => $row['LocationID']
 			);
 		}
 
@@ -225,10 +225,12 @@ function get_waiting_authentication_from_location($id) {
     *
 FROM
     testdb.User u
+    		JOIN
+    testdb.Staff s ON u.UserName = s.email
         JOIN
-    testdb.StaffLocation l ON u.Username = l.email
+    testdb.StaffLocation l ON u.UserName = l.email
         JOIN
-    testdb.StaffAuthentication a ON u.Username = a.email
+    testdb.StaffAuthentication a ON u.UserName = a.email
 WHERE
     a.LocationID = '" . $id . "'
         AND Authenticated = 0;";
@@ -236,7 +238,7 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
-				'Username' => $row['Username'],
+				'email' => $row['email'],
 				'UserRole' => $row['UserRole']
 			);
 		}
