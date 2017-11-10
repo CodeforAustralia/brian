@@ -313,7 +313,7 @@ $app->post('/staff/authenticate', function (Request $request, Response $response
     // echo $user_data['UserName'];
     // echo $user_data['LocationID'];
 
-    $data = set_user_authentication($user_data['UserName'], $user_data['LocationID']);
+    $data = set_staff_authentication($user_data['UserName'], $user_data['LocationID']);
     $response->getBody()->write($data);
 
     return $response;
@@ -342,7 +342,7 @@ $app->get('/staff/location/{id}/type/{role}', function (Request $request, Respon
     $role = (string)$args['role'];
 
 
-    $data = get_typed_users_from_location($id, $role);
+    $data = get_typed_staff_from_location($id, $role);
     $newResponse = $response->withJson($data);
 
     return $newResponse;
@@ -352,7 +352,7 @@ $app->get('/staff/location/{id}/type/{role}', function (Request $request, Respon
 $app->get('/staff/type/{role}', function (Request $request, Response $response, $args) {
     $role = (string)$args['role'];
 
-    $data = get_users_of_type($role);
+    $data = get_staff_of_type($role);
     $newResponse = $response->withJson($data);
 
     return $newResponse;
