@@ -253,71 +253,9 @@ $app->post('/user/new', function (Request $request, Response $response, $args) {
     return $response;
 
 });
-$app->get('/user/authenticate', function (Request $request, Response $response) {
-
-    $data = get_waiting_authentication();
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
-$app->post('/user/authenticate', function (Request $request, Response $response, $args) {
-
-    $body = $request->getParsedBody();
-    $user_data = [];
-    $user_data['UserName'] = filter_var($body['UserName'], FILTER_SANITIZE_STRING);
-    $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
-    // // var_dump($user_data);
-    // echo $user_data['UserName'];
-    // echo $user_data['LocationID'];
-
-    $data = set_user_authentication($user_data['UserName'], $user_data['LocationID']);
-    $response->getBody()->write($data);
-
-    return $response;
-
-});
 $app->get('/user/type', function (Request $request, Response $response) {
 
     $data = get_all_types();
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
-$app->get('/user/type/{role}', function (Request $request, Response $response, $args) {
-    $role = (string)$args['role'];
-
-    $data = get_users_of_type($role);
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
-$app->get('/user/location/{id}', function (Request $request, Response $response, $args) {
-    $id = (int)$args['id'];
-
-    $data = get_users_from_location($id);
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
-$app->get('/user/location/{id}/type/{role}', function (Request $request, Response $response, $args) {
-    $id = (int)$args['id'];
-    $role = (string)$args['role'];
-
-
-    $data = get_typed_users_from_location($id, $role);
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
-$app->get('/user/location/{id}/authenticate', function (Request $request, Response $response, $args) {
-    $id = (int)$args['id'];
-
-    $data = get_waiting_authentication_from_location($id);
     $newResponse = $response->withJson($data);
 
     return $newResponse;
@@ -357,10 +295,64 @@ $app->get('/staff', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->get('/staff/authenticate', function (Request $request, Response $response) {
+
+    $data = get_waiting_authentication();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->post('/staff/authenticate', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['UserName'] = filter_var($body['UserName'], FILTER_SANITIZE_STRING);
+    $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+    // // var_dump($user_data);
+    // echo $user_data['UserName'];
+    // echo $user_data['LocationID'];
+
+    $data = set_user_authentication($user_data['UserName'], $user_data['LocationID']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
 $app->get('/staff/location/{id}', function (Request $request, Response $response, $args) {
     $id = (string)$args['id'];
 
     $data = get_staff_from_location($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/staff/location/{id}/authenticate', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+
+    $data = get_waiting_authentication_from_location($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/staff/location/{id}/type/{role}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+    $role = (string)$args['role'];
+
+
+    $data = get_typed_users_from_location($id, $role);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+
+$app->get('/staff/type/{role}', function (Request $request, Response $response, $args) {
+    $role = (string)$args['role'];
+
+    $data = get_users_of_type($role);
     $newResponse = $response->withJson($data);
 
     return $newResponse;
