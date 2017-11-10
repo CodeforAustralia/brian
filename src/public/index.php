@@ -295,6 +295,14 @@ $app->get('/staff', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->get('/staff/revoked', function (Request $request, Response $response) {
+
+    $data = get_revoked_staff();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/staff/authenticate', function (Request $request, Response $response) {
 
     $data = get_waiting_authentication();

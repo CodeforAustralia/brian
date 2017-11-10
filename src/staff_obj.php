@@ -379,6 +379,45 @@ function get_staff_of_type($role) {
 	return $user_arr;
 }
 
+function get_revoked_staff() {
+	try {
+		$user_sql = "SELECT 
+    *
+FROM
+    testdb.User u
+    		JOIN
+    testdb.Staff s ON u.UserName = s.email
+        JOIN
+    testdb.StaffLocation sl ON u.UserName = sl.email
+        JOIN
+    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+        JOIN
+    testdb.Location l ON sl.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
+WHERE
+ Authenticated = 3;";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+
+			$user_arr[] = array(
+				'UserRole' => $row['UserRole'],
+				'email' => $row['email'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'LocationID' => $row['LocationID'],
+				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $user_arr;
+}
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function staff_output($arr) {
