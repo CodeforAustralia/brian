@@ -7,25 +7,24 @@ require_once "pretty_json.php";
 function get_all_staff() {
 	try {
 		$user_sql = "SELECT 
-    *
+*
 FROM
-    testdb.Staff s
+	testdb.User u
+		JOIN 
+    testdb.Staff s ON u.Username = s.email
         JOIN
-    testdb.StaffAuthentication a
+    testdb.StaffLocation sl ON s.email = sl.email
         JOIN
-    testdb.StaffLocation sl
+    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
         JOIN
-    testdb.Location l
+    testdb.Location l ON a.LocationID = l.LocationID
 WHERE
-    s.email = sl.email
-		    AND
-		    s.email = a.email
-        AND sl.LocationID = l.LocationID
-        AND a.Authenticated = 1;";
+        a.Authenticated = 1;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
@@ -47,7 +46,9 @@ function get_staff_from_location($id) {
 		$user_sql = "SELECT 
 *
 FROM
-    testdb.Staff s
+	testdb.User u
+		JOIN 
+    testdb.Staff s ON u.Username = s.email
         JOIN
     testdb.StaffLocation sl ON s.email = sl.email
         JOIN
@@ -61,6 +62,7 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
