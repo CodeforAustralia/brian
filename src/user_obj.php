@@ -64,35 +64,6 @@ function get_all_types() {
 	return $user_arr;
 }
 
-function get_users_from_location($id) {
-	try {
-
-		$user_sql = "SELECT 
-			    *
-			FROM
-			    testdb.Staff s
-			        JOIN
-			    testdb.StaffLocation l ON s.email = l.email
-			WHERE
-			     LocationID = '" . $id . "';";
-
-		foreach(returnDB()->query($user_sql) as $row) {
-
-			$user_arr[] = array(
-				'email' => $row['email'],
-				'FirstName' => $row['FirstName'],
-				'LastName' => $row['LastName']
-			);
-		}
-
-	} catch (Exception $e) {
-	    echo "Database Error!";
-	}
-
-	return $user_arr;
-}
-
-
 function set_user_role($username, $role) {
 
 	try {

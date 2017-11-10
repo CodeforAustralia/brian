@@ -7,6 +7,7 @@ require_once "pretty_json.php";
 function get_all_staff() {
 	try {
 		$user_sql = "SELECT 
+*SELECT 
 *
 FROM
 	testdb.User u
@@ -18,6 +19,8 @@ FROM
     testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON a.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
         a.Authenticated = 1;";
 
@@ -30,6 +33,8 @@ WHERE
 				'LastName' => $row['LastName'],
 				'LocationID' => $row['LocationID'],
 				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -55,6 +60,8 @@ FROM
     testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON a.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
         a.Authenticated = 1
         AND sl.LocationID = '" . $id . "';";
@@ -68,6 +75,8 @@ WHERE
 				'LastName' => $row['LastName'],
 				'LocationID' => $row['LocationID'],
 				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -90,6 +99,8 @@ FROM
     testdb.OffenderCCSLocation cl ON s.JAID = cl.JAID
         JOIN
     testdb.Location l ON cl.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
     cl.EndDate IS NULL AND o.OptedIn = 1
         AND s.email = '" . $username . "';";
@@ -102,6 +113,8 @@ WHERE
 				'LastName' => $row['LastName'],
 				'LocationID' => $row['LocationID'],
 				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -124,10 +137,12 @@ FROM
     testdb.OffenderCCSLocation cl ON s.JAID = cl.JAID
         JOIN
     testdb.Location l ON cl.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
     cl.EndDate IS NULL AND o.OptedIn = 1
         AND cl.LocationID = '" . $id . "'
-        AND s.email = " . $username . "';";
+        AND s.email = '" . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
@@ -137,6 +152,8 @@ WHERE
 				'LastName' => $row['LastName'],
 				'LocationID' => $row['LocationID'],
 				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -149,13 +166,34 @@ WHERE
 
 function get_waiting_authentication() {
 	try {
-		$user_sql = "SELECT * FROM testdb.StaffAuthentication WHERE Authenticated = 0;";
+		$user_sql = "SELECT 
+    *
+FROM
+    testdb.User u
+    		JOIN
+    testdb.Staff s ON u.UserName = s.email
+        JOIN
+    testdb.StaffLocation sl ON u.UserName = sl.email
+        JOIN
+    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+        JOIN
+    testdb.Location l ON sl.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
+WHERE
+ Authenticated = 0;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
-				'LocationID' => $row['LocationID']
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'LocationID' => $row['LocationID'],
+				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -177,9 +215,13 @@ FROM
     		JOIN
     testdb.Staff s ON u.UserName = s.email
         JOIN
-    testdb.StaffLocation l ON u.UserName = l.email
+    testdb.StaffLocation sl ON u.UserName = sl.email
         JOIN
-    testdb.StaffAuthentication a ON u.UserName = a.email
+    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+        JOIN
+    testdb.Location l ON sl.LocationID = l.LocationID
+    JOIN
+    testdb.Region r ON l.RegionID = r.RegionID
 WHERE
     a.LocationID = '" . $id . "'
         AND Authenticated = 0;";
@@ -187,8 +229,14 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
-				'UserRole' => $row['UserRole']
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'LocationID' => $row['LocationID'],
+				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
@@ -228,6 +276,10 @@ function get_typed_staff_from_location($id, $role) {
 				    testdb.User u
 				        JOIN
 				    testdb.OffenderCCSLocation c ON u.Username = c.JAID
+                    JOIN
+                    testdb.Location l ON c.LocationID = l.LocationID
+                    JOIN
+                    testdb.Region r ON l.RegionID = r.RegionID
 				        JOIN
 				    testdb.Offender o ON u.Username = o.JAID
 				WHERE u.UserRole = 'Offender' AND c.LocationID = '". $id ."'";
@@ -235,15 +287,18 @@ function get_typed_staff_from_location($id, $role) {
 
 		else {
 
-			$user_sql = "
-				SELECT
+			$user_sql = "	SELECT
 				    *
 				FROM
 				    testdb.User u
 				        JOIN
 				    testdb.Staff s ON u.Username = s.email
 								JOIN
-					testdb.StaffLocation l ON s.email = l.email
+					testdb.StaffLocation sl ON sl.email = s.email
+								JOIN
+					testdb.Location l ON l.LocationID = sl.LocationID
+                    JOIN
+                    testdb.Region r ON l.RegionID = r.RegionID
 				WHERE u.UserRole = '" . $role . "' AND 
 				    l.LocationID = '". $id ."'";
 		}
@@ -253,7 +308,11 @@ function get_typed_staff_from_location($id, $role) {
 			$user_arr[] = array(
 				'Username' => $row['Username'],
 				'FirstName' => $row['FirstName'],
-				'LastName' => $row['LastName']
+				'LastName' => $row['LastName'],
+				'LocationID' => $row['LocationID'],
+				'SiteName' => $row['SiteName'],
+				'RegionID' => $row['RegionID'],
+				'RegionName' => $row['RegionName']
 			);
 		}
 
