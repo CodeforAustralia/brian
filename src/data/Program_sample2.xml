@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Program xmlns="http://justice.gov.au/djr/data/cv/cdf/01" Version="1.1">
+    <SourceSystem>
+        <Name>EJS</Name>
+        <Entity>
+            <Id>4247</Id>
+            <Type>Program</Type>
+        </Entity>
+        <ParentEntity>
+            <Id>2016</Id>
+            <Type>CCSCase</Type>
+        </ParentEntity>
+        <ParentEntity>
+            <Id>598698937</Id>
+            <Type>PersonProfile</Type>
+        </ParentEntity>
+        <ParentEntity>
+            <Id>2048</Id>
+            <Type>OrgProfile</Type>
+        </ParentEntity>
+        <OperationType>Update</OperationType>
+        <TransactionId>4247:Program@2017-11-08 12:00:07.280365000</TransactionId>
+    </SourceSystem>
+    <LastUpdated>2017-11-08T12:00:07.280365000</LastUpdated>
+    <BusinessEntity>
+        <ID>2048</ID>
+        <EntityType>BusinessProfile</EntityType>
+    </BusinessEntity>
+    <DispositionStatus>
+        <CurrentCCSCase>true</CurrentCCSCase>
+        <AnyCCSCase>true</AnyCCSCase>
+        <CurrentCVBooking>true</CurrentCVBooking>
+        <AnyCVBooking>true</AnyCVBooking>
+    </DispositionStatus>
+    <ProgramCode>
+        <Code>DAT</Code>
+        <Description>Drug &amp; Alcohol Treatment</Description>
+    </ProgramCode>
+    <ProgramStatus>
+        <Code>COM</Code>
+        <Description>Completed</Description>
+    </ProgramStatus>
+    <ProgramType>
+        <Code>61</Code>
+        <Description>Condition</Description>
+    </ProgramType>
+    <Agency>
+        <Code>640</Code>
+        <Description>BROADMEADOWS CCS</Description>
+    </Agency>
+    <StartDate>2007-03-14</StartDate>
+    <EndDate>2007-03-30</EndDate>
+</Program>

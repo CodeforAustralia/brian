@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CCSCase xmlns="http://justice.gov.au/djr/data/cv/cdf/01" Version="1.3">
+    <SourceSystem>
+        <Name>EJS</Name>
+        <Entity>
+            <Id>6557</Id>
+            <Type>CCSCase</Type>
+        </Entity>
+        <ParentEntity>
+            <Id>989630903</Id>
+            <Type>PersonProfile</Type>
+        </ParentEntity>
+        <OperationType>Create</OperationType>
+        <TransactionId>6557:CCSCase@2017-11-08 14:51:27.449991000</TransactionId>
+    </SourceSystem>
+    <LastUpdated>2017-11-08T14:51:27.449991000</LastUpdated>
+    <DispositionStatus>
+        <CurrentCCSCase>true</CurrentCCSCase>
+        <AnyCCSCase>true</AnyCCSCase>
+        <CurrentCVBooking>true</CurrentCVBooking>
+        <AnyCVBooking>true</AnyCVBooking>
+    </DispositionStatus>
+    <Reference>
+        <ID>8086486</ID>
+        <EntityType>Alias</EntityType>
+        <Description/>
+    </Reference>
+    <CaseType>
+        <Code>CS</Code>
+        <Description>Community Service</Description>
+    </CaseType>
+    <CaseStatus>
+        <Code>CUR</Code>
+        <Description>Current</Description>
+    </CaseStatus>
+    <Location>
+        <Code>510</Code>
+        <Description>CARLTON CCS </Description>
+    </Location>
+    <AgencyAPBRegion>
+        <Code>CRTN</Code>
+        <Description>CARLTON</Description>
+    </AgencyAPBRegion>
+    <Flags>
+        <ICM>false</ICM>
+        <SexOffender>false</SexOffender>
+        <ViolentOffender>false</ViolentOffender>
+        <OffenderManagement>false</OffenderManagement>
+        <SeriousViolentOffender>false</SeriousViolentOffender>
+    </Flags>
+    <CaseManager>
+        <LastName>UF</LastName>
+        <FirstName>CSUP</FirstName>
+        <ID>
+            <Code>4386</Code>
+            <Description>EmployeeID</Description>
+        </ID>
+        <ValidFrom>2017-11-08</ValidFrom>
+    </CaseManager>
+</CCSCase>

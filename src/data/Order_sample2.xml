@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Order xmlns="http://justice.gov.au/djr/data/cv/cdf/01" Version="1.3">
+    <SourceSystem>
+        <Name>EJS</Name>
+        <Entity>
+            <Id>22230</Id>
+            <Type>Order</Type>
+        </Entity>
+        <ParentEntity>
+            <Id>715299437</Id>
+            <Type>PersonProfile</Type>
+        </ParentEntity>
+        <ParentEntity>
+            <Id>3535</Id>
+            <Type>CCSCase</Type>
+        </ParentEntity>
+        <ParentEntity>
+            <Id>180052640</Id>
+            <Type>Order</Type>
+        </ParentEntity>
+        <ParentEntity>
+            <Id>33619:1</Id>
+            <Type>Sentence</Type>
+        </ParentEntity>
+        <OperationType>Update</OperationType>
+        <TransactionId>22230:Order@2017-11-08 09:57:24.407551000</TransactionId>
+    </SourceSystem>
+    <LastUpdated>2017-11-08T09:57:24.407551000</LastUpdated>
+    <DispositionStatus>
+        <CurrentCCSCase>true</CurrentCCSCase>
+        <AnyCCSCase>true</AnyCCSCase>
+    </DispositionStatus>
+    <CasePerson>
+        <ID>33619</ID>
+        <EntityType>CourtCasePerson</EntityType>
+    </CasePerson>
+    <OrderType>
+        <Code>57</Code>
+        <Description>Community Correction Order</Description>
+    </OrderType>
+    <OrderStatus>
+        <Code>CUR</Code>
+        <Description>Current</Description>
+    </OrderStatus>
+    <StartDate>2017-11-08</StartDate>
+    <EndDate>2018-11-07</EndDate>
+    <SentencingDate>2017-11-08</SentencingDate>
+    <Duration>P1Y</Duration>
+    <ConditionHash>:CFW:</ConditionHash>
+    <OrderCondition>
+        <ConditionId>61901</ConditionId>
+        <StartDate>2017-11-08</StartDate>
+        <EndDate>2018-11-07</EndDate>
+        <OverrideStartDateFlag>false</OverrideStartDateFlag>
+        <ConditionType>
+            <Code>360</Code>
+            <Description>Curfew</Description>
+        </ConditionType>
+        <ConditionCode>CFW</ConditionCode>
+        <Duration>P1Y</Duration>
+        <Status>
+            <Code>CUR</Code>
+            <Description>Current</Description>
+        </Status>
+        <Description>Curfew</Description>
+    </OrderCondition>
+    <CorrectionsCentrePhone/>
+    <CourtAgency>
+        <Code>9995</Code>
+        <Description>ACT Magistrates'</Description>
+    </CourtAgency>
+    <CourtDescription>ACT Magistrates'</CourtDescription>
+    <CourtStartDate>2017-11-08</CourtStartDate>
+    <Chain>
+        <IsChain>false</IsChain>
+    </Chain>
+    <OrderCombination>
+        <Code>CON</Code>
+        <Description>Concurrent</Description>
+    </OrderCombination>
+    <CCSCaseAssociationDate>2017-11-08</CCSCaseAssociationDate>
+    <LastAssociatedDate>2017-11-08</LastAssociatedDate>
+    <LastAdjustmentDate>2017-11-08</LastAdjustmentDate>
+</Order>

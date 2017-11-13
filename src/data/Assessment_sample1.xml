@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Assessment xmlns="http://justice.gov.au/djr/data/cv/cdf/01" Version="1.0">
+    <SourceSystem>
+        <Name>RAT</Name>
+        <Entity>
+            <Id>2017/11/00004</Id>
+            <Type>Assessment</Type>
+        </Entity>
+        <!-- Person ID -->
+        <ParentEntity>
+            <Id>870989644</Id>
+            <Type>PersonProfile</Type>
+        </ParentEntity>
+        <!-- Person ID -->
+        <ParentEntity>
+            <Id>6550</Id>
+            <Type>CCSCase</Type>
+        </ParentEntity>
+        <!-- Person ID -->
+        <ParentEntity>
+            <Id>130010010</Id>
+            <Type>Custody</Type>
+        </ParentEntity>
+        <OperationType>Create</OperationType>
+        <TransactionId>Q2017/11/0000004</TransactionId>
+    </SourceSystem>
+    <DateCreated>2017-11-01</DateCreated>
+    <LastUpdatedBy>LNguyen, Lnsuperc</LastUpdatedBy>
+    <AssessmentType>
+        <Code>Risk</Code>
+    </AssessmentType>
+    <AssessmentLevel>
+        <Code>Medium</Code>
+    </AssessmentLevel>
+    <AssessmentDate>2017-11-01T03:54:43</AssessmentDate>
+    <RiskType>
+        <Code>SV</Code>
+    </RiskType>
+    <RiskVersion>
+        <Code>Initial</Code>
+    </RiskVersion>
+    <Status>
+        <Code>Confirm</Code>
+    </Status>
+    <RiskDetails>
+        <ConfirmationDate>2017-11-01</ConfirmationDate>
+        <CalculatedRiskLevel>
+            <Code>Medium</Code>
+        </CalculatedRiskLevel>
+        <FinalRiskLevel>
+            <Code>Medium</Code>
+        </FinalRiskLevel>
+        <RiskScore>
+            <Code>Medium</Code>
+        </RiskScore>
+        <AssessmentReason>Court Assessment</AssessmentReason>
+        <Assessor>
+            <Name>LNguyen, Lnsuperc</Name>
+            <Manager/>
+            <IsObsolite>0</IsObsolite>
+            <Region>
+                <Code>Carlton CCS</Code>
+            </Region>
+        </Assessor>
+        <Approver>
+            <Name>LNguyen, Lnsuperc</Name>
+            <Manager/>
+            <IsObsolite>0</IsObsolite>
+            <Region>
+                <Code>Central Region</Code>
+            </Region>
+        </Approver>
+    </RiskDetails>
+    <OffenderSnapshot>
+        <PID>870989644</PID>
+        <CRN>212517</CRN>
+        <LastName>CATS</LastName>
+        <FirstName>ROB XXIV</FirstName>
+        <DisplayName>CATS, ROB XXIV</DisplayName>
+        <DateOfBirth>1981-01-01</DateOfBirth>
+        <Age>36</Age>
+        <Gender>
+            <Code>36</Code>
+        </Gender>
+        <SOFlag>0</SOFlag>
+        <SVOSOFlag>0</SVOSOFlag>
+        <IDSFlag>0</IDSFlag>
+        <ABIFlag>0</ABIFlag>
+        <Location>
+            <Description>HOPKINS</Description>
+        </Location>
+        <CCSLocation>
+            <Description>CARLTON CCS</Description>
+        </CCSLocation>
+        <EDD>1-Oct-2018</EDD>
+        <Status>
+            <Code>USOO</Code>
+        </Status>
+        <CustodyStartDate>2017-10-02</CustodyStartDate>
+        <Offence>
+            <Description>"SCHOOL BUS" SIGNS NOT DISPLAYED</Description>
+            <ASOC>1631</ASOC>
+            <BOC>A1</BOC>
+            <StatutoryReference>9921.R9.15.1.B </StatutoryReference>
+        </Offence>
+    </OffenderSnapshot>
+    <QA>
+        <Section>
+            <Heading>General Introduction</Heading>
+            <Question>
+                <Id>SV_Item1</Id>
+                <Text>1. Two or more prior adult convictions?</Text>
+                <Answer>
+                    <Text>Yes</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item2</Id>
+                <Text>2. Arrested under age 16?</Text>
+                <Answer>
+                    <Text>Yes</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item3</Id>
+                <Text>3. Currently unemployed?</Text>
+                <Answer>
+                    <Text>No</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item4</Id>
+                <Text>4. Some criminal friends</Text>
+                <Answer>
+                    <Text>Yes</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item5</Id>
+                <Text>5. Alcohol/drug problem: School/work</Text>
+                <Answer>
+                    <Text>Yes</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item6</Id>
+                <Text>6. Psychological assessment indicated</Text>
+                <Answer>
+                    <Text>No</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item7</Id>
+                <Text>7. Non-rewarding, parental</Text>
+                <Answer>
+                    <Text>2</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_Item8</Id>
+                <Text>8. Attitudes/orientation: supportive of crime</Text>
+                <Answer>
+                    <Text>2</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>Section_1_2_Occupational_Status</Id>
+                <Text>Occupational Status</Text>
+                <Answer>
+                    <Text>Homemaker</Text>
+                </Answer>
+            </Question>
+            <Question>
+                <Id>SV_File_Notes</Id>
+                <Text>File Notes</Text>
+                <Answer>
+                    <Text>test</Text>
+                </Answer>
+            </Question>
+        </Section>
+    </QA>
+</Assessment>
