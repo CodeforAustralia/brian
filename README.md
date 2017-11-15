@@ -9,7 +9,7 @@ To access the respective API, assume the host is always the same:
 
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
-| POST | `/mail` | `To:{string}` <br/> `ToName:{string}` <br/> `From:{string}` <br/> `FromName:{string}` <br/> `Subject:{string}` <br/> `Body:{string}` |
+| POST | `/mail` | Send an HTML email | `To:{string}` <br/> `ToName:{string}` <br/> `From:{string}` <br/> `FromName:{string}` <br/> `Subject:{string}` <br/> `Body:{string}` |
 
 
 ## Client
