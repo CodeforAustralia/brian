@@ -6,17 +6,16 @@ require_once "pretty_json.php";
 
 function get_all_staff() {
 	try {
-		$user_sql = "SELECT 
-*SELECT 
+		$user_sql = "SELECT
 *
 FROM
 	testdb.User u
 		JOIN 
-    testdb.Staff s ON u.Username = s.email
+    testdb.Staff s ON u.Username = s.Username
         JOIN
-    testdb.StaffLocation sl ON s.email = sl.email
+    testdb.StaffLocation sl ON s.Username = sl.Username
         JOIN
-    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+    testdb.StaffAuthentication a ON s.Username = a.Username AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON a.LocationID = l.LocationID
     JOIN
@@ -28,6 +27,7 @@ WHERE
 
 			$user_arr[] = array(
 				'UserRole' => $row['UserRole'],
+				'Username' => $row['Username'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
@@ -53,11 +53,11 @@ function get_staff_from_location($id) {
 FROM
 	testdb.User u
 		JOIN 
-    testdb.Staff s ON u.Username = s.email
+    testdb.Staff s ON u.Username = s.Username
         JOIN
-    testdb.StaffLocation sl ON s.email = sl.email
+    testdb.StaffLocation sl ON s.Username = sl.Username
         JOIN
-    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+    testdb.StaffAuthentication a ON s.Username = a.Username AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON a.LocationID = l.LocationID
     JOIN
@@ -69,6 +69,7 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
@@ -103,7 +104,7 @@ FROM
     testdb.Region r ON l.RegionID = r.RegionID
 WHERE
     cl.EndDate IS NULL AND o.OptedIn = 1
-        AND s.email = '" . $username . "';";
+        AND s.Username = '" . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
@@ -142,7 +143,7 @@ FROM
 WHERE
     cl.EndDate IS NULL AND o.OptedIn = 1
         AND cl.LocationID = '" . $id . "'
-        AND s.email = '" . $username . "';";
+        AND s.Username = '" . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
@@ -171,11 +172,11 @@ function get_waiting_authentication() {
 FROM
     testdb.User u
     		JOIN
-    testdb.Staff s ON u.UserName = s.email
+    testdb.Staff s ON u.UserName = s.Username
         JOIN
-    testdb.StaffLocation sl ON u.UserName = sl.email
+    testdb.StaffLocation sl ON u.UserName = sl.Username
         JOIN
-    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+    testdb.StaffAuthentication a ON s.Username = a.Username AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON sl.LocationID = l.LocationID
     JOIN
@@ -186,6 +187,7 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
@@ -213,11 +215,11 @@ function get_waiting_authentication_from_location($id) {
 FROM
     testdb.User u
     		JOIN
-    testdb.Staff s ON u.UserName = s.email
+    testdb.Staff s ON u.UserName = s.Username
         JOIN
-    testdb.StaffLocation sl ON u.UserName = sl.email
+    testdb.StaffLocation sl ON u.UserName = sl.Username
         JOIN
-    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+    testdb.StaffAuthentication a ON s.Username = a.Username AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON sl.LocationID = l.LocationID
     JOIN
@@ -229,6 +231,7 @@ WHERE
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
@@ -255,15 +258,15 @@ function set_staff_authentication($username, $id, $status) {
 		SET 
 		    Authenticated = '" . $status . "'
 		WHERE
-		    email = '" . $username . "'
+		    Username = '" . $username . "'
 		        AND LocationID = '" . $id . "';";
 
 		returnDB()->query($user_sql);
+		return 1;
 
 	} catch (Exception $e) {
 		return;
 	}
-	return 1;
 }
 function get_typed_staff_from_location($id, $role) {
 	try {
@@ -292,9 +295,9 @@ function get_typed_staff_from_location($id, $role) {
 				FROM
 				    testdb.User u
 				        JOIN
-				    testdb.Staff s ON u.Username = s.email
+				    testdb.Staff s ON u.Username = s.Username
 								JOIN
-					testdb.StaffLocation sl ON sl.email = s.email
+					testdb.StaffLocation sl ON sl.Username = s.Username
 								JOIN
 					testdb.Location l ON l.LocationID = sl.LocationID
                     JOIN
@@ -349,9 +352,9 @@ function get_staff_of_type($role) {
 				FROM
 				    testdb.User u
 				        JOIN
-				    testdb.Staff s ON u.Username = s.email
+				    testdb.Staff s ON u.Username = s.Username
 				        JOIN
-				    testdb.StaffLocation sl ON s.email = sl.email
+				    testdb.StaffLocation sl ON s.Username = sl.Username
 				        JOIN
 				    testdb.Location l ON sl.LocationID = l.LocationID
 				        JOIN
@@ -386,21 +389,22 @@ function get_revoked_staff() {
 FROM
     testdb.User u
     		JOIN
-    testdb.Staff s ON u.UserName = s.email
+    testdb.Staff s ON u.UserName = s.Username
         JOIN
-    testdb.StaffLocation sl ON u.UserName = sl.email
+    testdb.StaffLocation sl ON u.UserName = sl.Username
         JOIN
-    testdb.StaffAuthentication a ON s.email = a.email AND sl.LocationID = a.LocationID
+    testdb.StaffAuthentication a ON s.Username = a.Username AND sl.LocationID = a.LocationID
         JOIN
     testdb.Location l ON sl.LocationID = l.LocationID
     JOIN
     testdb.Region r ON l.RegionID = r.RegionID
 WHERE
- Authenticated = 3;";
+ Authenticated = 2;";
 
 		foreach(returnDB()->query($user_sql) as $row) {
 
 			$user_arr[] = array(
+				'Username' => $row['Username'],
 				'UserRole' => $row['UserRole'],
 				'email' => $row['email'],
 				'FirstName' => $row['FirstName'],
@@ -425,16 +429,16 @@ function delete_staff($username, $id) {
 	try {
 
 		// Should not need to check any other table as the Staff would not have been authenticated at a location yet
-		$user_sql = "DELETE FROM testdb.StaffAuthentication WHERE email='" . $username . " and LocationID='" .$id . "';";
+		$user_sql = "DELETE FROM testdb.StaffAuthentication WHERE Username='" . $username . " and LocationID='" .$id . "';";
 		returnDB()->query($user_sql);
 
 		$user_sql = "DELETE FROM testdb.User WHERE Username='" . $username . "';";
 		returnDB()->query($user_sql);
+		return 1;
 
 	} catch (Exception $e) {
 		return;
 	}
-	return 1;
 }
 
 
