@@ -31,5 +31,10 @@ ehthumbs.db
 Thumbs.db
 
 # Vendors #
+###########
 vendor/*
 .sublime-workspace
+
+# Authentication files #
+########################
+src/authentication.php

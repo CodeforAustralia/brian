@@ -9,6 +9,7 @@ require_once "../region_obj.php";
 require_once "../user_obj.php";
 require_once "../staff_obj.php";
 require_once "../mailer_obj.php";
+require_once "../authentication.php";
 
 $app = new \Slim\App;
 
@@ -38,7 +39,7 @@ $app->add(function ($request, $response, $next) {
 $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     "secure" => false,
     "users" => [
-        "root" => "pass"
+        getUsername() => getPassword()
     ],
     "error" => function ($request, $response, $arguments) {
         $data = [];
