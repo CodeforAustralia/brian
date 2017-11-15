@@ -23,17 +23,17 @@ To access the respective API, assume the host is always the same:
 
 ## Staff (includes Admins)
 
-| Method | API | Description |
-| --- | --- | --- |
-| GET | `/staff` | List of *all* authenticated CCS staff |
-| GET | `/staff/location/{id}` | List of *all* authenticated CCS staff from a location |
-| GET | `/staff/{username}/client` | List of *all* offenders assigned to CM |
-| GET | `/staff/{username}/client/location/{id}` | List of offenders assigned to CM from a location |
+| Method | API | Description | Body |
+| --- | --- | --- | --- |
+| GET | `/staff` | List of *all* authenticated CCS staff | |
+| GET | `/staff/location/{id}` | List of *all* authenticated CCS staff from a location | |
+| GET | `/staff/{username}/client` | List of *all* offenders assigned to CM | |
+| GET | `/staff/{username}/client/location/{id}` | List of offenders assigned to CM from a location | |
 | GET | `/staff/type/{role}` | List of *all* users with a specific role | |
 | GET | `/staff/location/{id}/type/{role}` | List of *specific* users from a location | |
 | GET | `/staff/location/{id}/authenticate` | List of users that need to be authenticated in a location | |
 | GET | `/staff/authenticate` | List of *all* users that require authentication | |
-| POST | `/staff/authenticate` | Authenticates a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` |
+| POST | `/staff/authenticate` | Authenticates a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` | |
 | GET | `/staff/revoked` | List of *all* that have rejected/revoked access | |
 | GET | `/staff/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
 | GET | `/staff/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
