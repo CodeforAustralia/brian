@@ -33,7 +33,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/staff/location/{id}/type/{role}` | List of *specific* users from a location | |
 | GET | `/staff/location/{id}/authenticate` | List of users that need to be authenticated in a location | |
 | GET | `/staff/authenticate` | List of *all* users that require authentication | |
-| POST | `/staff/authenticate` | Authenticates a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` | |
+| POST | `/staff/authenticate` | Sets the authentication of a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` <br/> `Status:{0=waiting,1=approved,2=denied}` | |
 | GET | `/staff/revoked` | List of *all* that have rejected/revoked access | |
 | GET | `/staff/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
 | GET | `/staff/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
