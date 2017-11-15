@@ -321,8 +321,9 @@ $app->post('/staff/authenticate', function (Request $request, Response $response
     $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
     $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
     $user_data['Status'] = filter_var($body['Status'], FILTER_SANITIZE_STRING);
+    $user_data['Admin'] = filter_var($body['Admin'], FILTER_SANITIZE_STRING);
 
-    $data = set_staff_authentication($user_data['Username'], $user_data['LocationID'], $user_data['Status']);
+    $data = set_staff_authentication($user_data['Username'], $user_data['LocationID'], $user_data['Status'], $user_data['Admin']);
     $response->getBody()->write($data);
 
     return $response;

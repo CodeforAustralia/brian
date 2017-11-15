@@ -252,11 +252,12 @@ WHERE
 
 
 
-function set_staff_authentication($username, $id, $status) {
+function set_staff_authentication($username, $id, $status, $admin) {
 	try {
+
 		$user_sql = "UPDATE testdb.StaffAuthentication 
 		SET 
-		    Authenticated = '" . $status . "'
+		    Authenticated = '" . $status . "', AuthenticatedBy = '" . $admin . "'
 		WHERE
 		    Username = '" . $username . "'
 		        AND LocationID = '" . $id . "';";
