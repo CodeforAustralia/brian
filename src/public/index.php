@@ -248,6 +248,8 @@ $app->post('/user/new', function (Request $request, Response $response, $args) {
     $user_data['Authentication'] = filter_var($body['Authentication'], FILTER_SANITIZE_STRING);
 
     $data = set_new_user($user_data['UserName'], $user_data['Password'], $user_data['Role'], $user_data['Location'], $user_data['FirstName'], $user_data['LastName'], $user_data['Authentication']);
+
+    
     $response->getBody()->write($data);
     
     return $response;

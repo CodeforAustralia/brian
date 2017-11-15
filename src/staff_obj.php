@@ -418,6 +418,27 @@ WHERE
 
 	return $user_arr;
 }
+
+
+
+function delete_staff($username, $id) {
+	try {
+
+		// Should not need to check any other table as the Staff would not have been authenticated at a location yet
+		$user_sql = "DELETE FROM testdb.StaffAuthentication WHERE email='" . $username . " and LocationID='" .$id . "';";
+		returnDB()->query($user_sql);
+
+		$user_sql = "DELETE FROM testdb.User WHERE Username='" . $username . "';";
+		returnDB()->query($user_sql);
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
+}
+
+
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function staff_output($arr) {
