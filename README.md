@@ -5,6 +5,12 @@ To access the respective API, assume the host is always the same:
 
 `http://ec2-54-66-246-123.ap-southeast-2.compute.amazonaws.com/brian/src/public/`
 
+## Mail
+
+| Method | API | Description | Body |
+| --- | --- | --- | --- |
+| POST | `/mail` | `To:{string}` <br/> `ToName:{string}` <br/> `From:{string}` <br/> `FromName:{string}` <br/> `Subject:{string}` <br/> `Body:{string}` |
+
 
 ## Client
 
