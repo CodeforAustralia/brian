@@ -36,24 +36,15 @@ function get_client_manager($JAID) {
 					FROM 
 						testdb.OffenderAssignedToStaff s
 							JOIN testdb.Staff o
-								ON o.email=s.email
+								ON o.Username=s.Username
 					WHERE 
 						s.JAID = '". $JAID . "' ORDER BY EndDate ASC;";
 
 		foreach(returnDB()->query($manager_sql) as $row) {
-			// // Use this for CM object
-			// $manager_arr[] = array(
-			// 	'JAID' => $row['JAID'],
-			// 	'email' => $row['email'],
-			// 	'FirstName' => $row['FirstName'],
-			// 	'LastName' => $row['LastName'],
-			// 	'StartDate' => $row['StartDate'],
-			// 	'EndDate' => $row['EndDate']
-			// );
 			$manager_arr[] = array(
 				'FirstName' => $row['FirstName'],
 				'LastName' => $row['LastName'],
-				'email' => $row['email'],
+				'Username' => $row['Username'],
 				'StartDate' => $row['StartDate'],
 				'EndDate' => $row['EndDate']
 			);
