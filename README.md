@@ -33,9 +33,9 @@ To access the respective API, assume the host is always the same:
 | GET | `/staff/location/{id}/type/{role}` | List of *specific* users from a location | |
 | GET | `/staff/location/{id}/authenticate` | List of users that need to be authenticated in a location | |
 | GET | `/staff/authenticate` | List of *all* users that require authentication | |
-| POST | `/staff/authenticate` | Sets the authentication of a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` <br/> `Status:{0=waiting,1=approved,2=denied}` |
+| POST | `/staff/authenticate` | Sets the authentication of a *specific* user  | `Username:{string}` <br/> `LocationID:{int}` <br/> `Status:{0=waiting,1=approved,2=denied}` |
 | GET | `/staff/revoked` | List of *all* that have rejected/revoked access | |
-| POST | `/staff/delete` | Deletes a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` |
+| POST | `/staff/delete` | Deletes a *specific* user  | `Username:{string}` <br/> `LocationID:{int}` |
 | GET | `/staff/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
 | GET | `/staff/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
 
@@ -45,12 +45,12 @@ To access the respective API, assume the host is always the same:
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
 | GET | `/user` | List of *all* users | |
-| POST | `/user/new` | Create a new user | `UserName:{UserName}` <br/> `Password:{Password}` <br/> `Role:{Role}` <br/> `Location:{id}` <br/> `FirstName:{FirstName}` <br/> `LastName:{LastName}` |
+| POST | `/user/new` | Create a new user | `Username:{string}` <br/> `Password:{string}` <br/> `email:{string}` <br/> `Role:{string}` <br/> `Location:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
 | POST | `/user/password` | Update password (//TODO, not sure what this means yet) | |
 | GET | `/user/{username}` | Detailed information about *one* user (role only?) | |
-| POST | `/user/{username}` | Assigns a user a *specific role* | `Role:{Role}` |
+| POST | `/user/{username}` | Assigns a user a *specific role* | `Role:{string}` |
 | GET | `/user/type` | List of *all* user types | |
-| POST | `/user/delete` | Deletes a *specific* user  | `UserName:{UserName}` <br/> `LocationID:{id}` |
+| POST | `/user/delete` | Deletes a *specific* user  | `Username:{string}` <br/> `LocationID:{int}` |
 
 
 ## Location

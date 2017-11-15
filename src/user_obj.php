@@ -77,7 +77,7 @@ function set_user_role($username, $role) {
 	return 1;
 }
 
-function set_new_user($username, $password, $role, $location, $firstname, $lastname, $auth) {
+function set_new_user($username, $password, $email, $role, $location, $firstname, $lastname, $auth) {
 
 	try {
 		$user_sql = "INSERT INTO testdb.User (Username, Password, UserRole) VALUES ('" . $username . "', '" . $password . "', '" . $role . "');";
@@ -86,13 +86,13 @@ function set_new_user($username, $password, $role, $location, $firstname, $lastn
 
 		// Look into this for Offenders later
 		if ($role == 'Staff') {
-			$staff_sql = "INSERT INTO testdb.Staff (email, FirstName, LastName) VALUES ('" . $username . "', '" . $firstname . "', '" . $lastname . "');";
+			$staff_sql = "INSERT INTO testdb.Staff (Username, email, FirstName, LastName) VALUES ('" . $username . "', '" . $email . "', '" . $firstname . "', '" . $lastname . "');";
 		returnDB()->query($staff_sql);
 
-			$location_sql = "INSERT INTO testdb.StaffLocation (email, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
+			$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
 			returnDB()->query($location_sql);
 
-			$auth_sql = "INSERT INTO testdb.StaffAuthentication (email, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";
+			$auth_sql = "INSERT INTO testdb.StaffAuthentication (Username, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";
 			returnDB()->query($auth_sql);
 		}
 

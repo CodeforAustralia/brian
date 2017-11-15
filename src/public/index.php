@@ -239,17 +239,18 @@ $app->post('/user/new', function (Request $request, Response $response, $args) {
 
     $body = $request->getParsedBody();
     $user_data = [];
-    $user_data['UserName'] = filter_var($body['UserName'], FILTER_SANITIZE_STRING);
+    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
     $user_data['Password'] = filter_var($body['Password'], FILTER_SANITIZE_STRING);
+    $user_data['email'] = filter_var($body['email'], FILTER_SANITIZE_STRING);
     $user_data['Role'] = filter_var($body['Role'], FILTER_SANITIZE_STRING);
     $user_data['Location'] = filter_var($body['Location'], FILTER_SANITIZE_STRING);
     $user_data['FirstName'] = filter_var($body['FirstName'], FILTER_SANITIZE_STRING);
     $user_data['LastName'] = filter_var($body['LastName'], FILTER_SANITIZE_STRING);
     $user_data['Authentication'] = filter_var($body['Authentication'], FILTER_SANITIZE_STRING);
 
-    $data = set_new_user($user_data['UserName'], $user_data['Password'], $user_data['Role'], $user_data['Location'], $user_data['FirstName'], $user_data['LastName'], $user_data['Authentication']);
+    $data = set_new_user($user_data['Username'], $user_data['Password'], $user_data['email'], $user_data['Role'], $user_data['Location'], $user_data['FirstName'], $user_data['LastName'], $user_data['Authentication']);
 
-    
+
     $response->getBody()->write($data);
     
     return $response;
