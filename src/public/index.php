@@ -321,11 +321,21 @@ $app->post('/staff/authenticate', function (Request $request, Response $response
     $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
     $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
     $user_data['Status'] = filter_var($body['Status'], FILTER_SANITIZE_STRING);
-    // // var_dump($user_data);
-    // echo $user_data['UserName'];
-    // echo $user_data['LocationID'];
 
     $data = set_staff_authentication($user_data['Username'], $user_data['LocationID'], $user_data['Status']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
+$app->post('/staff/delete', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+    $user_data['LocationID'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+
+    $data = delete_staff($user_data['Username'], $user_data['LocationID']);
     $response->getBody()->write($data);
 
     return $response;

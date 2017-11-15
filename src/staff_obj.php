@@ -428,8 +428,13 @@ WHERE
 function delete_staff($username, $id) {
 	try {
 
-		// Should not need to check any other table as the Staff would not have been authenticated at a location yet
-		$user_sql = "DELETE FROM testdb.StaffAuthentication WHERE Username='" . $username . " and LocationID='" .$id . "';";
+		$user_sql = "DELETE FROM testdb.StaffLocation WHERE Username='" . $username . "' and LocationID='" .$id . "' and EndDate IS NULL;";
+		returnDB()->query($user_sql);
+
+		$user_sql = "DELETE FROM testdb.StaffAuthentication WHERE Username='" . $username . "' and LocationID='" .$id . "';";
+		returnDB()->query($user_sql);
+
+		$user_sql = "DELETE FROM testdb.Staff WHERE Username='" . $username . "';";
 		returnDB()->query($user_sql);
 
 		$user_sql = "DELETE FROM testdb.User WHERE Username='" . $username . "';";
