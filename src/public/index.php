@@ -8,6 +8,7 @@ require_once "../client_obj.php";
 require_once "../region_obj.php";
 require_once "../user_obj.php";
 require_once "../staff_obj.php";
+require_once "../mailer_obj.php";
 
 $app = new \Slim\App;
 
@@ -402,6 +403,23 @@ $app->get('/staff/{username}/client/location/{id}', function (Request $request, 
 });
 
 
+$app->post('/mail', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['To'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+    $user_data['ToName'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+    $user_data['From'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+    $user_data['FromName'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+    $user_data['Subject'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+    $user_data['Body'] = filter_var($body['LocationID'], FILTER_SANITIZE_STRING);
+
+    $data = send_message($user_data['To'], $user_data['ToName'], $user_data['From'], $user_data['FromName'], $user_data['Subject'], $user_data['Body']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
 
 
 $app->run();
