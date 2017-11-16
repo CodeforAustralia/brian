@@ -102,6 +102,33 @@ function set_new_user($username, $password, $email, $role, $location, $firstname
 	return 1;
 }
 
+function set_user_password($username, $password) {
+
+	try {
+		$user_sql = "UPDATE testdb.User SET Password = '" . $password . "' WHERE Username = '" . $username . "';";
+
+		returnDB()->query($user_sql);
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
+}
+
+function get_user_salt($username) {
+
+	try {
+		$user_sql = "SELECT Salt FROM testdb.User WHERE Username = '" . $username . "';";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+			return $row['Salt'];
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+}
+
 
 
 // Create JSON encoded object to be served with previous array data

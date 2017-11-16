@@ -237,6 +237,33 @@ $app->get('/user', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->post('/user/password', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+    $user_data['Password'] = filter_var($body['Password'], FILTER_SANITIZE_STRING);
+
+    $data = set_user_password($user_data['Username'], $user_data['Password']);
+
+    $response->getBody()->write($data);
+    
+    return $response;
+
+});
+$app->post('/user/salt', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+
+    $data = get_user_salt($user_data['Username']);
+
+    $response->getBody()->write($data);
+    
+    return $response;
+
+});
 $app->post('/user/new', function (Request $request, Response $response, $args) {
 
     $body = $request->getParsedBody();
