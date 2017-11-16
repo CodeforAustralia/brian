@@ -129,6 +129,27 @@ function get_user_salt($username) {
 	}
 }
 
+function check_user_login($username, $password) {
+
+	try {
+		$user_sql = "SELECT * FROM testdb.User WHERE Username = '" . $username . "';";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+			$user_arr[] = array(
+				'Username' => $row['Username'],
+				'Password' => $row['Password']
+			);
+		}
+		if($row['Password'] === $password)
+			return 1;			
+		else
+			return 0;
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+}
+
 
 
 // Create JSON encoded object to be served with previous array data
