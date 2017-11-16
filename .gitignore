@@ -32,10 +32,10 @@ Thumbs.db
 
 # Vendors #
 ###########
-vendor/*
+src/vendor/*
 .sublime-workspace
 
 # Authentication files #
 ########################
 src/authentication.php
-data/*
+src/data/*
