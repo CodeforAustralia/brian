@@ -370,6 +370,7 @@ function get_staff_of_type($role) {
 			$user_arr[] = array(
 				'Username' => $row['Username'],
 				'FirstName' => $row['FirstName'],
+				'email' => $row['email'],
 				'LastName' => $row['LastName'],
 				'SiteName' => $row['SiteName'],
 				'RegionName' => $row['RegionName'],
