@@ -448,6 +448,18 @@ function delete_staff($username, $id) {
 	}
 }
 
+// Not done yet
+function update_staff($username, $email, $firstname, $lastname) {
+	try {
+
+		$user_sql = "UPDATE testdb.Staff SET email = '" . $email . "', FirstName = '" . $firstname . "', LastName = '" . $lastname . "' WHERE Username='" . $username . "';";
+		returnDB()->query($user_sql);
+		return 1;
+
+	} catch (Exception $e) {
+		return;
+	}
+}
 
 
 // Create JSON encoded object to be served with previous array data
