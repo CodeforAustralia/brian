@@ -128,6 +128,18 @@ function get_user_salt($username) {
 	    echo "Database Error!";
 	}
 }
+function set_user_salt($username, $salt) {
+	try {
+
+		$user_sql = "UPDATE testdb.User SET Salt='" . $salt . "' WHERE Username='" . $username . "';'";
+
+		returnDB()->query($user_sql);
+
+	} catch (Exception $e) {
+		return;
+	}
+	return 1;
+}
 
 function check_user_login($username, $password) {
 

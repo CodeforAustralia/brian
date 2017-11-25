@@ -52,9 +52,10 @@ To access the respective API, assume the host is always the same:
 | --- | --- | --- | --- |
 | GET | `/user` | List of *all* users | |
 | POST | `/user/new` | Create a new user | `Username:{string}` <br/> `Password:{string}` <br/> `email:{string}` <br/> `Role:{string}` <br/> `Location:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
-| POST | `/user/password` | Update password (//TODO, not sure what this means yet) | |
-| POST | `/user/login` | Login with Hashed password | `Username:{string}` <br/> `Password:{string}` |
-| POST | `/user/salt` | Returns Salt string of a user | `Username:{string}` |
+| POST | `/user/password` | Set the password of a user | `Username:{string}` <br/> `Password:{string}` |
+| POST | `/user/login` | Login with hashed password | `Username:{string}` <br/> `Password:{string}` |
+| GET | `/user/salt/{username}` | Returns salt string of a user | |
+| POST | `/user/salt` | Sets the Salt of a user | `Username:{string}` <br/> `Salt:{string}` |
 | GET | `/user/{username}` | Detailed information about *one* user (role only?) | |
 | POST | `/user/{username}` | Assigns a user a *specific role* | `Role:{string}` |
 | GET | `/user/type` | List of *all* user types | |
