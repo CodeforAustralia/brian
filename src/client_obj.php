@@ -339,6 +339,8 @@ WHERE
 
 		if($user_query)
 			return 1;
+		else
+			return 0;
 
 	} catch (Exception $e) {
 		return 0;
