@@ -85,9 +85,11 @@ function set_new_user($username, $password, $email, $role, $location, $firstname
 
 
 		// Look into this for Offenders later
-		if ($role == 'Staff') {
+		if ($role == 'Offender') {
+		}
+		else {
 			$staff_sql = "INSERT INTO testdb.Staff (Username, email, FirstName, LastName) VALUES ('" . $username . "', '" . $email . "', '" . $firstname . "', '" . $lastname . "');";
-		returnDB()->query($staff_sql);
+			returnDB()->query($staff_sql);
 
 			$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
 			returnDB()->query($location_sql);
