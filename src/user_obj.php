@@ -89,13 +89,15 @@ function set_new_user($username, $password, $email, $role, $location, $firstname
 		}
 		else {
 			$staff_sql = "INSERT INTO testdb.Staff (Username, email, FirstName, LastName) VALUES ('" . $username . "', '" . $email . "', '" . $firstname . "', '" . $lastname . "');";
-			returnDB()->query($staff_sql);
+			$staff_query = returnDB()->query($staff_sql);
 
-			$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
-			returnDB()->query($location_sql);
+			if($staff_query) {
+				$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
+				$location_query = returnDB()->query($location_sql);
 
-			$auth_sql = "INSERT INTO testdb.StaffAuthentication (Username, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";
-			returnDB()->query($auth_sql);
+				$auth_sql = "INSERT INTO testdb.StaffAuthentication (Username, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";
+				$auth_query = returnDB()->query($auth_sql);
+			}
 		}
 
 	} catch (Exception $e) {
