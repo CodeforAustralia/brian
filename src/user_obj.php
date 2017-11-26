@@ -1,6 +1,7 @@
 <?php
 require_once "db.php";
 require_once "pretty_json.php";
+require_once "client_obj.php";
 
 date_default_timezone_set('Australia/Melbourne');
 
@@ -77,22 +78,23 @@ function set_user_role($username, $role) {
 	return 1;
 }
 
-function set_new_user($username, $password, $email, $role, $location, $firstname, $lastname, $auth) {
+function set_new_user($username, $password, $email, $role, $location, $firstname, $lastname, $auth, $JAID, $optedin, $assignedstaff) {
 
 	try {
 		$user_sql = "INSERT INTO testdb.User (Username, Password, UserRole) VALUES ('" . $username . "', '" . $password . "', '" . $role . "');";
 		returnDB()->query($user_sql);
 
+		$curr_date = date('Y-m-d h:i:s', time());
 
-		// Look into this for Offenders later
 		if ($role == 'Offender') {
+			set_new_client($assignedstaff, $location, $firstname, $lastname, $JAID, $optedin, $email);
 		}
 		else {
 			$staff_sql = "INSERT INTO testdb.Staff (Username, email, FirstName, LastName) VALUES ('" . $username . "', '" . $email . "', '" . $firstname . "', '" . $lastname . "');";
 			$staff_query = returnDB()->query($staff_sql);
 
 			if($staff_query) {
-				$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . date('Y-m-d h:i:s', time()) . "', NULL);";
+				$location_sql = "INSERT INTO testdb.StaffLocation (Username, LocationID, StartDate, EndDate) VALUES ('" . $username . "', '" . $location . "', '" . $curr_date . "', NULL);";
 				$location_query = returnDB()->query($location_sql);
 
 				$auth_sql = "INSERT INTO testdb.StaffAuthentication (Username, LocationID, Authenticated) VALUES ('" . $username . "', '" . $location . "', '" . $auth . "');";

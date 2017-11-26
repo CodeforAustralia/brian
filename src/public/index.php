@@ -300,8 +300,11 @@ $app->post('/user/new', function (Request $request, Response $response, $args) {
     $user_data['FirstName'] = filter_var($body['FirstName'], FILTER_SANITIZE_STRING);
     $user_data['LastName'] = filter_var($body['LastName'], FILTER_SANITIZE_STRING);
     $user_data['Authentication'] = filter_var($body['Authentication'], FILTER_SANITIZE_STRING);
+    $user_data['JAID'] = filter_var($body['JAID'], FILTER_SANITIZE_STRING);
+    $user_data['OptedIn'] = filter_var($body['OptedIn'], FILTER_SANITIZE_STRING);
+    $user_data['AssignedStaff'] = filter_var($body['AssignedStaff'], FILTER_SANITIZE_STRING);
 
-    $data = set_new_user($user_data['Username'], $user_data['Password'], $user_data['email'], $user_data['Role'], $user_data['Location'], $user_data['FirstName'], $user_data['LastName'], $user_data['Authentication']);
+    $data = set_new_user($user_data['Username'], $user_data['Password'], $user_data['email'], $user_data['Role'], $user_data['Location'], $user_data['FirstName'], $user_data['LastName'], $user_data['Authentication'], $user_data['JAID'], $user_data['OptedIn'], $user_data['AssignedStaff']);
 
 
     $response->getBody()->write($data);

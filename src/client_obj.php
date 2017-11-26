@@ -295,6 +295,79 @@ WHERE
 	return $offender_arr;
 }
 
+function set_new_client($assignedstaff, $location, $firstname, $lastname, $JAID, $optedin, $username) {
+
+	$curr_date = date('Y-m-d h:i:s', time());
+
+	try {
+		if($username == '') {
+			$offender_sql = "INSERT INTO testdb.Offender (JAID, FirstName, LastName, Username, OptedIn) VALUES ('" . $JAID . "', '" . $firstname . "', '" . $lastname . "', '" . $username . "', '" . $optedin . "');";
+			$offender_query = returnDB()->query($offender_sql);
+		}
+		else {
+			$offender_sql = "INSERT INTO testdb.Offender (JAID, FirstName, LastName, OptedIn) VALUES ('" . $JAID . "', '" . $firstname . "', '" . $lastname . "', '" . $optedin . "');";
+			$offender_query = returnDB()->query($offender_sql);	
+		}
+
+		if($offender_query) {
+			$location_sql = "INSERT INTO testdb.OffenderCCSLocation (JAID, LocationID, StartDate) VALUES ('" . $JAID . "', '" . $location . "', '" . $curr_date . "');";
+			$location_query = returnDB()->query($location_sql);
+
+			if($location_query) {
+				$auth_sql = "INSERT INTO testdb.OffenderAssignedToStaff (JAID, Username, StartDate) VALUES ('" . $JAID . "', '" . $assignedstaff . "', '" . $curr_date . "');";
+				$auth_query = returnDB()->query($auth_sql);
+
+				$order_sql = "INSERT INTO testdb.OffenderOrder (JAID, OrderTypeID, Status, StartDate) VALUES ('" . $JAID . "', '0', 'CUR', '" . $curr_date . "');";
+				$order_query = returnDB()->query($order_sql);
+
+				$order_ID = NULL;
+
+				if($order_query) {
+
+					try {
+						$user_sql = "SELECT * FROM testdb.OffenderOrder WHERE JAID = '" . $JAID . "' AND StartDate = '" . $curr_date . "';";
+
+						foreach(returnDB()->query($user_sql) as $row) {
+							$order_ID = $row['OrderID'];
+						}
+
+					} catch (Exception $e) {
+					    echo "Database Error!";
+					}
+
+					$condition_sql = "INSERT INTO testdb.OffenderCondition (OrderID, JAID, TypeID) VALUES 
+						('" . $order_ID . "', '" . $JAID . "', '1'),
+						('" . $order_ID . "', '" . $JAID . "', '2'), 
+						('" . $order_ID . "', '" . $JAID . "', '3'), 
+						('" . $order_ID . "', '" . $JAID . "', '4'), 
+						('" . $order_ID . "', '" . $JAID . "', '5'), 
+						('" . $order_ID . "', '" . $JAID . "', '6'), 
+						('" . $order_ID . "', '" . $JAID . "', '7'), 
+						('" . $order_ID . "', '" . $JAID . "', '8'), 
+						('" . $order_ID . "', '" . $JAID . "', '9'), 
+						('" . $order_ID . "', '" . $JAID . "', '10'), 
+						('" . $order_ID . "', '" . $JAID . "', '11'), 
+						('" . $order_ID . "', '" . $JAID . "', '12'), 
+						('" . $order_ID . "', '" . $JAID . "', '13'), 
+						('" . $order_ID . "', '" . $JAID . "', '14'), 
+						('" . $order_ID . "', '" . $JAID . "', '15'), 
+						('" . $order_ID . "', '" . $JAID . "', '16'), 
+						('" . $order_ID . "', '" . $JAID . "', '17'), 
+						('" . $order_ID . "', '" . $JAID . "', '18'), 
+						('" . $order_ID . "', '" . $JAID . "', '19'),
+						('" . $order_ID . "', '" . $JAID . "', '20');";
+						
+					$condition_query = returnDB()->query($condition_sql);
+
+				}
+			}
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+}
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function client_output($arr) {
