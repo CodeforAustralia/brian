@@ -14,17 +14,20 @@ To access the respective API, assume the host is always the same:
 
 ## Client
 
-| Method | API | Description |
-| --- | --- | --- |
-| GET | `/client` | List of *all* offenders |
-| GET | `/client/location/{id}` | List of *all* offender's from a location |
-| GET | `/client/region/{id}` | List of *all* offender's from a region |
-| GET | `/client/{id}` | *All* information about *one* offender |
-| GET | `/client/{id}/messages` | List of *all* correspondence for *one* offender |
-| GET | `/client/{id}/communitywork` | List of *all* assigned community work for *one* offender |
-| GET | `/client/{id}/location` | List of *all* assigned locations for *one* offender |
-| GET | `/client/{id}/staff` | List of *all* assigned staff for *one* offender |
-| GET | `/client/{id}/phone` | List of *all* offender's phone numbers for *one* offender |
+| Method | API | Description | Body |
+| --- | --- | --- | --- |
+| GET | `/client` | List of *all* offenders | |
+| GET | `/client/location/{id}` | List of *all* offender's from a location | |
+| GET | `/client/region/{id}` | List of *all* offender's from a region | |
+| GET | `/client/{JAID}` | *All* information about *one* offender | |
+| GET | `/client/{JAID}/messages` | List of *all* correspondence for *one* offender | |
+| GET | `/client/{JAID}/communitywork` | List of *all* assigned community work for *one* offender | |
+| GET | `/client/{JAID}/location` | List of *all* assigned locations for *one* offender | |
+| GET | `/client/{JAID}/staff` | List of *all* assigned staff for *one* offender | |
+| GET | `/client/{JAID}/phone` | List of *all* offender's phone numbers for *one* offender | |
+| GET | `/client/{JAID}/condition` | List of *all* conditions for *one* offender, returns Order #, Conditon ID, name, status | |
+| POST | `/client/{JAID}/condition/{id}` | Update status and details of condition, 0 = no, 1 = yes | `OrderID:{int}` <br/> `Status:{int}` <br/> `Detail:{string}` (Can be NULL) |
+
 
 
 ## Staff (includes Admins)
