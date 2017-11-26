@@ -103,7 +103,7 @@ FROM
     JOIN
     testdb.Region r ON l.RegionID = r.RegionID
 WHERE
-    cl.EndDate IS NULL AND o.OptedIn = 1
+    cl.EndDate IS NULL
         AND s.Username = '" . $username . "';";
 
 		foreach(returnDB()->query($user_sql) as $row) {
@@ -141,7 +141,7 @@ FROM
     JOIN
     testdb.Region r ON l.RegionID = r.RegionID
 WHERE
-    cl.EndDate IS NULL AND o.OptedIn = 1
+    cl.EndDate IS NULL
         AND cl.LocationID = '" . $id . "'
         AND s.Username = '" . $username . "';";
 
