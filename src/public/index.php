@@ -224,6 +224,50 @@ $app->get('/client/{id}/phone', function (Request $request, Response $response, 
     return $newResponse;
 
 });
+$app->get('/client/{id}/order', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    
+    $data = get_client_orders($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+});
+$app->get('/client/{id}/condition/order/{order_id}', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $order_id = (int)$args['order_id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    $order_id_clean = filter_var($order_id, FILTER_SANITIZE_STRING);
+    
+    $data = get_client_conditions_from_order($JAID_clean, $order_id_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->post('/client/{id}/condition/order/{order_id}/condition/{condition_id}', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $order_id = (int)$args['order_id'];
+    $condition_id = (int)$args['condition_id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    $order_id_clean = filter_var($order_id, FILTER_SANITIZE_STRING);
+    $condition_id_clean = filter_var($condition_id, FILTER_SANITIZE_STRING);
+    
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['StartDate'] = filter_var($body['StartDate'], FILTER_SANITIZE_STRING);
+    $user_data['EndDate'] = filter_var($body['EndDate'], FILTER_SANITIZE_STRING);
+    $user_data['Status'] = filter_var($body['Status'], FILTER_SANITIZE_STRING);
+    $user_data['Detail'] = filter_var($body['Detail'], FILTER_SANITIZE_STRING);
+
+
+    $data = set_client_condition($JAID_clean, $order_id_clean, $condition_id_clean, $user_data['StartDate'], $user_data['EndDate'], $user_data['Status'], $user_data['Detail'] );
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 
 
 

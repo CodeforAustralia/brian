@@ -259,6 +259,92 @@ WHERE
 	return $offender_arr;
 }
 
+function get_client_orders($JAID) {
+
+	try {
+		$offender_sql = "SELECT 
+    *
+FROM
+    testdb.OffenderOrder o
+        JOIN
+    testdb.OrderType t ON o.OrderTypeID = t.OrderTypeID
+WHERE
+    JAID = '" . $JAID . "';";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'OrderID' => $row['OrderID'],
+				'OrderTypeID' => $row['OrderTypeID'],
+				'OrderName' => $row['OrderName'],
+				'Status' => $row['Status'],
+				'StartDate' => $row['StartDate'],
+				'EndDate' => $row['EndDate']
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+	return $offender_arr;
+}
+
+function get_client_conditions_from_order($JAID, $id) {
+
+	try {
+		$offender_sql = "SELECT 
+    *
+FROM
+    testdb.OffenderCondition o
+        JOIN
+    testdb.ConditionType c ON o.TypeID = c.TypeID
+WHERE
+    JAID = '" . $JAID . "' AND OrderID = '" . $id . "';";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'ConditionID' => $row['ConditionID'],
+				'OrderID' => $row['OrderID'],
+				'StartDate' => $row['StartDate'],
+				'EndDate' => $row['EndDate'],
+				'TypeID' => $row['TypeID'],
+				'Status' => $row['Status'],
+				'Detail' => $row['Detail'],
+				'ConditionName' => $row['ConditionName'],
+				'ConditionDescription' => $row['ConditionDescription']
+			);
+		}
+	} catch (Exception $e) {
+	    echo "Database Error";
+	}
+
+	return $offender_arr;
+}
+
+function set_client_condition($JAID, $order_id, $type_id, $start_date, $end_date, $status, $detail) {
+	try {
+
+		$user_sql = "UPDATE testdb.OffenderCondition
+SET 
+    StartDate = '" . $start_date . "',
+    EndDate = '" . $end_date . "',
+    OrderStatus = '" . $status . "',
+    Detail = '" . $detail . "'
+WHERE
+    OrderID = '" . $order_id . "' AND JAID = '" . $JAID . "'
+        AND TypeID = '" . $type_id . "';";
+
+		$user_query = returnDB()->query($user_sql);
+
+		if($user_query)
+			return 1;
+
+	} catch (Exception $e) {
+		return 0;
+	}
+}
+
 function get_client_list_in_region($id) {
 
 	try {
