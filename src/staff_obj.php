@@ -452,7 +452,7 @@ function delete_staff($username, $id) {
 function update_staff($username, $email, $firstname, $lastname) {
 	try {
 
-		$user_sql = "UPDATE testdb.Staff SET email = '" . $email . "', FirstName = '" . $firstname . "', LastName = '" . $lastname . "' WHERE Username='" . $username . "';";
+		$user_sql = "UPDATE testdb.Staff SET email = '" . $email . "', FirstName = '" . $firstname . "', LastName = '" . $lastname . "', LastUpdated = '" . date('Y-m-d h:i:s', time()) . "' WHERE Username='" . $username . "';";
 		returnDB()->query($user_sql);
 		return 1;
 
