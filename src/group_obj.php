@@ -15,6 +15,7 @@ function get_all_groups() {
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
 				'GroupAuthor' => $row['GroupAuthor'],
+				'GroupLocation' => $row['GroupLocation'],
 				'GroupType' => $row['GroupType'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
@@ -44,6 +45,7 @@ function get_group($id) {
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
 				'GroupAuthor' => $row['GroupAuthor'],
+				'GroupLocation' => $row['GroupLocation'],
 				'GroupType' => $row['GroupType'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
@@ -73,6 +75,7 @@ function get_group_of_type($type) {
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
 				'GroupAuthor' => $row['GroupAuthor'],
+				'GroupLocation' => $row['GroupLocation'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
 				'LastUpdated' => $row['LastUpdated'],
@@ -100,6 +103,7 @@ function get_staff_groups($author) {
 			$group_arr[] = array(
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
+				'GroupLocation' => $row['GroupLocation'],
 				'GroupType' => $row['GroupType'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
@@ -125,6 +129,7 @@ function get_staff_groups_of_type($author, $type) {
 			$group_arr[] = array(
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
+				'GroupLocation' => $row['GroupLocation'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
 				'LastUpdated' => $row['LastUpdated']
@@ -150,6 +155,7 @@ function get_archived_staff_groups_of_type($author, $type) {
 			$group_arr[] = array(
 				'GroupID' => $row['GroupID'],
 				'GroupName' => $row['GroupName'],
+				'GroupLocation' => $row['GroupLocation'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
 				'LastUpdated' => $row['LastUpdated']
@@ -162,6 +168,62 @@ function get_archived_staff_groups_of_type($author, $type) {
 
 	return $group_arr;
 }
+
+// Get specific group
+function get_group_type($type) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type "';";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'GroupAuthor' => $row['GroupAuthor'],
+				'GroupLocation' => $row['GroupLocation'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated'],
+				'Archived' => $row['Archived'],
+				'ArchiveDate' => $row['ArchiveDate'],
+				'Archivist' => $row['Archivist'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
+
+// Get specific group
+function get_group_location($id) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND Archived IS NULL;";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'GroupAuthor' => $row['GroupAuthor'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
+
+
 
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
