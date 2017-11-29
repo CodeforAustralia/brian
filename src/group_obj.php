@@ -223,6 +223,33 @@ function get_group_location($id) {
 	return $group_arr;
 }
 
+// Get specific group
+function get_group_location_archived($id) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND Archived IS NOT NULL;";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'GroupAuthor' => $row['GroupAuthor'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated'],
+				'Archived' => $row['Archived'],
+				'ArchiveDate' => $row['ArchiveDate'],
+				'Archivist' => $row['Archivist'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
 
 
 // Create JSON encoded object to be served with previous array data
