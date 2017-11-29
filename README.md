@@ -100,11 +100,14 @@ To access the respective API, assume the host is always the same:
 | GET | `/group/{id}` | Get details about a *specific* group | |
 | GET | `/group/type/{string}` | Get *all* groups of a type (CW or Other) | |
 | GET | `/group/location/{int}` | Get *all* groups at a location | |
+| GET | `/group/location/{int}/archived` | Get *all* groups at a location | |
 | GET | `/group/location/{int}/type/{string}` | Get *all* groups at a location of a *specifc* type | |
-| POST | `/group/new/` | Create a new group, returns assoicated group ID if sucessful | `GroupName:{string}` |
-| POST | `/group/client/add` | Add an offender to a group | `GroupID:{int}` <br/> `JAID:{int}` |
-| POST | `/group/client/remove` | Removes an offender from a group | `GroupID:{int}` <br/> `JAID:{int}` |
+| GET | `/group/location/{int}/type/{string}/archived` | Get *all* groups at a location of a *specifc* type | |
+| POST | `/group/new/` | Create a new group, returns assoicated group ID if sucessful | `GroupName:{string}` <br/> `JAID:{int}` <br/> `GroupAuthor:{string}` |
+| POST | `/group/client/add` | Add an offender to a group | `GroupID:{int}` <br/> `GroupType:{string}`  <br/> `LastUpdatedAuthor:{string}` |
+| POST | `/group/client/remove` | Removes an offender from a group | `GroupID:{int}` <br/> `JAID:{int}`  <br/> `LastUpdatedAuthor:{string}` |
 | POST | `/group/archive/` | Archives a group | `GroupID:{int}` <br/> `Archived:{tinyint}` <br/> `Archivist:{string}` |
+| POST | `/group/unarchive/` | Removes a group from archive status | `GroupID:{int}` |
 
 
 | GET | `/client/region/{id}` | List of *all* offender's from a region | |
