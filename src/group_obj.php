@@ -37,7 +37,7 @@ function get_all_groups() {
 function get_group($id) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupID = '" . $id "';";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupID = '" . $id . "';";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -67,7 +67,7 @@ function get_group($id) {
 function get_group_of_type($type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type "';";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type . "';";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -96,7 +96,7 @@ function get_group_of_type($type) {
 function get_staff_groups($author) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author "' AND Archived IS NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author . "' AND Archived = 0;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -122,7 +122,7 @@ function get_staff_groups($author) {
 function get_staff_groups_of_type($author, $type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author "' AND GroupType = '" . $type . "' AND Archived IS NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author . "' AND GroupType = '" . $type . "' AND Archived = 0;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -148,7 +148,7 @@ function get_staff_groups_of_type($author, $type) {
 function get_archived_staff_groups_of_type($author, $type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author "' AND GroupType = '" . $type . "' AND Archived IS NOT NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author . "' AND GroupType = '" . $type . "' AND Archived = 1;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -173,7 +173,7 @@ function get_archived_staff_groups_of_type($author, $type) {
 function get_group_type($type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type "';";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type . "';";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -202,7 +202,7 @@ function get_group_type($type) {
 function get_group_location($id) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND Archived IS NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id . "' AND Archived = 0;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -227,7 +227,7 @@ function get_group_location($id) {
 function get_group_location_archived($id) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND Archived IS NOT NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id . "' AND Archived = 1;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -255,7 +255,7 @@ function get_group_location_archived($id) {
 function get_group_location_of_type($id, $type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND GroupType = '" . $type . "' AND Archived IS NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id . "' AND GroupType = '" . $type . "' AND Archived = 0;";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -280,7 +280,7 @@ function get_group_location_of_type($id, $type) {
 function get_group_location_of_type_archived($id, $type) {
 
 	try {
-		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id "' AND GroupType = '" . $type . "' AND Archived IS NOT NULL;";
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupLocation = '" . $id . "' AND GroupType = '" . $type . "' AND Archived = 1";
 
 		foreach(returnDB()->query($group_sql) as $row) {
 
@@ -302,15 +302,4 @@ function get_group_location_of_type_archived($id, $type) {
 	}
 
 	return $group_arr;
-}
-
-
-// Create JSON encoded object to be served with previous array data
-// TODO: Condense all of these outputs
-function client_output($arr) {
-	$client_obj = array(
-		'Clients' => $arr
-	);
-	
-	return $client_obj;
 }

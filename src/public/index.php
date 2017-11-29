@@ -8,6 +8,7 @@ require_once "../client_obj.php";
 require_once "../region_obj.php";
 require_once "../user_obj.php";
 require_once "../staff_obj.php";
+require_once "../group_obj.php";
 require_once "../mailer_obj.php";
 require_once "../authentication.php";
 
@@ -527,15 +528,6 @@ $app->get('/group', function (Request $request, Response $response) {
     return $newResponse;
 
 });
-$app->get('/group/{id}', function (Request $request, Response $response, $args) {
-    $id = (int)$args['id'];
-
-    $data = get_group($id);
-    $newResponse = $response->withJson($data);
-
-    return $newResponse;
-
-});
 $app->get('/group/staff/{staff}', function (Request $request, Response $response, $args) {
     $staff = (string)$args['staff'];
 
@@ -613,18 +605,13 @@ $app->get('/group/location/{id}/type/{type}/archived', function (Request $reques
     return $newResponse;
 
 });
-$app->post('/group/{id}', function (Request $request, Response $response, $args) {
+$app->get('/group/{id}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
 
-    $body = $request->getParsedBody();
-    $user_data = [];
-    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
-    $user_data['Password'] = filter_var($body['Password'], FILTER_SANITIZE_STRING);
+    $data = get_group($id);
+    $newResponse = $response->withJson($data);
 
-    $data = set_user_password($user_data['Username'], $user_data['Password']);
-
-    $response->getBody()->write($data);
-    
-    return $response;
+    return $newResponse;
 
 });
 $app->post('/mail', function (Request $request, Response $response, $args) {
