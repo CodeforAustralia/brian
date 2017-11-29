@@ -139,6 +139,30 @@ function get_staff_groups_of_type($author, $type) {
 }
 
 
+// Get groups made by a staff member
+function get_archived_staff_groups_of_type($author, $type) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author "' AND GroupType = '" . $type . "' AND Archived IS NOT NULL;";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated']
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
+
 // Create JSON encoded object to be served with previous array data
 // TODO: Condense all of these outputs
 function client_output($arr) {
