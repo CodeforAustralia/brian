@@ -61,7 +61,7 @@ function get_group($id) {
 	return $group_arr;
 }
 
-// Get all groups
+// Get groups of a specific type
 function get_group_of_type($type) {
 
 	try {
@@ -79,6 +79,31 @@ function get_group_of_type($type) {
 				'Archived' => $row['Archived'],
 				'ArchiveDate' => $row['ArchiveDate'],
 				'Archivist' => $row['Archivist'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
+
+// Get groups made by a staff member
+function get_staff_groups($author) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupAuthor = '" . $author "' AND Archived IS NULL;";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'GroupType' => $row['GroupType'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated']
 			);
 		}
 

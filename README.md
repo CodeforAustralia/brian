@@ -97,12 +97,15 @@ To access the respective API, assume the host is always the same:
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
 | GET | `/group` | List of *all* groups | |
-| GET | `/group/{id}` | Get details about a *specific* group | |
+| GET | `/group/{int}` | Get details about a *specific* group | |
+| GET | `/group/staff/{string}` | Get *all* groups belonging to a staff | |
+| GET | `/group/staff/{string}/type/{string}` | Get *all* groups belonging to a staff of a *specific* type | |
+| GET | `/group/staff/{string}/type/{string}/archived` | Get *all* groups belonging to a staff of a *specific* type that are archived | |
 | GET | `/group/type/{string}` | Get *all* groups of a type (CW or Other) | |
-| GET | `/group/location/{int}` | Get *all* groups at a location | |
-| GET | `/group/location/{int}/archived` | Get *all* groups at a location | |
+| GET | `/group/location/{int}` | Get *all* non-archived groups at a location | |
+| GET | `/group/location/{int}/archived` | Get *all* groups at a location that are archived | |
 | GET | `/group/location/{int}/type/{string}` | Get *all* groups at a location of a *specifc* type | |
-| GET | `/group/location/{int}/type/{string}/archived` | Get *all* groups at a location of a *specifc* type | |
+| GET | `/group/location/{int}/type/{string}/archived` | Get *all* groups at a location of a *specifc* type that are archived | |
 | POST | `/group/new/` | Create a new group, returns assoicated group ID if sucessful | `GroupName:{string}` <br/> `JAID:{int}` <br/> `GroupAuthor:{string}` |
 | POST | `/group/client/add` | Add an offender to a group | `GroupID:{int}` <br/> `GroupType:{string}`  <br/> `LastUpdatedAuthor:{string}` |
 | POST | `/group/client/remove` | Removes an offender from a group | `GroupID:{int}` <br/> `JAID:{int}`  <br/> `LastUpdatedAuthor:{string}` |
