@@ -32,7 +32,7 @@ function get_all_groups() {
 	return $group_arr;
 }
 
-// Get all groups
+// Get specific group
 function get_group($id) {
 
 	try {
@@ -45,6 +45,34 @@ function get_group($id) {
 				'GroupName' => $row['GroupName'],
 				'GroupAuthor' => $row['GroupAuthor'],
 				'GroupType' => $row['GroupType'],
+				'DateCreated' => $row['DateCreated'],
+				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
+				'LastUpdated' => $row['LastUpdated'],
+				'Archived' => $row['Archived'],
+				'ArchiveDate' => $row['ArchiveDate'],
+				'Archivist' => $row['Archivist'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $group_arr;
+}
+
+// Get all groups
+function get_group_of_type($type) {
+
+	try {
+		$group_sql = "SELECT * FROM testdb.Group WHERE GroupType = '" . $type "';";
+
+		foreach(returnDB()->query($group_sql) as $row) {
+
+			$group_arr[] = array(
+				'GroupID' => $row['GroupID'],
+				'GroupName' => $row['GroupName'],
+				'GroupAuthor' => $row['GroupAuthor'],
 				'DateCreated' => $row['DateCreated'],
 				'LastUpdatedAuthor' => $row['LastUpdatedAuthor'],
 				'LastUpdated' => $row['LastUpdated'],
