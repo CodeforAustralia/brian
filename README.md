@@ -90,3 +90,30 @@ To access the respective API, assume the host is always the same:
 | Method | API | Description |
 | --- | --- | --- |
 | GET | `/area` | List of *all* areas |
+
+
+## Group
+
+| Method | API | Description | Body |
+| --- | --- | --- | --- |
+| GET | `/group` | List of *all* groups | |
+| GET | `/group/{id}` | Get details about a *specific* group | |
+| GET | `/group/type/{string}` | Get *all* groups of a type (CW or Other) | |
+| GET | `/group/location/{int}` | Get *all* groups at a location | |
+| GET | `/group/location/{int}/type/{string}` | Get *all* groups at a location of a *specifc* type | |
+| POST | `/group/new/` | Create a new group, returns assoicated group ID if sucessful | `GroupName:{string}` |
+| POST | `/group/client/add` | Add an offender to a group | `GroupID:{int}` <br/> `JAID:{int}` |
+| POST | `/group/client/remove` | Removes an offender from a group | `GroupID:{int}` <br/> `JAID:{int}` |
+| POST | `/group/archive/` | Archives a group | `GroupID:{int}` <br/> `Archived:{tinyint}` <br/> `Archivist:{string}` |
+
+
+| GET | `/client/region/{id}` | List of *all* offender's from a region | |
+| GET | `/client/{JAID}` | *All* information about *one* offender | |
+| GET | `/client/{JAID}/messages` | List of *all* correspondence for *one* offender | |
+| GET | `/client/{JAID}/communitywork` | List of *all* assigned community work for *one* offender | |
+| GET | `/client/{JAID}/location` | List of *all* assigned locations for *one* offender | |
+| GET | `/client/{JAID}/staff` | List of *all* assigned staff for *one* offender | |
+| GET | `/client/{JAID}/phone` | List of *all* offender's phone numbers for *one* offender | |
+| GET | `/client/{id}/order` | List of *all* orders for *one* offender | |
+| GET | `/client/{id}/condition/order/{order_id}` | Get all of the conditions from an order | |
+| POST | `/client/{id}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `OrderStatus:{date}` <br/> `Detail:{string}` |
