@@ -517,6 +517,116 @@ $app->get('/staff/{username}/client/location/{id}', function (Request $request, 
 });
 
 
+// Group API
+// Make sure this stays in the correct order
+$app->get('/group', function (Request $request, Response $response) {
+
+    $data = get_all_groups();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/{id}', function (Request $request, Response $response, $args) {
+    $id = (int)$args['id'];
+
+    $data = get_group($id);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/staff/{staff}', function (Request $request, Response $response, $args) {
+    $staff = (string)$args['staff'];
+
+    $data = get_staff_groups($staff);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/staff/{staff}/type/{type}', function (Request $request, Response $response, $args) {
+    $staff = (string)$args['staff'];
+    $type = (string)$args['type'];
+
+    $data = get_staff_groups_of_type($staff, $type);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/staff/{staff}/type/{type}/archived', function (Request $request, Response $response, $args) {
+    $staff = (string)$args['staff'];
+    $type = (string)$args['type'];
+
+    $data = get_archived_staff_groups_of_type($staff, $type);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/type/{type}', function (Request $request, Response $response, $args) {
+    $staff = (string)$args['staff'];
+    $type = (string)$args['type'];
+
+    $data = get_group_type($type);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/location/{id}', function (Request $request, Response $response, $args) {
+    $location = (string)$args['id'];
+
+    $data = get_group_location($location);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/location/{id}/archived', function (Request $request, Response $response, $args) {
+    $location = (string)$args['id'];
+
+    $data = get_group_location_archived($location);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/location/{id}/type/{type}', function (Request $request, Response $response, $args) {
+    $location = (string)$args['id'];
+    $type = (string)$args['type'];
+
+    $data = get_group_location_of_type($location, $type);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->get('/group/location/{id}/type/{type}/archived', function (Request $request, Response $response, $args) {
+    $location = (string)$args['id'];
+    $type = (string)$args['type'];
+
+    $data = get_group_location_of_type_archived($location, $type);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
+$app->post('/group/{id}', function (Request $request, Response $response, $args) {
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Username'] = filter_var($body['Username'], FILTER_SANITIZE_STRING);
+    $user_data['Password'] = filter_var($body['Password'], FILTER_SANITIZE_STRING);
+
+    $data = set_user_password($user_data['Username'], $user_data['Password']);
+
+    $response->getBody()->write($data);
+    
+    return $response;
+
+});
 $app->post('/mail', function (Request $request, Response $response, $args) {
 
     $body = $request->getParsedBody();
