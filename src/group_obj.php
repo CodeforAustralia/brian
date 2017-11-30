@@ -304,6 +304,7 @@ function get_group_location_of_type_archived($id, $type) {
 	return $group_arr;
 }
 
+// Create a new group
 function set_new_group($name, $author, $location, $type) {
 
 	$curr_date = date('Y-m-d h:i:s', time());
@@ -329,6 +330,36 @@ function set_new_group($name, $author, $location, $type) {
 			}
 		}
 		return $group_ID;
+
+	} catch (Exception $e) {
+		return NULL;
+	}
+}
+
+// Add offender to group
+function set_new_offender($group_ID, $JAID, $author) {
+
+	$curr_date = date('Y-m-d h:i:s', time());
+
+	try {
+
+		$user_sql = "INSERT INTO testdb.GroupRecipient (JAID, GroupID, StartDate) VALUES ('" . $JAID . "', '" . $group_ID . "', '" . $curr_date . "');";
+		$user_query = returnDB()->query($user_sql);
+
+		if($user_query) {
+
+			try {
+
+				$group_sql = "UPDATE testdb.Group SET LastUpdatedAuthor = '" . $author ."', LastUpdated = '" . $curr_date . "' WHERE GroupID = '" . $group_ID . "';";
+				$group_query = returnDB()->query($user_sql);
+
+			} catch (Exception $e) {
+				return NULL;
+			}
+			return 1;
+		}
+		else
+			return NULL;
 
 	} catch (Exception $e) {
 		return NULL;

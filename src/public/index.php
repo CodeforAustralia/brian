@@ -606,7 +606,7 @@ $app->get('/group/location/{id}/type/{type}/archived', function (Request $reques
 
 });
 $app->post('/group/new', function (Request $request, Response $response, $args) {
-    
+
     $body = $request->getParsedBody();
     $user_data = [];
     $user_data['GroupName'] = filter_var($body['GroupName'], FILTER_SANITIZE_STRING);
@@ -615,6 +615,20 @@ $app->post('/group/new', function (Request $request, Response $response, $args) 
     $user_data['GroupType'] = filter_var($body['GroupType'], FILTER_SANITIZE_STRING);
 
     $data = set_new_group($user_data['GroupName'], $user_data['GroupAuthor'], $user_data['GroupLocation'], $user_data['GroupType']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
+$app->post('/group/client/add', function (Request $request, Response $response, $args) {
+    
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['JAID'] = filter_var($body['JAID'], FILTER_SANITIZE_STRING);
+    $user_data['GroupID'] = filter_var($body['GroupID'], FILTER_SANITIZE_STRING);
+    $user_data['LastUpdatedAuthor'] = filter_var($body['LastUpdatedAuthor'], FILTER_SANITIZE_STRING);
+
+    $data = set_new_offender($user_data['GroupID'], $user_data['JAID'], $user_data['LastUpdatedAuthor']);
     $response->getBody()->write($data);
 
     return $response;
