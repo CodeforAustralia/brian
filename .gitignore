@@ -40,3 +40,4 @@ src/vendor/*
 src/authentication.php
 src/data/*
 src/db_prod.php
+src/db.php
