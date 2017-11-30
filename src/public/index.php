@@ -648,6 +648,19 @@ $app->post('/group/client/remove', function (Request $request, Response $respons
     return $response;
 
 });
+$app->post('/group/archive', function (Request $request, Response $response, $args) {
+    
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['GroupID'] = filter_var($body['GroupID'], FILTER_SANITIZE_STRING);
+    $user_data['Archivist'] = filter_var($body['Archivist'], FILTER_SANITIZE_STRING);
+
+    $data = archive_group($user_data['GroupID'], $user_data['Archivist']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
 $app->get('/group/{id}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
 
