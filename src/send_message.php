@@ -6,6 +6,7 @@ header("Content-Type:application/json");
 // require_once "request.php";
 require_once "vendor/autoload.php";
 require_once "db.php";
+require_once "authentication.php";
 
 use MessageMedia\RESTAPI\Configuration;
 use MessageMedia\RESTAPI\Api\MessagingApi;
@@ -14,8 +15,8 @@ use MessageMedia\RESTAPI\Model\Messages;
 
 date_default_timezone_set('Australia/Melbourne');
 
-Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
-Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
+Configuration::getDefaultConfiguration()->setUsername(getMMUsername());
+Configuration::getDefaultConfiguration()->setPassword(getMMPassword());
 
 if((isset($_GET["JAID"]) && !empty($_GET["JAID"])) && (isset($_GET["to"]) && !empty($_GET["to"])) && (isset($_GET["content"]) && !empty($_GET["content"])) && (isset($_GET["response"]))) {
 
