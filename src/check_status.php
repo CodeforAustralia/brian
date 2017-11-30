@@ -12,8 +12,8 @@ use MessageMedia\RESTAPI\Model\NewMessage;
 use MessageMedia\RESTAPI\Model\Messages;
 
 
-Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
-Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
+Configuration::getDefaultConfiguration()->setUsername(getMMUsername());
+Configuration::getDefaultConfiguration()->setPassword(getMMPassword());
 
 
 function checkStatus() {    
@@ -48,7 +48,7 @@ function checkStatus() {
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 					  "Content-Type: application/json",
 					  "Accept: application/json",
-					  "Authorization: Basic a29IVGRYelJRekxFaWg3Y1g2S206d2xoamVpZ0dnck5jck5wTDdpQzBBQ1FFR3VUVWUz"
+					  "Authorization: Basic " . getMM64()
 					));
 
 					$response = curl_exec($ch);

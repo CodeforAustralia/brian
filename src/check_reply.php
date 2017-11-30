@@ -15,8 +15,8 @@ use MessageMedia\RESTAPI\Model\Messages;
 
 date_default_timezone_set('Australia/Melbourne');
 
-Configuration::getDefaultConfiguration()->setUsername('koHTdXzRQzLEih7cX6Km');
-Configuration::getDefaultConfiguration()->setPassword('wlhjeigGgrNcrNpL7iC0ACQEGuTUe3');
+Configuration::getDefaultConfiguration()->setUsername(getMMUsername());
+Configuration::getDefaultConfiguration()->setPassword(getMMPassword());
 
 function checkReply() {
     try {
