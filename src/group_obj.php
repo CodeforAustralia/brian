@@ -407,7 +407,27 @@ function archive_group($group_ID, $author) {
 
 	try {
 
-		$group_sql = "UPDATE testdb.Group SET Archived = '1', ArchiveDate = '" . $curr_date . "', Archivist = '" . $author ."' WHERE GroupID = '" . $group_ID . "';";
+		$group_sql = "UPDATE testdb.Group SET Archived = '1', ArchiveDate = '" . $curr_date . "', Archivist = '" . $author ."', LastUpdatedAuthor = '" . $author ."', LastUpdated = '" . $curr_date . "' WHERE GroupID = '" . $group_ID . "';";
+		$group_query = returnDB()->query($group_sql);
+
+		if($group_query)
+			return 1;
+		else
+			return NULL;
+
+	} catch (Exception $e) {
+		return NULL;
+	}
+}
+
+// Archive group
+function unarchive_group($group_ID, $author) {
+
+	$curr_date = date('Y-m-d h:i:s', time());
+
+	try {
+
+		$group_sql = "UPDATE testdb.Group SET Archived = '0', ArchiveDate = NULL, Archivist = NULL,  LastUpdatedAuthor = '" . $author ."', LastUpdated = '" . $curr_date . "' WHERE GroupID = '" . $group_ID . "';";
 		$group_query = returnDB()->query($group_sql);
 
 		if($group_query)
