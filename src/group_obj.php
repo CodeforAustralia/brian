@@ -351,7 +351,37 @@ function set_new_offender($group_ID, $JAID, $author) {
 			try {
 
 				$group_sql = "UPDATE testdb.Group SET LastUpdatedAuthor = '" . $author ."', LastUpdated = '" . $curr_date . "' WHERE GroupID = '" . $group_ID . "';";
-				$group_query = returnDB()->query($user_sql);
+				$group_query = returnDB()->query($group_sql);
+
+			} catch (Exception $e) {
+				return NULL;
+			}
+			return 1;
+		}
+		else
+			return NULL;
+
+	} catch (Exception $e) {
+		return NULL;
+	}
+}
+
+// Remove offender from group
+function delete_offender($group_ID, $JAID, $author) {
+
+	$curr_date = date('Y-m-d h:i:s', time());
+
+	try {
+
+		$user_sql = "DELETE FROM testdb.GroupRecipient WHERE JAID = '" . $JAID . "' AND GroupID = '" . $group_ID . "';";
+		$user_query = returnDB()->query($user_sql);
+
+		if($user_query) {
+
+			try {
+
+				$group_sql = "UPDATE testdb.Group SET LastUpdatedAuthor = '" . $author ."', LastUpdated = '" . $curr_date . "' WHERE GroupID = '" . $group_ID . "';";
+				$group_query = returnDB()->query($group_sql);
 
 			} catch (Exception $e) {
 				return NULL;

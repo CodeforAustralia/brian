@@ -634,6 +634,20 @@ $app->post('/group/client/add', function (Request $request, Response $response, 
     return $response;
 
 });
+$app->post('/group/client/remove', function (Request $request, Response $response, $args) {
+    
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['JAID'] = filter_var($body['JAID'], FILTER_SANITIZE_STRING);
+    $user_data['GroupID'] = filter_var($body['GroupID'], FILTER_SANITIZE_STRING);
+    $user_data['LastUpdatedAuthor'] = filter_var($body['LastUpdatedAuthor'], FILTER_SANITIZE_STRING);
+
+    $data = delete_offender($user_data['GroupID'], $user_data['JAID'], $user_data['LastUpdatedAuthor']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
 $app->get('/group/{id}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
 
