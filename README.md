@@ -28,10 +28,16 @@ To access the respective API, assume the host is always the same:
 | GET | `/client/{id}/order` | List of *all* orders for *one* offender | |
 | GET | `/client/{id}/condition/order/{order_id}` | Get all of the conditions from an order | |
 | POST | `/client/{id}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `OrderStatus:{date}` <br/> `Detail:{string}` |
+| --- | TODO | --- | --- |
+| POST | `/client/new` | Creates a new offender  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` <br/> `AssignedStaff:{string}` <br/> `LocationID:{int}`  |
+| POST | `/client/update/username` | Updates username  | `JAID:{int}` <br/> `Username:{string}` |
+| POST | `/client/update/name` | Updates names(s)  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
+| POST | `/client/update/location/add` | Adds a new location | `JAID:{int}` <br/> `LocationID:{int}` |
+| POST | `/client/update/location/delete` | Completely removes client from location | `JAID:{int}` <br/> `LocationID:{int}` |
 
 
 
-## Staff (includes Admins)
+## Staff
 
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
@@ -48,6 +54,13 @@ To access the respective API, assume the host is always the same:
 | POST | `/staff/delete` | Deletes a *specific* user  | `Username:{string}` <br/> `LocationID:{int}` |
 | GET | `/staff/region/{id}` | ~~List of *all* users from a region (//TODO)~~ | |
 | GET | `/staff/region/{id}/type/{role}` | ~~List of *specific* users from a region (//TODO)~~ | |
+| --- | TODO | --- | --- |
+| GET | `/staff/{username}` | Get details about *specific* staff | |
+| POST | `/staff/update/email` | Updates email  | `Username:{string}` <br/> `email:{string}` |
+| POST | `/staff/update/name` | Updates names(s)  | `Username:{string}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
+| POST | `/staff/update/location/add` | Adds a new location | `Username:{string}` <br/> `LocationID:{int}` |
+| POST | `/staff/update/location/leave` | Sets date staff left location | `Username:{string}` <br/> `LocationID:{int}` |
+| POST | `/staff/update/location/delete` | Completely removes staff from location | `Username:{string}` <br/> `LocationID:{int}` |
 
 
 ## Users
