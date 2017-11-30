@@ -605,6 +605,21 @@ $app->get('/group/location/{id}/type/{type}/archived', function (Request $reques
     return $newResponse;
 
 });
+$app->post('/group/new', function (Request $request, Response $response, $args) {
+    
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['GroupName'] = filter_var($body['GroupName'], FILTER_SANITIZE_STRING);
+    $user_data['GroupAuthor'] = filter_var($body['GroupAuthor'], FILTER_SANITIZE_STRING);
+    $user_data['GroupLocation'] = filter_var($body['GroupLocation'], FILTER_SANITIZE_STRING);
+    $user_data['GroupType'] = filter_var($body['GroupType'], FILTER_SANITIZE_STRING);
+
+    $data = set_new_group($user_data['GroupName'], $user_data['GroupAuthor'], $user_data['GroupLocation'], $user_data['GroupType']);
+    $response->getBody()->write($data);
+
+    return $response;
+
+});
 $app->get('/group/{id}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
 

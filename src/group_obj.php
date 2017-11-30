@@ -118,7 +118,7 @@ function get_staff_groups($author) {
 	return $group_arr;
 }
 
-// Get groups made by a staff member
+// Get groups made by a staff member of type
 function get_staff_groups_of_type($author, $type) {
 
 	try {
@@ -144,7 +144,7 @@ function get_staff_groups_of_type($author, $type) {
 }
 
 
-// Get groups made by a staff member
+// Get archived groups made by a staff member of type
 function get_archived_staff_groups_of_type($author, $type) {
 
 	try {
@@ -169,7 +169,7 @@ function get_archived_staff_groups_of_type($author, $type) {
 	return $group_arr;
 }
 
-// Get specific group
+// Get groups of type
 function get_group_type($type) {
 
 	try {
@@ -198,7 +198,7 @@ function get_group_type($type) {
 	return $group_arr;
 }
 
-// Get specific group
+// Get groups at a location
 function get_group_location($id) {
 
 	try {
@@ -223,7 +223,7 @@ function get_group_location($id) {
 	return $group_arr;
 }
 
-// Get specific group
+// Get archived groups at a location
 function get_group_location_archived($id) {
 
 	try {
@@ -251,7 +251,7 @@ function get_group_location_archived($id) {
 	return $group_arr;
 }
 
-// Get specific group
+// Get groups at a location of type
 function get_group_location_of_type($id, $type) {
 
 	try {
@@ -276,7 +276,7 @@ function get_group_location_of_type($id, $type) {
 	return $group_arr;
 }
 
-// Get specific group
+// Get archived groups at a location of type
 function get_group_location_of_type_archived($id, $type) {
 
 	try {
@@ -302,4 +302,35 @@ function get_group_location_of_type_archived($id, $type) {
 	}
 
 	return $group_arr;
+}
+
+function set_new_group($name, $author, $location, $type) {
+
+	$curr_date = date('Y-m-d h:i:s', time());
+	$group_ID = '';
+
+	try {
+
+		$user_sql = "INSERT INTO testdb.Group (GroupName, GroupAuthor, GroupLocation, GroupType, DateCreated) VALUES ('" . $name . "', '" . $author . "', '" . $location . "', '" . $type . "', '" . $curr_date . "');";
+		$user_query = returnDB()->query($user_sql);
+
+		if($user_query) {
+
+			try {
+
+				$group_sql = "SELECT * FROM testdb.Group WHERE GroupName = '" . $name . "' AND GroupAuthor = '" . $author . "' AND GroupLocation = '" . $location . "' AND GroupType = '" . $type . "' AND DateCreated = '" . $curr_date . "';";
+
+				foreach(returnDB()->query($group_sql) as $row) {
+					$group_ID = $row['GroupID'];
+				}
+
+			} catch (Exception $e) {
+				return NULL;
+			}
+		}
+		return $group_ID;
+
+	} catch (Exception $e) {
+		return NULL;
+	}
 }
