@@ -389,9 +389,20 @@ function set_new_client($assignedstaff, $location, $firstname, $lastname, $JAID,
 	$curr_date = date('Y-m-d h:i:s', time());
 
 	try {
-		if($username == '') {
-			$offender_sql = "INSERT INTO testdb.Offender (JAID, FirstName, LastName, Username, OptedIn) VALUES ('" . $JAID . "', '" . $firstname . "', '" . $lastname . "', '" . $username . "', '" . $optedin . "');";
+		if($username != '') {
+			$offender_sql = "INSERT INTO testdb.Offender (FirstName, LastName, Username, OptedIn) VALUES ('" . $firstname . "', '" . $lastname . "', '" . $username . "', '" . $optedin . "');";
 			$offender_query = returnDB()->query($offender_sql);
+			
+			try {
+				$offender_id_sql = "SELECT * FROM testdb.Offender WHERE Username = '" . $username . "';";
+
+				foreach(returnDB()->query($offender_id_sql) as $row) {
+					$JAID = $row['JAID'];
+				}
+
+			} catch (Exception $e) {
+			    echo "Database Error!";
+			}
 		}
 		else {
 			$offender_sql = "INSERT INTO testdb.Offender (JAID, FirstName, LastName, OptedIn) VALUES ('" . $JAID . "', '" . $firstname . "', '" . $lastname . "', '" . $optedin . "');";
