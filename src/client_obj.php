@@ -309,9 +309,10 @@ WHERE
 				'StartDate' => $row['StartDate'],
 				'EndDate' => $row['EndDate'],
 				'TypeID' => $row['TypeID'],
-				'Status' => $row['Status'],
+				'ConditionStatus' => $row['ConditionStatus'],
 				'Detail' => $row['Detail'],
 				'ConditionName' => $row['ConditionName'],
+				'ConditionSlug' => $row['ConditionSlug'],
 				'ConditionDescription' => $row['ConditionDescription']
 			);
 		}
@@ -433,14 +434,12 @@ function set_new_client($assignedstaff, $location, $firstname, $lastname, $JAID,
 						('" . $order_ID . "', '" . $JAID . "', '7'), 
 						('" . $order_ID . "', '" . $JAID . "', '8'), 
 						('" . $order_ID . "', '" . $JAID . "', '9'), 
-						('" . $order_ID . "', '" . $JAID . "', '10'), 
-						('" . $order_ID . "', '" . $JAID . "', '11'), 
+						('" . $order_ID . "', '" . $JAID . "', '10'),
 						('" . $order_ID . "', '" . $JAID . "', '12'), 
 						('" . $order_ID . "', '" . $JAID . "', '13'), 
 						('" . $order_ID . "', '" . $JAID . "', '14'), 
 						('" . $order_ID . "', '" . $JAID . "', '15'), 
 						('" . $order_ID . "', '" . $JAID . "', '16'), 
-						('" . $order_ID . "', '" . $JAID . "', '17'), 
 						('" . $order_ID . "', '" . $JAID . "', '18'), 
 						('" . $order_ID . "', '" . $JAID . "', '19'),
 						('" . $order_ID . "', '" . $JAID . "', '20');";
