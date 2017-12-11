@@ -146,6 +146,15 @@ $app->get('/client', function (Request $request, Response $response) {
     return $newResponse;
 
 });
+$app->get('/client/username/{username}', function (Request $request, Response $response, $args) {
+    $username = (string)$args['username'];
+
+    $data = get_client_details_from_username($username);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/client/location/{id}', function (Request $request, Response $response, $args) {
     $id = (int)$args['id'];
 
@@ -271,6 +280,17 @@ $app->post('/client/{id}/condition/order/{order_id}/condition/{condition_id}', f
 });
 
 
+
+// User API
+// Make sure this stays in the correct order
+$app->get('/conditions', function (Request $request, Response $response) {
+
+    $data = get_all_conditions();
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 
 // User API
 // Make sure this stays in the correct order

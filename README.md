@@ -16,18 +16,21 @@ To access the respective API, assume the host is always the same:
 
 | Method | API | Description | Body |
 | --- | --- | --- | --- |
+| GET | `/conditions` | List of *all* conditions | |
 | GET | `/client` | List of *all* offenders | |
-| GET | `/client/location/{id}` | List of *all* offender's from a location | |
-| GET | `/client/region/{id}` | List of *all* offender's from a region | |
-| GET | `/client/{JAID}` | *All* information about *one* offender | |
-| GET | `/client/{JAID}/messages` | List of *all* correspondence for *one* offender | |
-| GET | `/client/{JAID}/communitywork` | List of *all* assigned community work for *one* offender | |
-| GET | `/client/{JAID}/location` | List of *all* assigned locations for *one* offender | |
-| GET | `/client/{JAID}/staff` | List of *all* assigned staff for *one* offender | |
-| GET | `/client/{JAID}/phone` | List of *all* offender's phone numbers for *one* offender | |
-| GET | `/client/{id}/order` | List of *all* orders for *one* offender | |
-| GET | `/client/{id}/condition/order/{order_id}` | Get all of the conditions from an order | |
-| POST | `/client/{id}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `OrderStatus:{date}` <br/> `Detail:{string}` |
+| GET | `/client/username/{string}` | Get details by using username | |
+| GET | `/client/location/{int}` | List of *all* offender's from a location | |
+| GET | `/client/region/{int}` | List of *all* offender's from a region | |
+| GET | `/client/{int}` | *All* information about *one* offender | |
+| GET | `/client/{int}/messages` | List of *all* correspondence for *one* offender | |
+| GET | `/client/{int}/communitywork` | List of *all* assigned community work for *one* offender | |
+| GET | `/client/{int}/location` | List of *all* assigned locations for *one* offender | |
+| GET | `/client/{int}/staff` | List of *all* assigned staff for *one* offender | |
+| GET | `/client/{int}/phone` | List of *all* offender's phone numbers for *one* offender | |
+| GET | `/client/{int}/order` | List of *all* orders for *one* offender | |
+| GET | `/client/{int}/condition/order/{order_id}` | Get all of the conditions from an order | |
+| POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `OrderStatus:{date}` <br/> `Detail:{string}` |
+
 | --- | TODO | --- | --- |
 | POST | `/client/new` | Creates a new offender  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` <br/> `AssignedStaff:{string}` <br/> `LocationID:{int}`  |
 | POST | `/client/update/username` | Updates username  | `JAID:{int}` <br/> `Username:{string}` |

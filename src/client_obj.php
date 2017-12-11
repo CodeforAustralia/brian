@@ -3,6 +3,53 @@ require_once "db.php";
 require_once "pretty_json.php";
 
 
+function get_client_details_from_username($username) {
+	try {
+		$offender_sql = "SELECT * FROM testdb.Offender WHERE Username = '" . $username . "';";
+
+		foreach(returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'JAID' => $row['JAID'],
+				'FirstName' => $row['FirstName'],
+				'LastName' => $row['LastName'],
+				'Username' => $row['Username'],
+				'OptedIn' => $row['OptedIn'],
+				'LastUpdated' => $row['LastUpdated'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $offender_arr;
+}
+
+
+function get_all_conditions() {
+
+	try {
+		$condition_sql = "SELECT * FROM testdb.ConditionType;";
+
+		foreach(returnDB()->query($condition_sql) as $row) {
+
+			$condition_arr[] = array(
+				'TypeID' => $row['TypeID'],
+				'ConditionName' => $row['ConditionName'],
+				'ConditionDescription' => $row['ConditionDescription'],
+				'ConditionSlug' => $row['ConditionSlug'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $condition_arr;
+}
+
+
 // Get phone numbers in ascending order of EndDate
 function get_client_phone($JAID) {
 
