@@ -395,6 +395,28 @@ WHERE
 	}
 }
 
+function set_order_details($order_id, $start_date, $end_date, $status) {
+	try {
+
+		$user_sql = "UPDATE testdb.OffenderOrder
+SET 
+    StartDate = '" . $start_date . "',
+    EndDate = '" . $end_date . "',
+    Status = 'CUR'
+WHERE
+    OrderID = '" . $order_id . "';";
+
+		$user_query = returnDB()->query($user_sql);
+
+		if($user_query)
+			return 1;
+		else
+			return 0;
+
+	} catch (Exception $e) {
+		return 0;
+	}
+}
 function get_client_list_in_region($id) {
 
 	try {

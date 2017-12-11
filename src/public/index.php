@@ -243,6 +243,25 @@ $app->get('/client/{id}/order', function (Request $request, Response $response, 
 
     return $newResponse;
 });
+$app->post('/client/{id}/order/{order_id}', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $order_id = (int)$args['order_id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    $order_id_clean = filter_var($order_id, FILTER_SANITIZE_STRING);
+    
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['StartDate'] = filter_var($body['StartDate'], FILTER_SANITIZE_STRING);
+    $user_data['EndDate'] = filter_var($body['EndDate'], FILTER_SANITIZE_STRING);
+    $user_data['Status'] = filter_var($body['Status'], FILTER_SANITIZE_STRING);
+
+
+    $data = set_order_details($order_id_clean, $user_data['StartDate'], $user_data['EndDate'], $user_data['Status']);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+});
 $app->get('/client/{id}/condition/order/{order_id}', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $order_id = (int)$args['order_id'];

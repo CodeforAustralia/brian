@@ -28,8 +28,9 @@ To access the respective API, assume the host is always the same:
 | GET | `/client/{int}/staff` | List of *all* assigned staff for *one* offender | |
 | GET | `/client/{int}/phone` | List of *all* offender's phone numbers for *one* offender | |
 | GET | `/client/{int}/order` | List of *all* orders for *one* offender | |
+| POST | `/client/{int}/order` | Edit order details | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` |
 | GET | `/client/{int}/condition/order/{order_id}` | Get all of the conditions from an order | |
-| POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `OrderStatus:{date}` <br/> `Detail:{string}` |
+| POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` <br/> `Detail:{string}` |
 
 | --- | TODO | --- | --- |
 | POST | `/client/new` | Creates a new offender  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` <br/> `AssignedStaff:{string}` <br/> `LocationID:{int}`  |
