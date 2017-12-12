@@ -290,6 +290,7 @@ function get_client_detail($JAID) {
 
 			$FirstName = $row['FirstName'];
 			$LastName = $row['LastName'];
+			$Username = $row['Username'];
 		}
 	} catch (Exception $e) {
 	    echo "Database Error";
@@ -302,6 +303,7 @@ function get_client_detail($JAID) {
 		'JAID' => $JAID,
 		'FirstName' => $FirstName,
 		'LastName' => $LastName,
+		'Username' => $Username,
 		'Phones' => get_client_phone($JAID),
 		'Staff' => get_client_manager($JAID),
 		'CCSLocations' => get_client_ccs_locations($JAID),
