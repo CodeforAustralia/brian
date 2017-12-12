@@ -420,7 +420,7 @@ WHERE
 				'Detail' => $row['Detail'],
 				'ConditionName' => $row['ConditionName'],
 				'ConditionSlug' => $row['ConditionSlug'],
-				'ConditionDescription' => $row['ConditionDescription']
+				'ConditionDescription' => $row['ConditionDescription'],
 				'Image' => $row['Image']
 			);
 		}
