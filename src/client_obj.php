@@ -3,6 +3,66 @@ require_once "db.php";
 require_once "pretty_json.php";
 
 
+function get_client_support($JAID) {
+	try {
+		$offender_sql = "SELECT * FROM testdb.Support WHERE JAID = '" . $JAID . "';";
+
+		foreach(returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'SupportID' => $row['SupportID'],
+				'Name' => $row['Name'],
+				'Phone' => $row['Phone'],
+				'email' => $row['email'],
+				'Location' => $row['Location'],
+			);
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+
+	return $offender_arr;
+}
+
+function set_client_support($JAID, $name, $phone, $email, $location) {
+	try {
+
+		$offender_sql = "INSERT INTO testdb.Support (JAID, Name, Phone, email, Location) VALUES ( '" . $JAID . "', '" . $name . "', '" . $phone . "', '" . $email . "', '" . $location . "');";
+
+		echo $offender_sql;
+
+		$offender_query = returnDB()->query($offender_sql);
+
+		if($offender_query)
+			return 1;
+		else
+			return 0;
+
+	} catch (Exception $e) {
+			return 0;
+	}
+}
+
+function update_client_support($support_id, $name, $phone, $email, $location) {
+	try {
+
+		$offender_sql = "UPDATE testdb.Support SET Name='" . $name . "', Phone='" . $phone . "', email='" . $email . "', Location='" . $location . "' WHERE SupportID='" . $support_id . "';";
+
+		$offender_query = returnDB()->query($offender_sql);
+
+		if($offender_query)
+			return 1;
+		else
+			return 0;
+
+	} catch (Exception $e) {
+			return 0;
+	}
+}
+
+
+
 function get_client_details_from_username($username) {
 	try {
 		$offender_sql = "SELECT * FROM testdb.Offender WHERE Username = '" . $username . "';";
@@ -377,7 +437,7 @@ function set_client_condition($JAID, $order_id, $type_id, $start_date, $end_date
 SET 
     StartDate = '" . $start_date . "',
     EndDate = '" . $end_date . "',
-    OrderStatus = '" . $status . "',
+    ConditionStatus = '" . $status . "',
     Detail = '" . $detail . "'
 WHERE
     OrderID = '" . $order_id . "' AND JAID = '" . $JAID . "'

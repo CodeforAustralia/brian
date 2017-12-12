@@ -243,6 +243,54 @@ $app->get('/client/{id}/order', function (Request $request, Response $response, 
 
     return $newResponse;
 });
+$app->get('/client/{id}/support', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    
+    $data = get_client_support($JAID_clean);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+});
+
+$app->post('/client/{id}/support', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);    
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Name'] = filter_var($body['Name'], FILTER_SANITIZE_STRING);
+    $user_data['Phone'] = filter_var($body['Phone'], FILTER_SANITIZE_STRING);
+    $user_data['email'] = filter_var($body['email'], FILTER_SANITIZE_STRING);
+    $user_data['Location'] = filter_var($body['Location'], FILTER_SANITIZE_STRING);
+
+
+    $data = set_client_support($JAID_clean, $user_data['Name'], $user_data['Phone'], $user_data['email'], $user_data['Location']);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+});
+
+$app->post('/client/{id}/support/{support_id}', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    $support_id = (int)$args['support_id'];
+    $support_id_clean = filter_var($support_id, FILTER_SANITIZE_STRING);
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Name'] = filter_var($body['Name'], FILTER_SANITIZE_STRING);
+    $user_data['Phone'] = filter_var($body['Phone'], FILTER_SANITIZE_STRING);
+    $user_data['email'] = filter_var($body['email'], FILTER_SANITIZE_STRING);
+    $user_data['Location'] = filter_var($body['Location'], FILTER_SANITIZE_STRING);
+
+
+    $data = update_client_support($support_id_clean, $user_data['Name'], $user_data['Phone'], $user_data['email'], $user_data['Location']);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+});
+
 $app->post('/client/{id}/order/{order_id}', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $order_id = (int)$args['order_id'];
@@ -287,11 +335,11 @@ $app->post('/client/{id}/condition/order/{order_id}/condition/{condition_id}', f
     $user_data = [];
     $user_data['StartDate'] = filter_var($body['StartDate'], FILTER_SANITIZE_STRING);
     $user_data['EndDate'] = filter_var($body['EndDate'], FILTER_SANITIZE_STRING);
-    $user_data['Status'] = filter_var($body['Status'], FILTER_SANITIZE_STRING);
+    $user_data['ConditionStatus'] = filter_var($body['ConditionStatus'], FILTER_SANITIZE_STRING);
     $user_data['Detail'] = filter_var($body['Detail'], FILTER_SANITIZE_STRING);
 
 
-    $data = set_client_condition($JAID_clean, $order_id_clean, $condition_id_clean, $user_data['StartDate'], $user_data['EndDate'], $user_data['Status'], $user_data['Detail'] );
+    $data = set_client_condition($JAID_clean, $order_id_clean, $condition_id_clean, $user_data['StartDate'], $user_data['EndDate'], $user_data['ConditionStatus'], $user_data['Detail'] );
     $newResponse = $response->withJson($data);
 
     return $newResponse;
