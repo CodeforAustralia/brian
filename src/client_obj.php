@@ -421,6 +421,7 @@ WHERE
 				'ConditionName' => $row['ConditionName'],
 				'ConditionSlug' => $row['ConditionSlug'],
 				'ConditionDescription' => $row['ConditionDescription']
+				'Image' => $row['Image']
 			);
 		}
 	} catch (Exception $e) {
