@@ -32,7 +32,6 @@ Thumbs.db
 
 # Vendors #
 ###########
-src/vendor/*
 .sublime-workspace
 
 # Authentication files #
