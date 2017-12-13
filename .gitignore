@@ -30,12 +30,9 @@
 ehthumbs.db
 Thumbs.db
 
-# Vendors #
-###########
-.sublime-workspace
-
-# Authentication files #
+# Orion files #
 ########################
+.sublime-workspace
 src/authentication.php
 src/data/*
 src/db_prod.php
