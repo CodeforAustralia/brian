@@ -3,6 +3,24 @@ require_once "db.php";
 require_once "pretty_json.php";
 
 
+
+function set_client_name($JAID, $name) {
+
+	try {
+		$offender_sql = "UPDATE testdb.Offender SET FirstName = '" . $name . "' WHERE JAID = '" . $JAID . "';";
+
+		$offender_query = returnDB()->query($offender_sql);
+
+		if($offender_query)
+			return 1;
+		else
+			return 0;
+
+	} catch (Exception $e) {
+			return 0;
+	}
+}
+
 function get_client_support($JAID) {
 	try {
 		$offender_sql = "SELECT * FROM testdb.Support WHERE JAID = '" . $JAID . "';";
@@ -29,8 +47,6 @@ function set_client_support($JAID, $name, $phone, $email, $location) {
 	try {
 
 		$offender_sql = "INSERT INTO testdb.Support (JAID, Name, Phone, email, Location) VALUES ( '" . $JAID . "', '" . $name . "', '" . $phone . "', '" . $email . "', '" . $location . "');";
-
-		echo $offender_sql;
 
 		$offender_query = returnDB()->query($offender_sql);
 

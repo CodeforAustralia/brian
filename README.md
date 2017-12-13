@@ -35,11 +35,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/client/{int}/condition/order/{order_id}` | Get all of the conditions from an order | |
 | POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` <br/> `Detail:{string}` |
 | --- | TODO | --- | --- |
-| POST | `/client/new` | Creates a new offender  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` <br/> `AssignedStaff:{string}` <br/> `LocationID:{int}`  |
-| POST | `/client/update/username` | Updates username  | `JAID:{int}` <br/> `Username:{string}` |
 | POST | `/client/update/name` | Updates names(s)  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
-| POST | `/client/update/location/add` | Adds a new location | `JAID:{int}` <br/> `LocationID:{int}` |
-| POST | `/client/update/location/delete` | Completely removes client from location | `JAID:{int}` <br/> `LocationID:{int}` |
 
 
 
@@ -75,7 +71,7 @@ To access the respective API, assume the host is always the same:
 | --- | --- | --- | --- |
 | GET | `/user` | List of *all* users | |
 | POST | `/user/new` | Create a new user | `Username:{string}` <br/> `Password:{string}` <br/> `email:{string}` <br/> `Role:{string}` <br/> `Location:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
-| POST | `/user/password` | Set the password of a user | `Username:{string}` <br/> `Password:{string}` |
+| POST | `/user/password` | Update the password of a user | `Username:{string}` <br/> `Password:{string}` |
 | POST | `/user/login` | Login with hashed password | `Username:{string}` <br/> `Password:{string}` |
 | GET | `/user/salt/{username}` | Returns salt string of a user | |
 | POST | `/user/salt` | Sets the Salt of a user | `Username:{string}` <br/> `Salt:{string}` |
