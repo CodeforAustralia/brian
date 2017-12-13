@@ -474,6 +474,34 @@ WHERE
 	}
 }
 
+function get_order_details($order_id) {
+	try {
+		$offender_sql = "SELECT 
+    *
+FROM
+    testdb.OffenderOrder o
+        JOIN
+    testdb.OrderType t ON o.OrderTypeID = t.OrderTypeID
+WHERE
+    OrderID = '" . $order_id . "';";
+
+		foreach (returnDB()->query($offender_sql) as $row) {
+
+			$offender_arr[] = array(
+				'OrderID' => $row['OrderID'],
+				'OrderTypeID' => $row['OrderTypeID'],
+				'OrderName' => $row['OrderName'],
+				'Status' => $row['Status'],
+				'StartDate' => $row['StartDate'],
+				'EndDate' => $row['EndDate']
+			);
+		}
+
+	} catch (Exception $e) {
+		return 0;
+	}
+	return $offender_arr;
+}
 function set_order_details($order_id, $start_date, $end_date, $status) {
 	try {
 

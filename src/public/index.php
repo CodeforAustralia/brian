@@ -295,6 +295,17 @@ $app->post('/client/{id}/support/{support_id}', function (Request $request, Resp
     return $newResponse;
 });
 
+$app->get('/client/{id}/order/{order_id}', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $order_id = (int)$args['order_id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+    $order_id_clean = filter_var($order_id, FILTER_SANITIZE_STRING);
+
+
+    $data = get_order_details($order_id_clean);
+    $newResponse = $response->withJson($data);
+    return $newResponse;
+});
 $app->post('/client/{id}/order/{order_id}', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $order_id = (int)$args['order_id'];
@@ -382,6 +393,15 @@ $app->post('/user/password', function (Request $request, Response $response, $ar
 
     $data = set_user_password($user_data['Username'], $user_data['Password']);
 
+    $response->getBody()->write($data);
+    
+    return $response;
+
+});
+$app->get('/user/password/{username}', function (Request $request, Response $response, $args) {
+    $username = (string)$args['username'];
+
+    $data = get_user_password($username);
     $response->getBody()->write($data);
     
     return $response;

@@ -32,7 +32,8 @@ To access the respective API, assume the host is always the same:
 | POST | `/client/{int}/support` | Adds a support to an offender | `Name:{string}` <br/> `Phone:{int}` <br/> `email:{string}` <br/> `Location:{string}`  |
 | POST | `/client/{int}/support/{id}` | Updates support of an offender | `Name:{string}` <br/> `Phone:{int}` <br/> `email:{string}` <br/> `Location:{string}`  |
 | GET | `/client/{int}/order` | List of *all* orders for *one* offender | |
-| POST | `/client/{int}/order` | Edit order details | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` |
+| GET | `/client/{int}/order/{order_id}` | Get order details | |
+| POST | `/client/{int}/order/{order_id}` | Edit order details | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` |
 | GET | `/client/{int}/condition/order/{order_id}` | Get all of the conditions from an order | |
 | POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` <br/> `Detail:{string}` |
 
@@ -69,6 +70,7 @@ To access the respective API, assume the host is always the same:
 | --- | --- | --- | --- |
 | GET | `/user` | List of *all* users | |
 | POST | `/user/new` | Create a new user | `Username:{string}` <br/> `Password:{string}` <br/> `email:{string}` <br/> `Role:{string}` <br/> `Location:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
+| GET | `/user/password/{username}` | Get the hashed password of a user | |
 | POST | `/user/password` | Update the password of a user | `Username:{string}` <br/> `Password:{string}` |
 | POST | `/user/login` | Login with hashed password | `Username:{string}` <br/> `Password:{string}` |
 | GET | `/user/salt/{username}` | Returns salt string of a user | |

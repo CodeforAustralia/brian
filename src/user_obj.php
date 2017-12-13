@@ -120,7 +120,19 @@ function set_user_password($username, $password) {
 	}
 	return 1;
 }
+function get_user_password($username) {
 
+	try {
+		$user_sql = "SELECT Password FROM testdb.User WHERE Username = '" . $username . "';";
+
+		foreach(returnDB()->query($user_sql) as $row) {
+			return $row['Password'];
+		}
+
+	} catch (Exception $e) {
+	    echo "Database Error!";
+	}
+}
 function get_user_salt($username) {
 
 	try {
