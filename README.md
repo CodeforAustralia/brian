@@ -22,6 +22,7 @@ To access the respective API, assume the host is always the same:
 | GET | `/client/location/{int}` | List of *all* offender's from a location | |
 | GET | `/client/region/{int}` | List of *all* offender's from a region | |
 | GET | `/client/{int}` | *All* information about *one* offender | |
+| POST | `/client/{int}/update/name` | Updates names(s)  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
 | GET | `/client/{int}/messages` | List of *all* correspondence for *one* offender | |
 | GET | `/client/{int}/communitywork` | List of *all* assigned community work for *one* offender | |
 | GET | `/client/{int}/location` | List of *all* assigned locations for *one* offender | |
@@ -34,9 +35,6 @@ To access the respective API, assume the host is always the same:
 | POST | `/client/{int}/order` | Edit order details | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` |
 | GET | `/client/{int}/condition/order/{order_id}` | Get all of the conditions from an order | |
 | POST | `/client/{int}/condition/order/{order_id}/condition/{condition_id}` | Update condition details, 0 = no, 1 = yes | `StartDate:{date}` <br/> `EndDate:{date}` <br/> `Status:{string}` <br/> `Detail:{string}` |
-| --- | TODO | --- | --- |
-| POST | `/client/update/name` | Updates names(s)  | `JAID:{int}` <br/> `FirstName:{string}` <br/> `LastName:{string}` |
-
 
 
 ## Staff

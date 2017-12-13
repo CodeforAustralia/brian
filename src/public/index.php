@@ -171,6 +171,22 @@ $app->get('/client/{id}', function (Request $request, Response $response, $args)
     return $newResponse;
 
 });
+
+$app->post('/client/{id}/update/name', function (Request $request, Response $response, $args) {
+    $JAID = (int)$args['id'];
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
+
+    $body = $request->getParsedBody();
+    $user_data = [];
+    $user_data['Name'] = filter_var($body['Name'], FILTER_SANITIZE_STRING);
+
+
+    $data = set_client_name($JAID_clean, $user_data['Name']);
+    $newResponse = $response->withJson($data);
+
+    return $newResponse;
+
+});
 $app->get('/client/{id}/messages', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
     $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
@@ -243,7 +259,7 @@ $app->get('/client/{id}/support', function (Request $request, Response $response
 
 $app->post('/client/{id}/support', function (Request $request, Response $response, $args) {
     $JAID = (int)$args['id'];
-    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);    
+    $JAID_clean = filter_var($JAID, FILTER_SANITIZE_STRING);
 
     $body = $request->getParsedBody();
     $user_data = [];
